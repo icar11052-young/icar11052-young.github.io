@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>티스토리 종료 대응, 깃허브 페이지 블로그 자동화 구축기 - 영은.Dev</title>
+    <title>티스토리 API 종료 대응: 옵시디언 x 깃허브 페이지로 나만의 무인 자동화 블로그 구축하기 - 영은.Dev</title>
     <link rel="stylesheet" href="../style.css">
     <script>
         window.onscroll = function() {
@@ -36,24 +36,50 @@
 
         <article>
             <div class="post-header">
-                <h1>티스토리 종료 대응, 깃허브 페이지 블로그 자동화 구축기</h1>
+                <h1>티스토리 API 종료 대응: 옵시디언 x 깃허브 페이지로 나만의 무인 자동화 블로그 구축하기</h1>
                 <div class="post-meta">
                     <span>📅 2026-06-29</span>
-                    <span>🏷️ Obsidian, GitHub, Automation</span>
+                    <span>🏷️ Obsidian, GitHub-Pages, Automation, Python, SEO</span>
                 </div>
             </div>
             
             <div class="post-body">
-                <h1>티스토리 API 종료와 나의 대응</h1>
-<p>어제까지 구축하려던 티스토리 자동화 연동 프로젝트는 오늘 <strong>티스토리 Open API 공식 서비스 종료(2024년 2월)</strong> 사실을 확인하면서 전면 중단되었다. </p>
-<p>하지만 나는 굴하지 않고 훌륭한 대안인 <strong>GitHub Pages</strong> 정적 블로그를 구축했다.</p>
-<h2>왜 GitHub Pages인가?</h2>
+                <h1>티스토리 API 종료 대응: 옵시디언 x 깃허브 페이지로 나만의 무인 자동화 블로그 구축하기</h1>
+<p>오랜 시간 국내 많은 창작자들에게 사랑받아온 <strong>티스토리 Open API 서비스가 공식 종료(2024년 2월)</strong>되면서, 외부 에이전트나 프로그램을 통해 포스팅을 무인으로 자동 발행하던 많은 시스템이 중단되었다. </p>
+<p>나 역시 옵시디언(Obsidian) 노트의 지식을 다듬어 즉시 블로그로 자동 발행하는 시스템을 구상하던 중 이 난관에 부딪혔으나, 굴하지 않고 훨씬 유연하고 독립적이며 비용이 들지 않는 대안을 찾아 구축에 성공했다.</p>
+<p>그 주인공은 바로 <strong>GitHub Pages</strong>와 <strong>Python 정적 웹 빌더</strong>의 융합이다.</p>
+<hr />
+<h2>💡 왜 GitHub Pages를 선택했는가?</h2>
+<p>티스토리가 API를 닫았고 워드프레스는 고정적인 서버 비용이 발생하는 반면, GitHub Pages는 다음과 같은 압도적인 메리트를 제공한다.</p>
 <ol>
-<li><strong>완벽한 데이터 격리</strong>: 내 민감한 소송 관련 데이터나 일기는 비공개로 유지하고, <code>published: true</code>가 설정된 글만 공개 깃허브 페이지로 복사된다.</li>
-<li><strong>비용 0원</strong>: 호스팅 비용이 평생 무료이며 구글 애드센스도 적용 가능하다.</li>
-<li><strong>옵시디언-깃허브 연동</strong>: 깃허브 푸시 한 번에 웹 빌드부터 배포까지 알아서 진행된다.</li>
+<li><strong>완벽한 데이터 격리 (보안성)</strong></li>
+<li>내 개인적인 일기, 민감한 프로젝트 자료 등은 비공개(Private) 옵시디언 저장소에 안전하게 유지된다.</li>
+<li>오직 퍼블리싱하겠다고 마킹(<code>published: true</code>)한 글만 정적 웹 파일로 추출되어 공개(Public) 깃허브 레포지토리로 전달된다. 프라이버시가 완벽히 보장된다.</li>
+<li><strong>평생 유지비 0원 &amp; 광고 수익 창출 가능</strong></li>
+<li>호스팅 비용이 평생 무료다. 트래픽 비용 걱정 없이 대규모 인프라를 활용할 수 있다.</li>
+<li>정적 HTML 템플릿에 구글 애드센스(AdSense) 광고 코드 스크립트만 심어두면 동일하게 수익화가 가능하다.</li>
+<li><strong>옵시디언-깃허브 연동 기반의 원클릭 배포</strong></li>
+<li>API 키를 갱신할 필요도 없고, 글쓰기 폼에서 파일 업로드를 위해 버벅댈 필요도 없다. 옵시디언에서 마크다운으로 글을 쓴 뒤, 빌드 스크립트 하나만 작동시키면 웹 페이지 빌드부터 원격 푸시, 서버 반영까지 1초 만에 완전 자동 수행된다.</li>
 </ol>
-<p>이것은 매우 성공적인 자동화 워크플로우의 사례다.</p>
+<hr />
+<h2>🛠️ 블로그 자동화 파이프라인 구조</h2>
+<p>내가 구축한 시스템의 핵심 아키텍처는 다음과 같이 직관적이다.</p>
+<ol>
+<li><strong>드래프트 작성</strong>: 옵시디언 볼트 내부의 <code>블로그/</code> 폴더 내에 마크다운(<code>.md</code>) 파일로 포스팅을 작성한다.</li>
+<li><strong>빌드 및 배포 엔진 가동</strong>: 파이썬으로 직접 코딩한 웹 페이지 컴파일러(<code>publish.py</code>)를 실행한다.</li>
+<li>스크립트가 마크다운을 분석하여 세련된 글래스모피즘(Glassmorphism) 기반의 다크 모드 HTML 페이지로 변환한다.</li>
+<li>검색 최적화(SEO)의 필수 요소인 <code>sitemap.xml</code>과 <code>robots.txt</code>를 실시간 빌드 시점에 자동 갱신 및 생성한다.</li>
+<li><strong>자동 Git Push</strong>: 빌드 결과물이 공개용 깃허브 페이지 디렉토리인 <code>scratch/blog</code>로 복사된 뒤, 내부적으로 <code>git add -&gt; commit -&gt; push</code>가 자동으로 순차 수행된다.</li>
+</ol>
+<hr />
+<h2>📈 구글 및 네이버 검색 최적화(SEO) 완수</h2>
+<p>블로그 구축의 완성은 타인에게 노출되는 것이다. 이를 위해 검색봇을 맞이할 준비도 완벽히 마쳤다.</p>
+<ul>
+<li><strong>Google Search Console 등록</strong>: 도메인 루트에 인증 메타 태그를 주입하고, 사이트맵(<code>sitemap.xml</code>)을 구글 검색 엔진에 정상적으로 제출하였다.</li>
+<li><strong>네이버 서치어드바이저 등록</strong>: 동일하게 네이버 소유권 메타 태그를 레이아웃에 포함하여 배포하고 사이트맵 등록을 완료하였다.</li>
+</ul>
+<p>이제 구글과 네이버 검색 로봇이 자동으로 새로운 포스팅을 읽어가며 검색 지수를 컴파운딩할 수 있는 진정한 <strong>'나만의 두 번째 뇌 기술 블로그'</strong>가 완성되었다. </p>
+<p>앞으로 이곳에 인공지능 도구 활용법, 자동화 파이프라인 구축기, 그리고 배움의 기록들을 아낌없이 기록해 나갈 예정이다.</p>
             </div>
         </article>
     </main>

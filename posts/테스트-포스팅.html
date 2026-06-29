@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>티스토리 종료 대응, 깃허브 페이지 블로그 자동화 구축기 - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">블로그</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">
+            ← 목록으로 돌아가기
+        </a>
+
+        <article>
+            <div class="post-header">
+                <h1>티스토리 종료 대응, 깃허브 페이지 블로그 자동화 구축기</h1>
+                <div class="post-meta">
+                    <span>📅 2026-06-29</span>
+                    <span>🏷️ Obsidian, GitHub, Automation</span>
+                </div>
+            </div>
+            
+            <div class="post-body">
+                <h1>티스토리 API 종료와 나의 대응</h1>
+<p>어제까지 구축하려던 티스토리 자동화 연동 프로젝트는 오늘 <strong>티스토리 Open API 공식 서비스 종료(2024년 2월)</strong> 사실을 확인하면서 전면 중단되었다. </p>
+<p>하지만 나는 굴하지 않고 훌륭한 대안인 <strong>GitHub Pages</strong> 정적 블로그를 구축했다.</p>
+<h2>왜 GitHub Pages인가?</h2>
+<ol>
+<li><strong>완벽한 데이터 격리</strong>: 내 민감한 소송 관련 데이터나 일기는 비공개로 유지하고, <code>published: true</code>가 설정된 글만 공개 깃허브 페이지로 복사된다.</li>
+<li><strong>비용 0원</strong>: 호스팅 비용이 평생 무료이며 구글 애드센스도 적용 가능하다.</li>
+<li><strong>옵시디언-깃허브 연동</strong>: 깃허브 푸시 한 번에 웹 빌드부터 배포까지 알아서 진행된다.</li>
+</ol>
+<p>이것은 매우 성공적인 자동화 워크플로우의 사례다.</p>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

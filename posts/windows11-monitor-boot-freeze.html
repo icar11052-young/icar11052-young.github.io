@@ -39,31 +39,53 @@
                 <h1>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법</h1>
                 <div class="post-meta">
                     <span>📅 2026-06-30</span>
-                    <span>🏷️ Windows, Monitor, PowerManagement, Troubleshooting</span>
+                    <span>🏷️ Windows, Monitor, PowerManagement, Troubleshooting, Lenovo, Legion</span>
                 </div>
             </div>
             
             <div class="post-body">
                 <h1>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법</h1>
-<p>노트북에 USB-C(DP Alt Mode, Power Delivery 포함) 또는 HDMI/DisplayPort로 외부 모니터를 연결해 둔 상태에서 노트북을 켜면, 로고 화면에서 넘어가기 전에 멈추거나 화면이 아예 검은색으로 유지되는 부팅 실패 현상이 발생하곤 한다. </p>
-<p>모니터 케이블을 뽑고 켜면 부팅이 잘 되지만, 켤 때마다 케이블을 연결하고 끊는 것은 매우 번거롭다. 이 현상의 명확한 원인과 해결 방법을 알아본다.</p>
+<p>노트북에 USB-C(DP Alt Mode 및 Power Delivery 지원) 또는 HDMI/DP 케이블로 외부 모니터를 연결해 둔 채 전원을 켜면, 로고 화면에서 멈추거나 화면이 검은색으로 유지되며 부팅이 되지 않는 경우가 있다. </p>
+<p>이 현상은 특히 최신 사양의 게이밍 노트북에서 종종 발생한다. 인터넷에 흔히 알려진 일반적인 해결책들과 함께, <strong>Lenovo Legion 5 15AHP10 (83M0)</strong> 환경에서 실제로 겪고 완벽히 해결한 실전 트러블슈팅 사례를 공유한다.</p>
 <hr />
-<h2>부팅 멈춤 현상의 원인</h2>
-<p>이 문제는 윈도우 11의 <strong>'빠른 시작 켜기(Fast Startup)'</strong> 기능과 하드웨어 드라이버 간의 충돌 때문에 발생한다. </p>
-<p>빠른 시작 기능은 컴퓨터를 종료할 때 완전 종료가 아니라 하이브리드 최대 절전 모드를 사용하여 시스템 커널 상태를 디스크에 저장하고, 다시 켤 때 이를 그대로 복구하여 부팅을 빠르게 만든다. </p>
-<p>하지만 외부 모니터가 연결되어 전력을 공급받거나 디스플레이 신호(DP/HDMI)를 주고받는 상태에서 저장된 커널을 급격히 불러오다 보면, 그래픽 카드 드라이버나 USB-C 포트 컨트롤러가 정상적으로 초기화되지 못해 부팅 과정에서 시스템이 정지(Crash)해 버리는 현상이다.</p>
+<h2>💻 문제가 발생한 하드웨어 사양</h2>
+<ul>
+<li><strong>노트북</strong>: LENOVO Legion 5 15AHP10 (모델명 83M0) - AMD Ryzen 7 프로세서 및 NVIDIA RTX 그래픽 탑재 게이밍 노트북</li>
+<li><strong>연결 환경</strong>: USB-C 포트를 통해 Power Delivery(PD) 충전 및 DP Alt Mode 출력을 동시에 지원하는 외부 모니터 연결</li>
+<li><strong>증상</strong>: 모니터 케이블이 연결된 채 전원을 켜면, 제조사 로고(Lenovo) 화면이 깜빡이거나 켜졌다 꺼지기를 반복하다가 결국 검은 화면에서 멈춤(부팅 실패)</li>
+</ul>
 <hr />
-<h2>해결 방법: '빠른 시작 켜기' 해제</h2>
-<p>최신 SSD 환경에서는 빠른 시작 기능을 꺼도 부팅 속도 차이가 거의 없으므로, 시스템 안정성을 위해 비활성화하는 것이 권장된다.</p>
+<h2>🛠️ 일반적인 해결 방법 (대중적인 조치)</h2>
+<p>인터넷 검색이나 일반 가이드에서 주로 권장하는 해결책은 다음과 같다.</p>
+<h3>1. 임시방편: 부팅 시 케이블 분리</h3>
+<p>가장 원시적인 방법으로, 모니터 케이블을 뽑아둔 상태로 노트북을 켜서 부팅이 정상 완료되면 그때 케이블을 다시 꽂는 방법이다. 매끄러운 부팅은 가능하지만 컴퓨터를 켤 때마다 케이블을 만져야 하므로 대단히 번거롭다.</p>
+<h3>2. 윈도우 '빠른 시작 켜기' 해제</h3>
+<p>윈도우 11의 빠른 시작 기능(Fast Startup)은 종료 시 시스템 커널 상태를 디스크에 저장했다가 복구하는 방식으로 부팅을 단축하지만, 부팅 시 외부 기기(모니터 등)의 드라이버가 엉키며 프리징을 유발할 수 있다.<br />
+* <strong>조치</strong>: 제어판 ➔ 전원 옵션 ➔ 전원 단추 작동 설정 ➔ "현재 사용할 수 없는 설정 변경" 클릭 ➔ "빠른 시작 켜기 (권장)" 체크 해제 및 저장</p>
+<hr />
+<h2>🎯 내가 실제로 해결한 방법 (BIOS 설정 변경)</h2>
+<p><strong>주의</strong>: 내 노트북(Legion 5 15AHP10)에서는 위에서 언급한 <strong>'빠른 시작 켜기' 해제만으로는 문제가 해결되지 않았다.</strong> </p>
+<p>핵심 원인은 윈도우 진입 전 단계인 <strong>하드웨어 레벨(BIOS/UEFI)</strong>에서의 전원 충돌이었다. 아래의 BIOS 설정을 변경한 뒤에야 비로소 케이블을 꽂은 채로도 부팅이 완벽하게 성공했다.</p>
+<h3>1단계: BIOS 진입</h3>
 <ol>
-<li>윈도우 검색창에 <strong>제어판</strong>을 입력하고 실행한다.</li>
-<li><strong>하드웨어 및 소리</strong> ➔ <strong>전원 옵션</strong>으로 이동한다.</li>
-<li>왼쪽 메뉴에서 <strong>"전원 단추 작동 설정"</strong>을 클릭한다.</li>
-<li>상단의 <strong>"현재 사용할 수 없는 설정 변경"</strong>을 클릭한다. (관리자 권한 필요)</li>
-<li>아래쪽 '종료 설정' 항목에서 <strong>"빠른 시작 켜기 (권장)"</strong>의 체크를 <strong>해제</strong>한다.</li>
-<li><strong>변경 내용 저장</strong>을 누르고 재부팅한다.</li>
+<li>노트북을 완전히 종료한 후 전원을 켠다.</li>
+<li>부팅 로고가 뜰 때 키보드의 <strong><code>F2</code></strong> 키를 여러 번 연속으로 눌러 BIOS Utility 화면으로 진입한다.</li>
 </ol>
-<p>체크를 해제하면 PC 부팅 시 모든 장치 드라이버가 깨끗하게 처음부터 로드되므로, 외부 모니터가 연결되어 있어도 멈춤 현상 없이 안전하게 부팅된다.</p>
+<h3>2단계: USB-C 모니터 전원 관련 옵션 수정</h3>
+<ol>
+<li>BIOS 화면에서 <strong>Advanced</strong> 또는 <strong>Configuration</strong> 메뉴로 이동한다.</li>
+<li><strong><code>USB Power Delivery</code></strong> 또는 <strong><code>Always On USB</code></strong> 관련 전원 공급 옵션(노트북이 꺼져 있을 때 외부 기기에 전원을 공급하거나 모니터로부터 전원을 받는 설정)을 찾는다.</li>
+<li>해당 옵션의 값이 <strong><code>Auto</code></strong>로 설정되어 있을 것이다. 이를 <strong><code>Off</code> (또는 Disabled)</strong>로 변경한다.</li>
+<li><strong><code>F10</code></strong>을 눌러 저장하고 종료(Save &amp; Exit)하여 재부팅한다.</li>
+</ol>
+<hr />
+<h2>💡 기술적인 원인 분석</h2>
+<p>USB-C 포트는 디스플레이 신호 송출(DP Alt Mode)과 전력 송수신(Power Delivery)을 동시에 수행한다. </p>
+<p>BIOS 전원 설정이 <code>Auto</code>로 되어 있으면, 부팅 초기 단계(POST 과정)에서 노트북이 연결된 외부 모니터와 전력 협상(Handshake)을 시도한다. 즉, '모니터로부터 전원을 받을 것인가, 아니면 모니터로 전원을 보낼 것인가'를 판별하는 과정이다.</p>
+<p>이때 게이밍 노트북의 고출력 전원 요구 스펙과 모니터의 PD 충전 스펙이 윈도우 드라이버 로드 전에 엉켜버리면서, 메인보드가 대기 상태(락업)에 빠져 부팅이 멈추는 프리징 현상이 발생한 것이다. 이 옵션을 <code>Off</code>로 강제함으로써 부팅 시 불필요한 전력 협상을 차단하여 깔끔하게 부팅을 완료할 수 있게 된다.</p>
+<hr />
+<h2>요약</h2>
+<p>외부 모니터 연결 시 부팅 멈춤이 발생할 때 <strong>빠른 시작 해제</strong>로 해결이 안 된다면, 즉시 <strong>BIOS 전원 옵션(USB Power Delivery / Always On USB)을 Auto에서 Off</strong>로 변경해 보길 바란다.</p>
             </div>
         </article>
     </main>

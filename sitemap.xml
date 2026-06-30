@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/index.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/windows11-startup-troubleshooting-numlock-monitor.html</loc>
+    <lastmod>2026-06-30</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/옵시디언-모바일-PC-깃허브-무료-자동-동기화.html</loc>

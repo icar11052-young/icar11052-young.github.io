@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우 11 부팅 문제 해결: 넘버락(Num Lock) 자동 활성화 및 외부 모니터 부팅 멈춤 해결 가이드 - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">블로그</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">
+            ← 목록으로 돌아가기
+        </a>
+
+        <article>
+            <div class="post-header">
+                <h1>윈도우 11 부팅 문제 해결: 넘버락(Num Lock) 자동 활성화 및 외부 모니터 부팅 멈춤 해결 가이드</h1>
+                <div class="post-meta">
+                    <span>📅 2026-06-30</span>
+                    <span>🏷️ Windows, Troubleshooting, Keyboard, Monitor, PowerManagement</span>
+                </div>
+            </div>
+            
+            <div class="post-body">
+                <h1>윈도우 11 부팅 문제 해결: 넘버락(Num Lock) 자동 활성화 및 외부 모니터 부팅 멈춤 해결 가이드</h1>
+<p>노트북이나 PC를 사용하면서 부팅할 때마다 사소하지만 매번 사람을 귀찮게 하거나 당황스럽게 만드는 대표적인 부팅 트러블슈팅 두 가지가 있다. </p>
+<p>하나는 <strong>부팅할 때 숫자 패드의 넘버락(Num Lock)이 자동으로 켜지지 않고 꺼지는 현상</strong>이고, 다른 하나는 <strong>외부 모니터를 연결한 상태로 부팅하면 화면이 안 뜨고 멈추는(프리징) 현상</strong>이다.</p>
+<p>이 두 가지 문제는 모두 윈도우 11의 전원 관리 방식 및 드라이버 로드 시점과 밀접한 연관이 있다. 직접 겪고 완벽히 해결한 해결 가이드를 정리하여 공유한다.</p>
+<hr />
+<h2>🔢 1. 부팅 및 로그인 화면에서 넘버락(Num Lock) 항상 켜두기</h2>
+<p>컴퓨터를 켜고 로그인 화면에서 숫자 PIN(비밀번호)을 치려고 할 때마다 넘버락이 꺼져 있어서 키가 안 눌리는 불편함을 겪은 적이 있을 것이다. 레지스트리를 수정하고 윈도우의 '상태 기억' 동작을 이해하면 이를 영구적으로 해결할 수 있다.</p>
+<h3>원인</h3>
+<p>윈도우는 로그인 화면 전의 시스템 프로필(<code>.DEFAULT</code>)과 로그인 후 사용자 프로필(<code>HKEY_CURRENT_USER</code>)의 키보드 설정을 각각 따로 관리한다. 또한, 컴퓨터를 종료할 때 <strong>마지막 넘버락의 상태(On/Off)</strong>를 기억하여 프로필에 자동으로 덮어쓴다. 따라서 넘버락이 꺼진 상태로 종료하면 다음 부팅 때 다시 꺼지게 된다.</p>
+<h3>해결 순서</h3>
+<h4>① 레지스트리 값 수정</h4>
+<ol>
+<li><code>Win + R</code>을 눌러 실행 창에 <code>regedit</code>을 입력하고 엔터를 누른다.</li>
+<li>아래 두 가지 경로로 각각 이동하여 <strong><code>InitialKeyboardIndicators</code></strong> 항목의 값을 수정한다.</li>
+<li><strong>로그인 화면(부팅 직후) 설정 경로</strong>:<br />
+<code>HKEY_USERS\.DEFAULT\Control Panel\Keyboard</code><br />
+     ➔ 값 데이터를 <strong><code>2</code></strong> (또는 기존 비트 플래그를 유지하려면 <code>2147483650</code>)로 설정</li>
+<li><strong>사용자 계정 로그인 이후 설정 경로</strong>:<br />
+<code>HKEY_CURRENT_USER\Control Panel\Keyboard</code><br />
+     ➔ 값 데이터를 <strong><code>2</code></strong>로 설정</li>
+</ol>
+<h4>② 윈도우에 '켜짐' 상태 강제 기억시키기 (중요)</h4>
+<p>레지스트리를 수정했더라도 넘버락이 꺼진 채로 재부팅을 해버리면 윈도우가 종료 단계에서 해당 레지스트리를 다시 <code>0</code>(꺼짐)으로 덮어써 버린다.<br />
+1. 컴퓨터 바탕화면에서 키보드의 <strong><code>Num Lock</code> 키를 직접 눌러 불이 들어오게(On) 만든다.</strong><br />
+2. 이 상태 그대로 <strong>컴퓨터를 다시 시작(또는 종료)</strong>한다.<br />
+3. 윈도우가 '넘버락이 켜진 상태'를 정상적으로 저장하며 종료되므로, 다음 부팅 때부터 레지스트리 <code>2</code> 값이 유지되며 항상 켜진 채로 부팅된다.</p>
+<hr />
+<h2>🖥️ 2. 외부 모니터 연결 시 부팅 멈춤(블랙스크린/프리징) 현상 해결</h2>
+<p>노트북에 USB-C(DP Alt Mode, Power Delivery 포함) 또는 HDMI/DisplayPort로 외부 모니터를 연결해 둔 상태에서 노트북을 켜면, 로고 화면에서 넘어가지 않거나 화면이 아예 검은색으로 유지되며 부팅이 안 되는 치명적인 오류다. </p>
+<p>모니터 케이블을 뽑고 켜면 부팅이 잘 되지만, 켤 때마다 케이블을 뽑았다 꽂는 것은 대단히 번거롭다.</p>
+<h3>원인</h3>
+<p>윈도우의 <strong>'빠른 시작 켜기(Fast Startup)'</strong> 기능과의 하드웨어 드라이버 충돌이다. 빠른 시작 기능은 컴퓨터를 완전히 종료하지 않고 시스템 메모리 상태를 하드디스크에 저장한 뒤(하이브리드 최대 절전 모드), 다시 켤 때 이 상태를 그대로 불러와 부팅 속도를 단축한다.</p>
+<p>하지만 외부 모니터가 연결되어 전력을 공급받거나 DP 신호를 주고받는 상태에서 커널을 복구하려고 하면, 그래픽 카드 드라이버나 USB-C 포트 컨트롤러가 정상적으로 초기화되지 못하고 시스템이 정지(Crash)해 버리는 것이다.</p>
+<h3>해결 방법: '빠른 시작 켜기' 해제</h3>
+<p>이 기능은 SSD를 사용하는 최신 컴퓨터 환경에서는 부팅 속도에 거의 차이를 주지 않으므로 꺼두는 것이 훨씬 안정적이다.</p>
+<ol>
+<li>윈도우 검색창에 <strong>제어판</strong>을 입력하고 실행한다.</li>
+<li><strong>하드웨어 및 소리</strong> ➔ <strong>전원 옵션</strong>으로 들어간다.</li>
+<li>왼쪽 메뉴에서 <strong>"전원 단추 작동 설정"</strong>을 클릭한다.</li>
+<li>상단의 <strong>"현재 사용할 수 없는 설정 변경"</strong>을 클릭한다. (관리자 권한 필요)</li>
+<li>아래쪽 '종료 설정' 항목에서 <strong>"빠른 시작 켜기 (권장)"</strong>의 체크를 <strong>해제</strong>한다.</li>
+<li><strong>변경 내용 저장</strong>을 누르고 컴퓨터를 재부팅한다.</li>
+</ol>
+<p>이제 외부 모니터가 몇 대가 연결되어 있든 상관없이 정상적으로 드라이버가 깨끗하게 로드되어 부팅 실패 없이 매끄럽게 켜진다.</p>
+<hr />
+<h2>💡 요약</h2>
+<ul>
+<li><strong>넘버락 자동 켜기</strong>: 레지스트리 수정 후 꼭 <strong>넘버락을 켠 채로 다시 시작</strong>을 눌러 상태를 기록해 준다.</li>
+<li><strong>모니터 부팅 프리징</strong>: 전원 관리 옵션에서 <strong>빠른 시작 켜기</strong>를 비활성화하여 드라이버 충돌을 방지한다.</li>
+</ul>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

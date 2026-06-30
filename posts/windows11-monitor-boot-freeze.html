@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법 - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">블로그</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">
+            ← 목록으로 돌아가기
+        </a>
+
+        <article>
+            <div class="post-header">
+                <h1>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법</h1>
+                <div class="post-meta">
+                    <span>📅 2026-06-30</span>
+                    <span>🏷️ Windows, Monitor, PowerManagement, Troubleshooting</span>
+                </div>
+            </div>
+            
+            <div class="post-body">
+                <h1>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법</h1>
+<p>노트북에 USB-C(DP Alt Mode, Power Delivery 포함) 또는 HDMI/DisplayPort로 외부 모니터를 연결해 둔 상태에서 노트북을 켜면, 로고 화면에서 넘어가기 전에 멈추거나 화면이 아예 검은색으로 유지되는 부팅 실패 현상이 발생하곤 한다. </p>
+<p>모니터 케이블을 뽑고 켜면 부팅이 잘 되지만, 켤 때마다 케이블을 연결하고 끊는 것은 매우 번거롭다. 이 현상의 명확한 원인과 해결 방법을 알아본다.</p>
+<hr />
+<h2>부팅 멈춤 현상의 원인</h2>
+<p>이 문제는 윈도우 11의 <strong>'빠른 시작 켜기(Fast Startup)'</strong> 기능과 하드웨어 드라이버 간의 충돌 때문에 발생한다. </p>
+<p>빠른 시작 기능은 컴퓨터를 종료할 때 완전 종료가 아니라 하이브리드 최대 절전 모드를 사용하여 시스템 커널 상태를 디스크에 저장하고, 다시 켤 때 이를 그대로 복구하여 부팅을 빠르게 만든다. </p>
+<p>하지만 외부 모니터가 연결되어 전력을 공급받거나 디스플레이 신호(DP/HDMI)를 주고받는 상태에서 저장된 커널을 급격히 불러오다 보면, 그래픽 카드 드라이버나 USB-C 포트 컨트롤러가 정상적으로 초기화되지 못해 부팅 과정에서 시스템이 정지(Crash)해 버리는 현상이다.</p>
+<hr />
+<h2>해결 방법: '빠른 시작 켜기' 해제</h2>
+<p>최신 SSD 환경에서는 빠른 시작 기능을 꺼도 부팅 속도 차이가 거의 없으므로, 시스템 안정성을 위해 비활성화하는 것이 권장된다.</p>
+<ol>
+<li>윈도우 검색창에 <strong>제어판</strong>을 입력하고 실행한다.</li>
+<li><strong>하드웨어 및 소리</strong> ➔ <strong>전원 옵션</strong>으로 이동한다.</li>
+<li>왼쪽 메뉴에서 <strong>"전원 단추 작동 설정"</strong>을 클릭한다.</li>
+<li>상단의 <strong>"현재 사용할 수 없는 설정 변경"</strong>을 클릭한다. (관리자 권한 필요)</li>
+<li>아래쪽 '종료 설정' 항목에서 <strong>"빠른 시작 켜기 (권장)"</strong>의 체크를 <strong>해제</strong>한다.</li>
+<li><strong>변경 내용 저장</strong>을 누르고 재부팅한다.</li>
+</ol>
+<p>체크를 해제하면 PC 부팅 시 모든 장치 드라이버가 깨끗하게 처음부터 로드되므로, 외부 모니터가 연결되어 있어도 멈춤 현상 없이 안전하게 부팅된다.</p>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

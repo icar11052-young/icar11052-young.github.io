@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM — 유튜브 URL 넣고 표만 뽑기 (에이전트 크롤링 대신) - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>NotebookLM — 유튜브 URL 넣고 표만 뽑기 (에이전트 크롤링 대신)</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-03</span>
+                    <span>🏷️ NotebookLM, YouTube, AI, Productivity</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>NotebookLM — 유튜브 URL 넣고 표만 뽑기</h1>
+<p>AI 에이전트에게 「이 유튜브에서 레시피 표 뽑아줘」라고 하면 보통 <strong>yt-dlp 자막 다운로드 → 파싱 → 표 정리</strong> 순으로 간다. 금요미식회 <strong>103회</strong> 아카이브를 채우면서 확인한 건, <strong>NotebookLM에 URL(또는 URL 목록)을 넣고 표만 요청</strong>하는 쪽이 훨씬 빠르고 정확하다는 것이다.</p>
+<hr />
+<h2>왜 크롤링부터 하면 안 되나?</h2>
+<table>
+<thead>
+<tr>
+<th>방식</th>
+<th>문제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자막 API / yt-dlp</td>
+<td>HTTP 429, IP 차단, 풀방송 2시간+ 자막 노이즈</td>
+</tr>
+<tr>
+<td>에이전트 브라우저 크롤</td>
+<td>느림, 구조 불안정</td>
+</tr>
+<tr>
+<td>NotebookLM</td>
+<td>URL 소스 추가 → <strong>「표로 정리해줘」</strong> 한 방</td>
+</tr>
+</tbody>
+</table>
+<p>풀방송 자막에는 뉴스·광고·잡담이 섞여 있고, <strong>금요미식회 구간만</strong> 골라내는 비용이 크다. NotebookLM은 영상을 이미 요약·구조화해 두는 쪽에 가깝다.</p>
+<hr />
+<h2>기본 워크플로</h2>
+<ol>
+<li><a href="https://notebooklm.google.com/">NotebookLM</a>에서 노트북 생성</li>
+<li><strong>소스 추가</strong> → 유튜브 URL (여러 개면 텍스트 파일로 URL 목록 업로드도 가능)</li>
+<li>채팅에 예시처럼 요청:</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>각 영상(또는 방영일)마다 표로:
+1) 메뉴 이름
+2) 재료
+3) 조리법 3~5단계
+4) (가능하면) 방송 대사 인용
+없으면 &quot;소스 없음&quot;
+</code></pre></div>
+
+<ol>
+<li>결과를 Obsidian <code>프로젝트/</code> 또는 위키에 <strong>compile</strong> (복붙만 하지 말고 기존 표와 병합)</li>
+</ol>
+<hr />
+<h2>금요미식회에서 검증된 팁</h2>
+<ul>
+<li><strong>URL↔날짜 오매핑</strong>이 「소스 없음」의 주 원인이었다. 오바타임 형식(<code>탁현민의 오바타임 N회ㅣM월 D일</code>)처럼 제목에 <strong>연도가 빠진</strong> 풀방송, 홍사훈 경제쇼·겸공뉴스특보 ID가 끼어 있는 경우가 많았다.</li>
+<li>NotebookLM 돌리기 <strong>전에</strong> yt-dlp로 <code>upload_date</code>와 제목을 한 번 대조하는 게 좋다.</li>
+<li><strong>중복 회차</strong>(같은 메뉴 재방)는 NotebookLM에 「메뉴 같으면 중복 의심」이라고 명시.</li>
+</ul>
+<hr />
+<h2>Cursor / MCP 연동 (선택)</h2>
+<p>Vault에 <code>notebooklm-mcp-setup.md</code> 가이드가 있다. Cursor에서 MCP로 NotebookLM을 붙이면 채팅 안에서 소스 추가·질의까지 이어갈 수 있다. (Google 로그인 1회 필요)</p>
+<hr />
+<h2>정리</h2>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>1순위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>유튜브 → 구조화 표</td>
+<td><strong>NotebookLM</strong></td>
+</tr>
+<tr>
+<td>URL·날짜 검증</td>
+<td>yt-dlp 메타데이터</td>
+</tr>
+<tr>
+<td>장기 보관·링크</td>
+<td>Obsidian 위키 compile</td>
+</tr>
+</tbody>
+</table>
+<p>에이전트에게 「유튜브 ingest」라고만 하면 크롤링부터 달리지 말고, <strong>NotebookLM 표 추출 → 위키 반영</strong> 순서를 기본값으로 두는 게 낫다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

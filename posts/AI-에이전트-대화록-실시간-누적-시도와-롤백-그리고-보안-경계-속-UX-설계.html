@@ -15,36 +15,28 @@
     </script>
 </head>
 <body>
-    <div class="progress-container">
-        <div class="progress-bar" id="myBar"></div>
-    </div>
-
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
     <header>
         <div class="container nav-container">
             <a href="../index.html" class="logo">영은.Dev</a>
             <div class="nav-links">
-                <a href="../index.html">블로그</a>
+                <a href="../index.html">홈</a>
                 <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
             </div>
         </div>
     </header>
-
     <main class="container" style="padding-top: 40px;">
-        <a href="../index.html" class="back-link">
-            ← 목록으로 돌아가기
-        </a>
-
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
         <article>
             <div class="post-header">
                 <h1>AI 에이전트 대화록 실시간 누적 시도와 롤백, 그리고 보안 경계 속 UX 설계</h1>
                 <div class="post-meta">
                     <span>📅 2026-06-30</span>
                     <span>🏷️ agent, concept, trend</span>
+                    
                 </div>
             </div>
-            
-            <div class="post-body">
-                <h1>AI 에이전트 대화록 실시간 누적 시도와 롤백, 그리고 보안 경계 속 UX 설계</h1>
+            <div class="post-body"><h1>AI 에이전트 대화록 실시간 누적 시도와 롤백, 그리고 보안 경계 속 UX 설계</h1>
 <p>AI 에이전트와 페어 프로그래밍을 하거나 업무 비서로 활용할 때 가장 곤란한 순간 중 하나는 <strong>'세션 단절로 인한 대화 맥락 유실'</strong>이다. 에이전트는 독립된 세션으로 실행되므로, 사용자가 예기치 않게 브라우저 탭이나 IDE 개발 창을 닫아버리면 직전까지 나눴던 세부 대화 내역이 가공되지 않은 채 그대로 증발할 수 있다.</p>
 <p>이 문제를 해결하기 위해 시도했던 <strong>실시간 대화록 누적 시스템의 도입기</strong>, 그리고 플랫폼 보안 정책과 충돌하며 겪은 <strong>롤백기</strong>, 그 과정에서 얻은 <strong>UX 설계적 교훈</strong>을 정리한다.</p>
 <hr />
@@ -81,8 +73,7 @@
 <ol>
 <li><strong>에이전트는 독립된 개체가 아닌 플랫폼의 하위 프로세스다</strong>: 플랫폼(IDE)이 정의해 둔 보안 규칙과 경계를 완벽히 인지하지 않은 채 로직을 확장하면, 아무리 좋은 아이디어라도 실제 실행 단계에서 충돌을 일으킨다.</li>
 <li><strong>보안과 편리함은 언제나 대척점에 서 있다</strong>: 파일 쓰기의 자동 승인은 편리하지만 에이전트 폭주 시 큰 리스크가 되며, 매번 승인을 받는 것은 안전하지만 심각한 UX 저하를 낳는다. 우리가 개발하는 자동화 도구에서도 이 선을 어디에 그을지 끊임없이 고민해야 한다.</li>
-</ol>
-            </div>
+</ol></div>
         </article>
     </main>
 </body>

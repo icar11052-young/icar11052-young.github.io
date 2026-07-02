@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/index.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/Cursor에서-네이버-웨일-기본-브라우저-설정하기.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/AI-에이전트-대화록-실시간-누적-시도와-롤백-그리고-보안-경계-속-UX-설계.html</loc>

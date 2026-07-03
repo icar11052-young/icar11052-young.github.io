@@ -5,7 +5,14 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 04 Jul 2026 06:21:05 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2026 07:24:27 +0900</lastBuildDate>
+    <item>
+      <title>2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-04-OneNote-267%ED%8E%98%EC%9D%B4%EC%A7%80-Obsidian-%EC%9D%B4%EA%B4%80-%EB%B0%A4%EC%83%98-%EC%97%90%EC%84%B8%EC%9D%B4.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-04-OneNote-267%ED%8E%98%EC%9D%B4%EC%A7%80-Obsidian-%EC%9D%B4%EA%B4%80-%EB%B0%A4%EC%83%98-%EC%97%90%EC%84%B8%EC%9D%B4.html</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0900</pubDate>
+      <description>Obsidian Importer가 0건만 가져오는 버그를 Graph API 스크립트로 우회해 267페이지를 이관한 하루. rate limit, 토큰 만료, 스킵 버그까지.</description>
+    </item>
     <item>
       <title>Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식</title>
       <link>https://icar11052-young.github.io/posts/Claude-Code-6%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%28%EC%97%89%ED%81%B4%EC%9E%A1%EC%8A%A4-%EC%A0%95%EB%A6%AC%29.html</link>

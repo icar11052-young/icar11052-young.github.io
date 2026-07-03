@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘 - 영은.Dev</title>
+    <meta name="description" content="Obsidian Importer가 0건만 가져오는 버그를 Graph API 스크립트로 우회해 267페이지를 이관한 하루. rate limit, 토큰 만료, 스킵 버그까지.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/2026-07-04-OneNote-267페이지-Obsidian-이관-밤샘-에세이.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘">
+    <meta property="og:description" content="Obsidian Importer가 0건만 가져오는 버그를 Graph API 스크립트로 우회해 267페이지를 이관한 하루. rate limit, 토큰 만료, 스킵 버그까지.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/2026-07-04-OneNote-267페이지-Obsidian-이관-밤샘-에세이.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘">
+    <meta name="twitter:description" content="Obsidian Importer가 0건만 가져오는 버그를 Graph API 스크립트로 우회해 267페이지를 이관한 하루. rate limit, 토큰 만료, 스킵 버그까지.">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘", "description": "Obsidian Importer가 0건만 가져오는 버그를 Graph API 스크립트로 우회해 267페이지를 이관한 하루. rate limit, 토큰 만료, 스킵 버그까지.", "datePublished": "2026-07-04", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/2026-07-04-OneNote-267페이지-Obsidian-이관-밤샘-에세이.html", "inLanguage": "ko-KR"}</script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>2026-07-04 — OneNote 267페이지 Obsidian 이관, Importer 버그와 Graph API 밤샘</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-04</span>
+                    <span>🏷️ Obsidian, OneNote, Microsoft, Daily</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>2026-07-04 — OneNote 267페이지, 밤샘 export</h1>
+<p>몇 년치 OneNote를 Obsidian으로 옮기려다 <strong>Importer가 0개</strong>만 가져오는 벽에 부딪혔다. 결국 Microsoft Graph API로 직접 긁어 <strong>267페이지</strong>를 <code>메모-이관/onenote/</code>에 넣었다. 잠 못 자고 붙잡고 있던 이유가 있었다.</p>
+<hr />
+<h2>Importer는 보이는데 0건</h2>
+<p>노트북·섹션 목록은 뜨는데 Import 누르면 <strong>0 imported</strong>. 개인 MS 계정도 맞고, OneDrive 동기화도 됐다. 플러그인 버그로 보고 <strong><code>scratch/onenote/onenote_export.py</code></strong> 를 짰다.</p>
+<ul>
+<li><code>Notes.Read</code> scope, device-code 로그인 (1회)</li>
+<li>HTML → markdownify → frontmatter 붙여 <code>.md</code> 저장</li>
+<li>이미지는 <code>assets/</code>로 내려받기</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">python</span> <span class="n">onenote_export</span><span class="p">.</span><span class="n">py</span> <span class="n">login</span>
+<span class="n">python</span> <span class="n">onenote_export</span><span class="p">.</span><span class="n">py</span> <span class="n">export</span>
+</code></pre></div>
+
+<hr />
+<h2>밤샘의 원인 세 가지</h2>
+<h3>1. Rate limit (429)</h3>
+<p>Graph API가 30초씩 쉬라고 한다. 페이지마다 1.2초 sleep도 넣었는데, 밤새 <strong>429</strong> 로그가 수백 줄.</p>
+<h3>2. 토큰 만료 (401)</h3>
+<p>1시간 넘게 돌리면 access token이 죽는다. 처음엔 전체가 <strong>401</strong>로 끊겼고, <code>_get()</code>에서 silent refresh 넣어서 해결.</p>
+<h3>3. 스킵 버그 (가장 억울함)</h3>
+<p><strong>이미 받은 251개 파일</strong>을 매번 API로 <strong>내용까지 다시 받은 뒤</strong> "이미 있음"으로 넘겼다. 3시간 헛돈. 수정: <strong>파일 있으면 API 호출 자체를 안 함</strong>. 그다음 export는 <strong>몇 분</strong>에 끝났다.</p>
+<hr />
+<h2>비번 잠긴 섹션</h2>
+<p><code>개인 정보</code>, <code>일기</code>는 OneNote <strong>AES 암호</strong>. 마이크로소프트도 복구 못 한다. 앱에서 세션만 풀면 로컬에서만 보이고, <strong>API는 여전히 403</strong>. <strong>암호 제거 + 동기화</strong>까지 해야 export된다. 3개 섹션은 다음에.</p>
+<hr />
+<h2>오늘의 교훈</h2>
+<ul>
+<li><strong>공식 Importer 막히면 Graph API</strong> — 개인 계정이면 <code>Notes.Read</code>로 충분</li>
+<li><strong>장시간 배치는 토큰 갱신 + idempotent 스킵</strong> 필수</li>
+<li><strong>compounding KB</strong> — 이 삽질을 위키·스크립트에 남겨두면 다음엔 5분이면 끝난다</li>
+</ul>
+<p>→ 위키: <a href="onenote-graph-api-obsidian-export.html">onenote-graph-api-obsidian-export</a></p></div>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>영은.Dev</title>
+    <link>https://icar11052-young.github.io/</link>
+    <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
+    <language>ko</language>
+    <lastBuildDate>Sat, 04 Jul 2026 05:53:30 +0900</lastBuildDate>
+    <item>
+      <title>Google Opal로 쓰레드 트렌드 포스팅 초안 자동화 — 플로우댓 영상 정리</title>
+      <link>https://icar11052-young.github.io/posts/Google-Opal%EB%A1%9C-%EC%93%B0%EB%A0%88%EB%93%9C-%ED%8A%B8%EB%A0%8C%EB%93%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-%EC%B4%88%EC%95%88-%EC%9E%90%EB%8F%99%ED%99%94-%28%ED%94%8C%EB%A1%9C%EC%9A%B0%EB%8C%93-%EC%A0%95%EB%A6%AC%29.html</link>
+      <guid>https://icar11052-young.github.io/posts/Google-Opal%EB%A1%9C-%EC%93%B0%EB%A0%88%EB%93%9C-%ED%8A%B8%EB%A0%8C%EB%93%9C-%ED%8F%AC%EC%8A%A4%ED%8C%85-%EC%B4%88%EC%95%88-%EC%9E%90%EB%8F%99%ED%99%94-%28%ED%94%8C%EB%A1%9C%EC%9A%B0%EB%8C%93-%EC%A0%95%EB%A6%AC%29.html</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0900</pubDate>
+      <description>Opal에 자연어로 워크플로를 짜고 Reddit·Google Search로 트렌드 긁어 쓰레드 포스트 초안까지 만드는 방법 — n8n·Cursor와 어디가 다른지.</description>
+    </item>
+    <item>
+      <title>옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처</title>
+      <link>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</link>
+      <guid>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0900</pubDate>
+      <description>inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.</description>
+    </item>
+    <item>
+      <title>2026-07-03 — Cursor 하루: 창 2:1 포커싱, NotebookLM, 금요미식회 103회</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-03-Cursor-%ED%95%98%EB%A3%A8-%EC%B0%BD-%ED%8F%AC%EC%BB%A4%EC%8B%B1-NotebookLM-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C-%EC%97%90%EC%84%B8%EC%9D%B4.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-03-Cursor-%ED%95%98%EB%A3%A8-%EC%B0%BD-%ED%8F%AC%EC%BB%A4%EC%8B%B1-NotebookLM-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C-%EC%97%90%EC%84%B8%EC%9D%B4.html</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0900</pubDate>
+      <description>하루 종일 Cursor 세션에서 창 클릭 포커싱 자동화, NotebookLM 표 추출, 금요미식회 시즌1 103회 아카이브를 마친 날.</description>
+    </item>
+    <item>
+      <title>NotebookLM — 유튜브 URL 넣고 표만 뽑기 (에이전트 크롤링 대신)</title>
+      <link>https://icar11052-young.github.io/posts/NotebookLM-%EC%9C%A0%ED%8A%9C%EB%B8%8C-URL-%EB%84%A3%EA%B3%A0-%ED%91%9C-%EB%A7%8C-%EB%BD%91%EA%B8%B0-%28%ED%81%AC%EB%A1%A4%EB%A7%81-%EB%8C%80%EC%8B%A0%29.html</link>
+      <guid>https://icar11052-young.github.io/posts/NotebookLM-%EC%9C%A0%ED%8A%9C%EB%B8%8C-URL-%EB%84%A3%EA%B3%A0-%ED%91%9C-%EB%A7%8C-%EB%BD%91%EA%B8%B0-%28%ED%81%AC%EB%A1%A4%EB%A7%81-%EB%8C%80%EC%8B%A0%29.html</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0900</pubDate>
+      <description>유튜브 자막 크롤링·yt-dlp보다 NotebookLM에 URL을 넣고 표 생성을 요청하는 게 훨씬 빠른 이유 — 금요미식회 103회 아카이브에서 검증.</description>
+    </item>
+    <item>
+      <title>윈도우 11 — 작은 창 클릭하면 2:1 비율 자동 확대 (FancyZones 한계 + AutoHotkey)</title>
+      <link>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%9E%91%EC%9D%80-%EC%B0%BD-%ED%81%B4%EB%A6%AD%ED%95%98%EB%A9%B4-2-1-%EB%B9%84%EC%9C%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EB%8C%80-%28FancyZones-%ED%95%9C%EA%B3%84-AutoHotkey%29.html</link>
+      <guid>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%9E%91%EC%9D%80-%EC%B0%BD-%ED%81%B4%EB%A6%AD%ED%95%98%EB%A9%B4-2-1-%EB%B9%84%EC%9C%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EB%8C%80-%28FancyZones-%ED%95%9C%EA%B3%84-AutoHotkey%29.html</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0900</pubDate>
+      <description>PowerToys FancyZones로는 안 되는 '클릭한 창이 master로 커지는' 2:1 동적 포커싱을 AutoHotkey v2로 구현한 방법.</description>
+    </item>
+    <item>
+      <title>Cursor에서 링크가 크롬으로 열릴 때 — 네이버 웨일 기본 브라우저 설정</title>
+      <link>https://icar11052-young.github.io/posts/Cursor%EC%97%90%EC%84%9C-%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%9B%A8%EC%9D%BC-%EA%B8%B0%EB%B3%B8-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0.html</link>
+      <guid>https://icar11052-young.github.io/posts/Cursor%EC%97%90%EC%84%9C-%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%9B%A8%EC%9D%BC-%EA%B8%B0%EB%B3%B8-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0.html</guid>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 +0900</pubDate>
+      <description>안티그래비티에서 Cursor로 옮긴 뒤, 채팅 링크가 크롬으로 열리는 문제를 네이버 웨일 기본 브라우저 설정으로 해결하는 방법.</description>
+    </item>
+    <item>
+      <title>AI 에이전트 대화록 실시간 누적 시도와 롤백, 그리고 보안 경계 속 UX 설계</title>
+      <link>https://icar11052-young.github.io/posts/AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%8C%80%ED%99%94%EB%A1%9D-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%88%84%EC%A0%81-%EC%8B%9C%EB%8F%84%EC%99%80-%EB%A1%A4%EB%B0%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B3%B4%EC%95%88-%EA%B2%BD%EA%B3%84-%EC%86%8D-UX-%EC%84%A4%EA%B3%84.html</link>
+      <guid>https://icar11052-young.github.io/posts/AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%8C%80%ED%99%94%EB%A1%9D-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%88%84%EC%A0%81-%EC%8B%9C%EB%8F%84%EC%99%80-%EB%A1%A4%EB%B0%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B3%B4%EC%95%88-%EA%B2%BD%EA%B3%84-%EC%86%8D-UX-%EC%84%A4%EA%B3%84.html</guid>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0900</pubDate>
+      <description>작성된 블로그 글 요약문이 없습니다.</description>
+    </item>
+    <item>
+      <title>외부 모니터 연결 시 윈도우 11 부팅 멈춤(프리징/검은 화면) 해결법</title>
+      <link>https://icar11052-young.github.io/posts/%EC%99%B8%EB%B6%80-%EB%AA%A8%EB%8B%88%ED%84%B0-%EC%97%B0%EA%B2%B0-%EC%8B%9C-%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EB%B6%80%ED%8C%85-%EB%A9%88%EC%B6%A4%28%ED%94%84%EB%A6%AC%EC%A7%95-%EA%B2%80%EC%9D%80-%ED%99%94%EB%A9%B4%29-%ED%95%B4%EA%B2%B0%EB%B2%95.html</link>
+      <guid>https://icar11052-young.github.io/posts/%EC%99%B8%EB%B6%80-%EB%AA%A8%EB%8B%88%ED%84%B0-%EC%97%B0%EA%B2%B0-%EC%8B%9C-%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EB%B6%80%ED%8C%85-%EB%A9%88%EC%B6%A4%28%ED%94%84%EB%A6%AC%EC%A7%95-%EA%B2%80%EC%9D%80-%ED%99%94%EB%A9%B4%29-%ED%95%B4%EA%B2%B0%EB%B2%95.html</guid>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0900</pubDate>
+      <description>Lenovo Legion 5 15AHP10 (83M0) 노트북에 USB-C 외부 모니터를 연결한 상태로 켤 때 발생하는 부팅 프리징 현상의 원인과 바이오스(BIOS) 설정을 통한 실전 해결 방법입니다.</description>
+    </item>
+    <item>
+      <title>윈도우 11 부팅 시 넘버락(Num Lock) 자동 활성화 완벽 해결법</title>
+      <link>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EB%B6%80%ED%8C%85-%EC%8B%9C-%EB%84%98%EB%B2%84%EB%9D%BD%28Num-Lock%29-%EC%9E%90%EB%8F%99-%ED%99%9C%EC%84%B1%ED%99%94-%EC%99%84%EB%B2%BD-%ED%95%B4%EA%B2%B0%EB%B2%95.html</link>
+      <guid>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EB%B6%80%ED%8C%85-%EC%8B%9C-%EB%84%98%EB%B2%84%EB%9D%BD%28Num-Lock%29-%EC%9E%90%EB%8F%99-%ED%99%9C%EC%84%B1%ED%99%94-%EC%99%84%EB%B2%BD-%ED%95%B4%EA%B2%B0%EB%B2%95.html</guid>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0900</pubDate>
+      <description>부팅하거나 로그인 화면이 뜰 때 키보드의 넘버락(Num Lock)이 자동으로 켜지지 않아 불편한 분들을 위한 레지스트리 설정 및 상태 저장 해결 방법입니다.</description>
+    </item>
+    <item>
+      <title>구글 드라이브 버리고 옵시디언 깃허브 무료 동기화 구축하기 (윈도우 PC x 갤럭시 안드로이드)</title>
+      <link>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%AA%A8%EB%B0%94%EC%9D%BC-PC-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%AC%B4%EB%A3%8C-%EC%9E%90%EB%8F%99-%EB%8F%99%EA%B8%B0%ED%99%94.html</link>
+      <guid>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%AA%A8%EB%B0%94%EC%9D%BC-PC-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%AC%B4%EB%A3%8C-%EC%9E%90%EB%8F%99-%EB%8F%99%EA%B8%B0%ED%99%94.html</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 +0900</pubDate>
+      <description>구글드라이브의 기기 간 동기화 충돌을 해결하기 위해, 윈도우 PC와 갤럭시 모바일 기기 간에 GitHub Private 저장소와 Obsidian Git 플러그인을 활용한 완전 무료 무인 자동 동기화를 세팅하는 실전 가이드입니다.</description>
+    </item>
+    <item>
+      <title>티스토리 API 종료 대응: 옵시디언 x 깃허브 페이지로 나만의 무인 자동화 블로그 구축하기</title>
+      <link>https://icar11052-young.github.io/posts/%ED%8B%B0%EC%8A%A4%ED%86%A0%EB%A6%AC-API-%EC%A2%85%EB%A3%8C-%EB%8C%80%EC%9D%91-%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EA%B9%83%ED%97%88%EB%B8%8C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%AC%EC%B6%95%EA%B8%B0.html</link>
+      <guid>https://icar11052-young.github.io/posts/%ED%8B%B0%EC%8A%A4%ED%86%A0%EB%A6%AC-API-%EC%A2%85%EB%A3%8C-%EB%8C%80%EC%9D%91-%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EA%B9%83%ED%97%88%EB%B8%8C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%AC%EC%B6%95%EA%B8%B0.html</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 +0900</pubDate>
+      <description>티스토리 API 서비스 종료에 대응하여, 개인 옵시디언 볼트에서 선택한 노트만 안전하게 정적 웹사이트로 빌드하고 깃허브 페이지로 자동 배포하는 무무비용 자동화 블로그 파이프라인 구축기입니다.</description>
+    </item>
+  </channel>
+</rss>

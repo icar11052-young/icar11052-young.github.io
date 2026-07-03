@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처 - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-04</span>
+                    <span>🏷️ Obsidian, AutoHotkey, Productivity, Windows</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>옵시디언 빠른메모를 윈도우 스티커메모처럼</h1>
+<p>메모를 여기저기 흩어두면 결국 <strong>한곳에 모아야</strong> 한다. 나는 옵시디언 <code>inbox/빠른메모.md</code>를 그 저장소로 쓰는데, 매번 앱을 열고 파일을 찾는 건 느리다. 스티커 메모처럼 <strong>바로 띄우고, 닫으면 MD에 남는</strong> 도구가 필요했다.</p>
+<p>이 글은 <strong>AutoHotkey v2</strong>로 만든 <code>quick-capture</code> 스티커 메모의 설계와 쓰는 법을 정리한다.</p>
+<hr />
+<h2>한 줄 요약</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>저장소</td>
+<td>옵시디언 <code>inbox/빠른메모.md</code> (진짜 원본)</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>AHK 스티커 메모 + 리스트 창</td>
+</tr>
+<tr>
+<td>단축키</td>
+<td><code>Win+Alt+N</code> — 숨기기 / <strong>새 메모</strong></td>
+</tr>
+<tr>
+<td>동기화</td>
+<td>메모 편집·삭제·추가가 MD에 반영</td>
+</tr>
+</tbody>
+</table>
+<p><strong>원본은 MD, 입력은 바탕화면에서</strong> — 이게 전부다.</p>
+<hr />
+<h2>왜 직접 만들었나</h2>
+<ul>
+<li><strong>윈도우 스티커 메모</strong> — 옵시디언과 안 맞음</li>
+<li><strong>옵시디언만</strong> — 띄우는 게 무겁고, “한 줄 적고 닫기”에 과함</li>
+<li><strong>다른 캡처 앱</strong> — 결국 또 다른 저장소가 생김</li>
+</ul>
+<p>이미 <code>빠른메모.md</code>에 쌓아 두고 있었으니, <strong>그 파일을 그대로 읽고 쓰는 가벼운 껍데기</strong>만 있으면 됐다.</p>
+<hr />
+<h2>쓰는 법</h2>
+<h3>설치 (1회)</h3>
+<ol>
+<li><a href="https://www.autohotkey.com/">AutoHotkey v2</a> 설치<br />
+<code>winget install AutoHotkey.AutoHotkey</code></li>
+<li>스크립트 실행: <code>scratch/quick-capture/quick-capture.ahk</code><br />
+   (Obsidian Vault 안 경로)</li>
+<li><code>quick-capture.ini</code>와 <code>notes/</code> 폴더에 창 위치·UI 상태가 저장된다. MD 경로는 스크립트 상단 <code>CAPTURE_FILE</code>에서 볼트 위치에 맞게 수정.</li>
+</ol>
+<h3>일상 사용</h3>
+<table>
+<thead>
+<tr>
+<th>동작</th>
+<th>방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>새 메모</td>
+<td><code>Win+Alt+N</code> (아무 메모도 안 열려 있을 때)</td>
+</tr>
+<tr>
+<td>전부 숨기기</td>
+<td><code>Win+Alt+N</code> (메모가 열려 있을 때)</td>
+</tr>
+<tr>
+<td>리스트 보기</td>
+<td>메모창 노란 바 <strong>목록</strong> 버튼, 또는 트레이 메뉴</td>
+</tr>
+<tr>
+<td>메모 닫기</td>
+<td><strong>✕</strong> — 내용 있으면 MD에 저장 후 숨김, 비어 있으면 삭제</td>
+</tr>
+<tr>
+<td>리스트에서 열기</td>
+<td>항목 더블클릭</td>
+</tr>
+<tr>
+<td>여러 개 삭제</td>
+<td>리스트에서 선택 후 <code>Delete</code></td>
+</tr>
+</tbody>
+</table>
+<h3>리스트 창</h3>
+<ul>
+<li><code>빠른메모.md</code> 내용을 제목·시간으로 보여 준다.</li>
+<li><strong>＋</strong> 새 메모, <strong>삭제</strong> 선택 항목 제거, <strong>동기화</strong> MD 다시 읽기.</li>
+<li>다크 테마, 가로 스크롤 없음.</li>
+</ul>
+<hr />
+<h2>메모창 UX (만들면서 신경 쓴 것)</h2>
+<h3>스크롤 없이 높이만 늘어남</h3>
+<p>글을 쓰면 창 높이가 줄 수 있는 만큼 커진다. 모니터 작업 영역을 넘기면 그때부터는 더 이상 안 키운다.</p>
+<h3>좁혀도 글이 잘리기 전엔 안 좁아짐</h3>
+<p>내용이 많을 때 창을 옆으로 줄이면, <strong>맨 아래 줄이 잘리기 직전</strong>에서 최소 너비가 걸린다. 스크롤바 대신 <strong>너비를 막는</strong> 쪽을 택했다.</p>
+<h3>리사이즈·이동할 때 깜빡임 줄이기</h3>
+<p>드래그로 크기 바꿀 때 레이아웃을 나눠서, 놓을 때만 전체 정리한다. 이동만 할 때는 불필요한 <code>Show()</code>를 피했다.</p>
+<hr />
+<h2>구조 (간단히)</h2>
+<div class="codehilite"><pre><span></span><code>inbox/빠른메모.md     ← 본문 저장 (단일 진실 공급원)
+scratch/quick-capture/
+  quick-capture.ahk   ← 스크립트
+  notes/*.ini         ← 창 위치·너비·표시 여부만
+</code></pre></div>
+
+<ul>
+<li><strong>본문</strong>은 MD만 본다. ini는 UI 상태만.</li>
+<li>리스트 ↔ 메모창 편집은 디바운스 후 MD에 쓴다.</li>
+<li>트레이에서 <strong>MD 동기화</strong>로 외부에서 고친 MD를 다시 읽을 수 있다.</li>
+</ul>
+<hr />
+<h2>AHK v2로 만들며 배운 것 (버튼이 안 보였던 이야기)</h2>
+<p>메모창 상단에 <code>목록</code>·<code>✕</code> 버튼을 붙였는데, <strong>노란 바만 보이고 버튼은 전혀 안 보이는</strong> 문제가 있었다. 원인은 두 가지였다.</p>
+<ol>
+<li><strong>드래그용 Text 컨트롤</strong>이 노란색 불투명 배경으로 바를 덮음 → <code>BackgroundTrans</code>로 클릭만 받게 변경</li>
+<li><strong>Edit 컨트롤</strong>이 <code>Move()</code> 할 때마다 z-order 맨 위로 올라가 버튼을 가림 → 레이아웃 후 버튼을 Edit 위로 다시 올림</li>
+</ol>
+<p>리스트 창의 3D 버튼은 처음부터 잘 보였는데, 메모창만 깨진 이유가 여기 있었다. 커스텀 타이틀바 없는 AHK Gui에서 <strong>컨트롤 순서와 투명 핸들</strong>을 같이 보면 된다.</p>
+<p>참고로 AHK v2에서는 <code>WinGetClientPos(, &amp;obj.prop, ...)</code>처럼 <strong>객체 속성에 <code>&amp;</code> 참조를 붙일 수 없다</strong>. 임시 변수에 받아서 대입해야 한다.</p>
+<hr />
+<h2>정리</h2>
+<ul>
+<li>옵시디언 <code>빠른메모.md</code>를 <strong>스티커 메모 UI</strong>로 감싼 도구</li>
+<li><code>Win+Alt+N</code>으로 <strong>새 메모</strong>, <strong>목록</strong>으로 리스트, <strong>✕</strong>로 닫기</li>
+<li>스크롤 없이 높이·너비가 내용에 맞게 동작</li>
+</ul>
+<p>메모는 결국 옵시디언에 쌓이고, 입력은 키 한 번이면 된다. 비슷한 고민이 있으면 AHK로 껍데기만 얹는 것도 괜찮은 선택이다.</p>
+<p>스크립트는 개인 Vault <code>scratch/quick-capture/</code>에 두었다. 볼트 경로만 맞추면 그대로 쓸 수 있다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식 - 영은.Dev</title>
+    <meta name="description" content="서브에이전트 6개와 Skill로 리서치~발행까지 — Notion 대신 Obsidian+GitHub Pages로 옮긴 blog-pipeline 스킬.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/Claude-Code-6에이전트-블로그-자동화-(엉클잡스-정리).html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식">
+    <meta property="og:description" content="서브에이전트 6개와 Skill로 리서치~발행까지 — Notion 대신 Obsidian+GitHub Pages로 옮긴 blog-pipeline 스킬.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/Claude-Code-6에이전트-블로그-자동화-(엉클잡스-정리).html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식">
+    <meta name="twitter:description" content="서브에이전트 6개와 Skill로 리서치~발행까지 — Notion 대신 Obsidian+GitHub Pages로 옮긴 blog-pipeline 스킬.">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식", "description": "서브에이전트 6개와 Skill로 리서치~발행까지 — Notion 대신 Obsidian+GitHub Pages로 옮긴 blog-pipeline 스킬.", "datePublished": "2026-07-04", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/Claude-Code-6에이전트-블로그-자동화-(엉클잡스-정리).html", "inLanguage": "ko-KR"}</script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>Claude Code 6에이전트로 블로그 자동화 — 엉클잡스 영상 정리 + Cursor 이식</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-04</span>
+                    <span>🏷️ Claude, Cursor, Automation, Blog</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>Claude Code 6에이전트로 블로그 자동화</h1>
+<p>유튜브 <strong>엉클잡스</strong> (<a href="https://www.youtube.com/watch?v=FC9dB065lL8">원본</a>) — Claude Code <strong>서브에이전트 6개 + Skill</strong> 로 블로그 글을 리서치부터 노션 발행까지 자동화하는 방법. 우리 Vault에는 <strong>Cursor용 <code>blog-pipeline</code> 스킬</strong>로 이식했다.</p>
+<hr />
+<h2>한 줄 요약</h2>
+<p><strong>Researcher → Fact checker → Planner → Writer → Reviewer → Publisher</strong> — 단계마다 에이전트·모델을 나눠 토큰을 아끼고, Skill 한 번에 순차 실행. 발행은 Notion MCP 대신 <strong><code>블로그/</code> + publish.py</strong>.</p>
+<hr />
+<h2>6 에이전트가 하는 일</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>에이전트</th>
+<th>출력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Researcher</strong></td>
+<td>웹·Vault 검색, <code>research.md</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Fact checker</strong></td>
+<td><code>verified</code> / <code>rejected</code> 분리</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Planner</strong></td>
+<td>목차·SEO·태그 <code>outline.md</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Writer</strong></td>
+<td><code>draft-v1.md</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Reviewer</strong></td>
+<td><code>draft-final.md</code> (frontmatter 포함)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Publisher</strong></td>
+<td><code>블로그/*.md</code> + (선택) GitHub Pages</td>
+</tr>
+</tbody>
+</table>
+<p>영상에서는 <strong>Reviewer에 Opus</strong>, 리서치·초안은 가벼운 모델을 쓴다. 팩트체커 넣으면 리서치 rejected/verified 폴더가 생겨 환각을 줄인다.</p>
+<hr />
+<h2>왜 Notion이 아니라 Obsidian인가</h2>
+<p>엉클잡스는 네이버 블로그 API·자동화 리스크 때문에 <strong>Notion MCP</strong>를 택했다. 우리는 이미:</p>
+<ul>
+<li><code>블로그/</code> 마크다운 CMS</li>
+<li><code>scratch/publish.py</code> → <strong>영은.Dev</strong> GitHub Pages</li>
+<li>Vault compile + git 동기화</li>
+</ul>
+<p>가 있으므로 <strong>Publisher만 교체</strong>하면 된다. SEO·소유권·장기 보관은 Obsidian 쪽이 유리하다.</p>
+<hr />
+<h2>Opal·NotebookLM과 역할 나누기</h2>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NotebookLM</strong></td>
+<td>유튜브 URL → 표·요약</td>
+</tr>
+<tr>
+<td><strong>Google Opal</strong></td>
+<td>트렌드·쓰레드 <strong>초안</strong></td>
+</tr>
+<tr>
+<td><strong>blog-pipeline</strong></td>
+<td><strong>롱폼 블로그</strong> 6단계</td>
+</tr>
+<tr>
+<td><strong>publish.py</strong></td>
+<td>정적 사이트 <strong>발행</strong></td>
+</tr>
+</tbody>
+</table>
+<p>SNS 초안(Opal)과 블로그 롱폼(6 agent)을 분리하는 게 맞다.</p>
+<hr />
+<h2>Cursor에서 쓰는 법</h2>
+<p>Vault에 스킬을 넣어 두었다.</p>
+<div class="codehilite"><pre><span></span><code><span class="na">.cursor</span><span class="err">/</span><span class="no">skills</span><span class="err">/</span><span class="no">blog-pipeline</span><span class="err">/</span>
+<span class="w">  </span><span class="nf">SKILL.md</span>
+<span class="w">  </span><span class="nf">agents</span><span class="err">/</span><span class="mi">01</span><span class="p">-</span><span class="no">researcher.md</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="mi">06</span><span class="p">-</span><span class="no">publisher.md</span>
+<span class="nf">scratch</span><span class="err">/</span><span class="no">blog-pipeline</span><span class="err">/</span><span class="p">{</span><span class="no">slug</span><span class="p">}</span><span class="err">/</span><span class="w">   </span><span class="err">←</span><span class="w"> </span><span class="err">중간</span><span class="w"> </span><span class="err">산출물</span>
+</code></pre></div>
+
+<p><strong>호출 예:</strong></p>
+<div class="codehilite"><pre><span></span><code>/blog-pipeline topic=&quot;NotebookLM 유튜브 표 추출&quot; target=tech
+/blog-pipeline topic=&quot;금요미식회 103회&quot; target=food publish=false
+</code></pre></div>
+
+<p><code>publish=false</code>(기본)면 <code>블로그/</code>에만 저장하고, 승인 후 <code>publish.py</code>를 돌린다.</p>
+<hr />
+<h2>AGENTS.md 세션 종료와의 관계</h2>
+<p>세션 종료 자동 blog는 <strong>가벼운 요약</strong>용. <code>/blog-pipeline</code>은 <strong>주제 하나를 깊게</strong> 파는 반자동 공장이다. 둘 다 쓰되, 같은 날 같은 주제로 중복 발행하지 않도록 <code>위키/log.md</code>를 본다.</p>
+<hr />
+<h2>참고</h2>
+<ul>
+<li>원본 영상: https://www.youtube.com/watch?v=FC9dB065lL8</li>
+<li>위키: <a href="위키/개념/claude-code-블로그-6에이전트-파이프라인.html">Claude Code 6에이전트 파이프라인</a></li>
+<li><a href="Google-Opal로-쓰레드-트렌드-포스팅-초안-자동화-(플로우댓-정리).html">Opal 쓰레드 WF 정리</a></li>
+</ul></div>
+        </article>
+    </main>
+</body>
+</html>

@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/index.html</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/Google-Opal로-쓰레드-트렌드-포스팅-초안-자동화-(플로우댓-정리).html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/2026-07-03-Cursor-하루-창-포커싱-NotebookLM-아카이브-에세이.html</loc>

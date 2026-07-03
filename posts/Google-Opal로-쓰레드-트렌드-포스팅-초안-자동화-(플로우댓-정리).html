@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Opal로 쓰레드 트렌드 포스팅 초안 자동화 — 플로우댓 영상 정리 - 영은.Dev</title>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>Google Opal로 쓰레드 트렌드 포스팅 초안 자동화 — 플로우댓 영상 정리</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-04</span>
+                    <span>🏷️ Google, Opal, Gemini, Threads, Automation</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>Google Opal로 쓰레드 트렌드 포스팅 초안 자동화</h1>
+<p>유튜브 <strong>플로우댓-FlowThat</strong> 채널 영상(<a href="https://www.youtube.com/watch?v=kwnLi9G9LBU">원본</a>)을 스크랩했다. 본문 템플릿은 비어 있었지만, 자막 기준으로 <strong>우리 블로그·자동화 파이프라인</strong>에 어떻게 쓸지 정리한다.</p>
+<hr />
+<h2>한 줄 요약</h2>
+<p><strong>기획(사람) → Opal에 워크플로 설계 요청 → Reddit·Google Search로 트렌드 수집 → Gemini가 쓰레드 포스트 초안 → Google Docs 저장.</strong><br />
+실제 Threads <strong>게시</strong>까지는 별도(API·n8n·수동) 단계가 필요하다.</p>
+<hr />
+<h2>Opal이 뭔가?</h2>
+<ul>
+<li><a href="https://opal.google.com/">Google Opal</a> — Google Labs <strong>노코드 AI 워크플로 빌더</strong></li>
+<li>"쓰레드 포스트 자동 생성 워크플로 설계해줘"처럼 <strong>자연어로 설계도</strong>를 받고, 노드(검색·요약·생성)를 Gemini가 짜 준다</li>
+<li>완성된 앱은 Gemini <strong>Gems(Super Gems)</strong> 로도 쓸 수 있다</li>
+</ul>
+<p>영상에서는 <strong>Gemini 2.5</strong> 계열(자막상 "58")을 엔진으로 쓴다.</p>
+<hr />
+<h2>영상에서의 워크플로 (5단계)</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 기획</td>
+<td>사람이 목표·톤·수익 모델을 프롬프트로 적는다</td>
+</tr>
+<tr>
+<td>2. Opal 설계</td>
+<td>"트렌디한 주제, 쓰레드에 잘 퍼지는 형식" 조건으로 <strong>워크플로·설계도</strong> 생성</td>
+</tr>
+<tr>
+<td>3. 트렌드 리서치</td>
+<td><strong>Google Search</strong> + <strong>Reddit</strong> 에서 실시간 이슈·논쟁적 의견 수집</td>
+</tr>
+<tr>
+<td>4. 포스트 생성</td>
+<td>리서치 요약 → <strong>Threads용 포스트 1편</strong> 초안</td>
+</tr>
+<tr>
+<td>5. 저장</td>
+<td><strong>Google Docs</strong>에 결과 저장 (Human-in-the-loop로 검수 후 게시)</td>
+</tr>
+</tbody>
+</table>
+<p>핵심 아이디어: <strong>Reddit = 트렌드 선행 지표</strong>. 국내 기사로 번지기 전에 Reddit에서 먼저 긁어 오면 "쓰레드에 잘 먹히는 각"을 잡기 쉽다.</p>
+<hr />
+<h2>n8n / Cursor / Opal — 우리 글쓰기 파이프라인과 비교</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Opal (이 영상)</th>
+<th>n8n + Threads API</th>
+<th>우리 Vault (Cursor + publish.py)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>입력</strong></td>
+<td>키워드·주제</td>
+<td>YouTube URL, Sheet</td>
+<td>Obsidian <code>블로그/*.md</code></td>
+</tr>
+<tr>
+<td><strong>강점</strong></td>
+<td>설계·초안 초고속</td>
+<td><strong>실제 자동 게시</strong></td>
+<td><strong>장기 보관·GitHub Pages·SEO</strong></td>
+</tr>
+<tr>
+<td><strong>약점</strong></td>
+<td>Threads API 직접 연동 불명확</td>
+<td>JSON 파싱·API 2단계</td>
+<td>글 <strong>초안</strong>은 사람/에이전트가 써야 함</td>
+</tr>
+<tr>
+<td><strong>비용</strong></td>
+<td>Gemini 사용량</td>
+<td>LLM + API 호출</td>
+<td>거의 무료(정적 사이트)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>실용 조합 (영은 입장):</strong></p>
+<ol>
+<li><strong>Opal / NotebookLM</strong> — 유튜브·Reddit·트렌드 → <strong>초안·표·요약</strong></li>
+<li><strong>Cursor</strong> — Vault 위키에 compile + <code>블로그/</code> 마크다운 가공</li>
+<li><strong><code>publish.py --target tech</code></strong> — GitHub Pages 발행</li>
+<li>(선택) <strong>n8n</strong> — 쓰레드만 짧게 티저 + 블로그 링크</li>
+</ol>
+<p>즉 Opal은 <strong>「쓰레드용 1차 원고 공장」</strong>, 우리 블로그는 <strong>「컴파일된 지식·SEO 자산」</strong>이다. 같은 글을 두 채널에 그대로 복붙하기보다, Opal 출력을 <strong>블로그 초안 재료</strong>로 쓰는 게 맞다.</p>
+<hr />
+<h2>영은 메모와 연결</h2>
+<p><code>inbox/빠른메모</code>에 적어 둔 것처럼, Opal로 <strong>수익형 쓰레드 워크플로</strong>를 실험 중이다. 다만:</p>
+<ul>
+<li>"프로그램 만들어서 쓰는 건 좋은데 100% 완벽하진 않다" → <strong>Human 검수 + Vault compile</strong> 단계는 그대로 필요</li>
+<li>Cursor / Claude Code / Codex 비교는 <strong>코딩·Vault 가공</strong> 쪽, Opal은 <strong>SNS 초안·트렌드 리서치</strong> 쪽으로 역할 분리</li>
+</ul>
+<hr />
+<h2>다음 액션 (체크리스트)</h2>
+<ul>
+<li>[ ] Opal에서 영상과 비슷한 워크플로 1개 복제</li>
+<li>[ ] 출력 Google Doc → 마크다운 복사 → <code>원본자료/기사/</code> 또는 <code>블로그/</code> 초안</li>
+<li>[ ] 쓰레드 게시는 n8n 또는 수동 — <strong>auto_publish_text</strong> 등 API 옵션 확인</li>
+<li>[ ] 잘 된 포스트는 <code>위키/개념/</code>에 개념 노트로 compile</li>
+</ul>
+<hr />
+<h2>참고</h2>
+<ul>
+<li>원본 영상: https://www.youtube.com/watch?v=kwnLi9G9LBU</li>
+<li>관련 위키: <a href="위키/개념/google-opal-threads-자동포스팅.html">Google Opal · 쓰레드 자동포스팅</a></li>
+<li><a href="NotebookLM-유튜브-URL-넣고-표-만-뽑기-(크롤링-대신).html">NotebookLM 유튜브 표 추출</a> — 유튜브→구조화는 NotebookLM, 트렌드→SNS 초안은 Opal</li>
+</ul></div>
+        </article>
+    </main>
+</body>
+</html>

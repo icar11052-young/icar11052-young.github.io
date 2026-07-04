@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/2026-07-05-OneNote-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%95-%EC%8A%B9%EA%B2%A9-%EC%B6%94%EC%96%B5-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
+    <lastmod>2026-07-05</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/2026-07-04-OneNote-267%ED%8E%98%EC%9D%B4%EC%A7%80-Obsidian-%EC%9D%B4%EA%B4%80-%EB%B0%A4%EC%83%98-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>

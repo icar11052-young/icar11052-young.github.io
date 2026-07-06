@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루 - 영은.Dev</title>
+    <meta name="description" content="출발 역산 캘린더, Gemini 끊고 Cursor ACP 텔레그램, AHK 50:50 창 포커싱, 그리고 '위치 몰라요'라고 한 AI의 실수.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/2026-07-06-캘린더-OpenClaw-창포커싱-하루-에세이.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루">
+    <meta property="og:description" content="출발 역산 캘린더, Gemini 끊고 Cursor ACP 텔레그램, AHK 50:50 창 포커싱, 그리고 '위치 몰라요'라고 한 AI의 실수.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/2026-07-06-캘린더-OpenClaw-창포커싱-하루-에세이.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루">
+    <meta name="twitter:description" content="출발 역산 캘린더, Gemini 끊고 Cursor ACP 텔레그램, AHK 50:50 창 포커싱, 그리고 '위치 몰라요'라고 한 AI의 실수.">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루", "description": "출발 역산 캘린더, Gemini 끊고 Cursor ACP 텔레그램, AHK 50:50 창 포커싱, 그리고 '위치 몰라요'라고 한 AI의 실수.", "datePublished": "2026-07-06", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/2026-07-06-캘린더-OpenClaw-창포커싱-하루-에세이.html", "inLanguage": "ko-KR"}</script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-06</span>
+                    <span>🏷️ Obsidian, OpenClaw, AutoHotkey, Google-Calendar</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>캘린더에 집 주소를 넣었는데 AI는 왜 모를까</h1>
+<p>7월 6일은 <strong>데스크톱 생활 OS</strong>를 한 겹 더 쌓은 날이었다. 아침에는 Google Calendar와 Obsidian을 잇고, 오후에는 텔레그램 비서에서 <strong>종량제 Gemini</strong>를 걷어냈다. 저녁에는 윈도우 <strong>2:1 창 포커싱</strong> 스크립트를 고쳤다. 그리고 잘 자러 가기 직전, AI에게 「지금 어디 있어?」라고 물었더니 <strong>모른다</strong>고 답했다 — 분명 같은 날 <code>calendar_sync.py</code>에 <strong>집 주소</strong>를 넣고 <strong>출발 시각</strong>까지 역산해 둔 뒤였다.</p>
+<hr />
+<h2>1. 일정 = 위치 정보다</h2>
+<p><code>scratch/calendar/calendar_sync.py</code>에는 이미 이렇게 박혀 있다.</p>
+<ul>
+<li><strong>집:</strong> 경북 경산시 남천면 금곡길 36-1</li>
+<li><strong>신마산:</strong> 대구 남구 현충로 214 → 이동 40분 + 여유 10분 → 09:40 출발</li>
+<li><strong>학원 픽업:</strong> 경산 경청로 1105 → 20분 + 10분 → 17:00 출발</li>
+</ul>
+<p><code>일정.md</code>에 동기화되면 「지금 어디?」는 GPS가 아니라 <strong>캘린더 블록 + 집 주소</strong>로 답할 수 있다. 오늘(7/6)은 외출 주소가 없고 16:40부터 가족·저녁 → <strong>집</strong> 추정이 맞다.</p>
+<p><strong>교훈:</strong> AI는 vault에 저장해 둔 걸 <strong>질문 유형에 맞게 읽어야</strong> 한다. 「위치」→ <code>일정.md</code> + <code>HOME_ADDRESS</code> 먼저.</p>
+<hr />
+<h2>2. OpenClaw: Gemini 끊고 Cursor ACP</h2>
+<p>텔레그램 <code>@chorok_ai_bot</code>은 PC에서 돌아가는 OpenClaw Gateway다. 처음엔 <code>.env</code>의 <code>GEMINI_API_KEY</code>로 <strong>gemini-2.5-flash</strong>가 붙었다. 영은은 <strong>종량제 Gemini 쓰지 말고 Cursor 구독</strong>을 쓰라고 했다.</p>
+<p>조치 요약:</p>
+<ul>
+<li><code>plugins.entries.google.enabled: false</code></li>
+<li>ACP + acpx, <code>defaultAgent: cursor</code></li>
+<li>Gateway는 <code>TELEGRAM_BOT_TOKEN</code>만 로드</li>
+<li>Cursor CLI <code>agent login</code> (PATH 없으면 <code>%LOCALAPPDATA%\cursor-agent\agent.ps1</code>)</li>
+</ul>
+<p>텔레그램 <strong>파발이</strong>와 Cursor <strong>초록</strong>은 별개다. 이름만 비슷할 뿐.</p>
+<hr />
+<h2>3. 창 포커싱: PowerToys가 원인이 아니었다</h2>
+<p>스티커 메모(<code>quick-capture.ahk</code>)는 Startup에서 잘 떴는데, <strong>2:1 클릭 포커싱</strong>은 안 됐다. PowerToys FancyZones를 껐기 때문이 <strong>아니다</strong>. 둘 다 AutoHotkey고 PowerToys <strong>필수 아님</strong>.</p>
+<ul>
+<li>포커싱 스크립트는 작업 스케줄러 <code>Chorok-WindowFocusSwap</code></li>
+<li><strong>50:50</strong> 배치는 구버전이 「이미 큰 쪽」으로 보고 <strong>클릭 무시</strong> → <code>isBalanced</code> 분기로 <strong>반반에서도 클릭한 창 2/3</strong> 되게 수정</li>
+</ul>
+<hr />
+<h2>4. PC Telegram 글자 크기</h2>
+<p>모바일처럼 「채팅 글자만」 슬라이더는 <strong>데스크톱 Telegram 6.9에 없다</strong>. <code>-scale 125</code>로 실행하거나 설정 맨 아래 <strong>Interface scale</strong>을 쓴다.</p>
+<hr />
+<h2>마무리</h2>
+<p>하루에 <strong>캘린더·봇·AHK·텔레그램 UI</strong>까지 손댔다. 내일(7/7)은 09:40 신마산 출발, 17:00 학원 픽업 — <code>일정.md</code>에 다 있다.</p>
+<p>AI한테 「자러 간다」고 하면 <strong>스티커 정리 → 작업일지 → 블로그 → lint → git push</strong>까지 해야 한다. 오늘은 그걸 한 번 더 배웠다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

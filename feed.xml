@@ -5,13 +5,20 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 06 Jul 2026 13:42:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 21:54:38 +0900</lastBuildDate>
     <item>
       <title>Gmail·Google 캘린더·Microsoft To Do·클래식 Outlook을 한 PC에 묶는 실전 가이드</title>
       <link>https://icar11052-young.github.io/posts/2026-07-06-Gmail-Outlook-ToDo-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1-%EC%9D%BC%EC%A0%95-%ED%95%A0%EC%9D%BC-%EC%97%B0%EB%8F%99-%EA%B0%80%EC%9D%B4%EB%93%9C.html</link>
       <guid>https://icar11052-young.github.io/posts/2026-07-06-Gmail-Outlook-ToDo-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1-%EC%9D%BC%EC%A0%95-%ED%95%A0%EC%9D%BC-%EC%97%B0%EB%8F%99-%EA%B0%80%EC%9D%B4%EB%93%9C.html</guid>
       <pubDate>Mon, 06 Jul 2026 00:00:00 +0900</pubDate>
       <description>Gmail(IMAP) 메일, Google 캘린더 양방향, 삼성 리마인더·To Do 할 일, Outlook on the Desktop(OotD) 바탕화면 위젯까지—Google과 Microsoft를 섞어 쓰는 사람을 위한 따라 하기 쉬운 연동 가이드입니다.</description>
+    </item>
+    <item>
+      <title>캘린더에 집 주소를 넣었는데 AI는 왜 모를까 — 7월 6일 데스크톱 자동화 하루</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-06-%EC%BA%98%EB%A6%B0%EB%8D%94-OpenClaw-%EC%B0%BD%ED%8F%AC%EC%BB%A4%EC%8B%B1-%ED%95%98%EB%A3%A8-%EC%97%90%EC%84%B8%EC%9D%B4.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-06-%EC%BA%98%EB%A6%B0%EB%8D%94-OpenClaw-%EC%B0%BD%ED%8F%AC%EC%BB%A4%EC%8B%B1-%ED%95%98%EB%A3%A8-%EC%97%90%EC%84%B8%EC%9D%B4.html</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0900</pubDate>
+      <description>출발 역산 캘린더, Gemini 끊고 Cursor ACP 텔레그램, AHK 50:50 창 포커싱, 그리고 '위치 몰라요'라고 한 AI의 실수.</description>
     </item>
     <item>
       <title>2026-07-05 — OneNote 스테이징을 비우고, 추억 폴더를 만든 날</title>

@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처 - 영은.Dev</title>
-    <meta name="description" content="inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
+    <meta name="description" content="빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://icar11052-young.github.io/posts/옵시디언-빠른메모를-윈도우-스티커메모처럼-(AutoHotkey-v2).html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처">
-    <meta property="og:description" content="inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
+    <meta property="og:description" content="빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
     <meta property="og:url" content="https://icar11052-young.github.io/posts/옵시디언-빠른메모를-윈도우-스티커메모처럼-(AutoHotkey-v2).html">
     <meta property="og:site_name" content="영은.Dev">
     <meta property="og:locale" content="ko_KR">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처">
-    <meta name="twitter:description" content="inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
+    <meta name="twitter:description" content="빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.">
     <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
     <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
     <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
     <link rel="stylesheet" href="../style.css">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처", "description": "inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.", "datePublished": "2026-07-04", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/옵시디언-빠른메모를-윈도우-스티커메모처럼-(AutoHotkey-v2).html", "inLanguage": "ko-KR"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "옵시디언 빠른메모를 윈도우 스티커메모처럼 — AutoHotkey v2로 만든 빠른 캡처", "description": "빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.", "datePublished": "2026-07-04", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/옵시디언-빠른메모를-윈도우-스티커메모처럼-(AutoHotkey-v2).html", "inLanguage": "ko-KR"}</script>
     <script>
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="post-body"><h1>옵시디언 빠른메모를 윈도우 스티커메모처럼</h1>
-<p>메모를 여기저기 흩어두면 결국 <strong>한곳에 모아야</strong> 한다. 나는 옵시디언 <code>inbox/빠른메모.md</code>를 그 저장소로 쓰는데, 매번 앱을 열고 파일을 찾는 건 느리다. 스티커 메모처럼 <strong>바로 띄우고, 닫으면 MD에 남는</strong> 도구가 필요했다.</p>
+<p>메모를 여기저기 흩어두면 결국 <strong>한곳에 모아야</strong> 한다. 나는 옵시디언 <code>빠른메모.md</code>를 그 저장소로 쓰는데, 매번 앱을 열고 파일을 찾는 건 느리다. 스티커 메모처럼 <strong>바로 띄우고, 닫으면 MD에 남는</strong> 도구가 필요했다.</p>
 <p>이 글은 <strong>AutoHotkey v2</strong>로 만든 <code>quick-capture</code> 스티커 메모의 설계와 쓰는 법을 정리한다.</p>
 <hr />
 <h2>한 줄 요약</h2>
@@ -67,7 +67,7 @@
 <tbody>
 <tr>
 <td>저장소</td>
-<td>옵시디언 <code>inbox/빠른메모.md</code> (진짜 원본)</td>
+<td>옵시디언 <code>빠른메모.md</code> (진짜 원본)</td>
 </tr>
 <tr>
 <td>UI</td>
@@ -153,7 +153,7 @@
 <p>드래그로 크기 바꿀 때 레이아웃을 나눠서, 놓을 때만 전체 정리한다. 이동만 할 때는 불필요한 <code>Show()</code>를 피했다.</p>
 <hr />
 <h2>구조 (간단히)</h2>
-<div class="codehilite"><pre><span></span><code>inbox/빠른메모.md     ← 본문 저장 (단일 진실 공급원)
+<div class="codehilite"><pre><span></span><code>빠른메모.md     ← 본문 저장 (단일 진실 공급원)
 scratch/quick-capture/
   quick-capture.ahk   ← 스크립트
   notes/*.ini         ← 창 위치·너비·표시 여부만

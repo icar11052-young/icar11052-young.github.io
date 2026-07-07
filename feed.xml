@@ -5,7 +5,14 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 06 Jul 2026 21:54:38 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jul 2026 23:13:20 +0900</lastBuildDate>
+    <item>
+      <title>크롬 광고 차단기 설치하기 — 컴퓨터 잘 모르는 사람도 5분이면 OK</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-07-%ED%81%AC%EB%A1%AC-%EA%B4%91%EA%B3%A0-%EC%B0%A8%EB%8B%A8%EA%B8%B0-%EC%84%A4%EC%B9%98-%EC%B4%88%EB%B3%B4%EC%9E%90-%EA%B0%80%EC%9D%B4%EB%93%9C.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-07-%ED%81%AC%EB%A1%AC-%EA%B4%91%EA%B3%A0-%EC%B0%A8%EB%8B%A8%EA%B8%B0-%EC%84%A4%EC%B9%98-%EC%B4%88%EB%B3%B4%EC%9E%90-%EA%B0%80%EC%9D%B4%EB%93%9C.html</guid>
+      <pubDate>Tue, 07 Jul 2026 00:00:00 +0900</pubDate>
+      <description>구글 크롬에 광고 차단 확장 프로그램(uBlock Origin Lite)을 크롬 웹 스토어에서 설치·고정·확인하는 방법. 프로그램 설치 없이 버튼 몇 번으로 끝나는 초보자용 따라 하기 가이드입니다.</description>
+    </item>
     <item>
       <title>Gmail·Google 캘린더·Microsoft To Do·클래식 Outlook을 한 PC에 묶는 실전 가이드</title>
       <link>https://icar11052-young.github.io/posts/2026-07-06-Gmail-Outlook-ToDo-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1-%EC%9D%BC%EC%A0%95-%ED%95%A0%EC%9D%BC-%EC%97%B0%EB%8F%99-%EA%B0%80%EC%9D%B4%EB%93%9C.html</link>
@@ -60,7 +67,7 @@
       <link>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</link>
       <guid>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</guid>
       <pubDate>Sat, 04 Jul 2026 00:00:00 +0900</pubDate>
-      <description>inbox/빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.</description>
+      <description>빠른메모.md와 양방향 동기화되는 스티커 메모 UI. Win+Alt+N으로 새 메모, 목록 버튼으로 리스트 열기, 스크롤 없이 높이 자동 맞춤.</description>
     </item>
     <item>
       <title>2026-07-03 — Cursor 하루: 창 2:1 포커싱, NotebookLM, 금요미식회 103회</title>

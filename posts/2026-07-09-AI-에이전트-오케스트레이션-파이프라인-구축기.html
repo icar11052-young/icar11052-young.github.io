@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다 - 영은.Dev</title>
+    <meta name="description" content="커서와 클로드 코드가 서로 대화할 수 있냐는 질문에서 출발해, 기획-실행-검수-자동수정 파이프라인을 실제로 만들고 텔레그램으로 배포까지 한 하루.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/2026-07-09-AI-에이전트-오케스트레이션-파이프라인-구축기.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다">
+    <meta property="og:description" content="커서와 클로드 코드가 서로 대화할 수 있냐는 질문에서 출발해, 기획-실행-검수-자동수정 파이프라인을 실제로 만들고 텔레그램으로 배포까지 한 하루.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/2026-07-09-AI-에이전트-오케스트레이션-파이프라인-구축기.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다">
+    <meta name="twitter:description" content="커서와 클로드 코드가 서로 대화할 수 있냐는 질문에서 출발해, 기획-실행-검수-자동수정 파이프라인을 실제로 만들고 텔레그램으로 배포까지 한 하루.">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다", "description": "커서와 클로드 코드가 서로 대화할 수 있냐는 질문에서 출발해, 기획-실행-검수-자동수정 파이프라인을 실제로 만들고 텔레그램으로 배포까지 한 하루.", "datePublished": "2026-07-09", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/2026-07-09-AI-에이전트-오케스트레이션-파이프라인-구축기.html", "inLanguage": "ko-KR"}</script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-09</span>
+                    <span>🏷️ Claude Code, Cursor, Agent, Automation, Telegram, PowerShell</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다</h1>
+<p>영은이 물었다. "커서 에이전트랑 클로드 코드 둘 다 데스크탑 버전으로 쓰고 있는데, 혹시 너희끼리 대화가 가능하니? 텔레그램 그룹방 만들어서 나까지 셋이 얘기하면 안 돼?"</p>
+<p>재밌는 아이디어였지만 답은 "안 된다"였다 — 그리고 그 "안 되는 이유"를 설명하다가, 결국 하루 종일 걸려서 진짜로 작동하는 AI 에이전트 파이프라인을 만들게 됐다.</p>
+<hr />
+<h2>1. 그룹방이 안 되는 진짜 이유</h2>
+<p>텔레그램 Bot API는 <strong>봇이 다른 봇의 메시지를 아예 못 보게 서버 단에서 막아놓는다.</strong> Privacy Mode를 켜든 끄든 상관없다. "봇 관리자거나 privacy mode가 꺼진 봇도 다른 봇이 보낸 메시지는 못 받는다"가 텔레그램의 공식 정책이다. 무한루프 방지용 하드코딩이라 우회할 방법이 없다.</p>
+<p>즉 커서용 봇, 클로드용 봇을 같은 그룹에 넣어도 둘은 서로의 말을 절대 못 듣는다. 결국 영은이 한쪽 답을 복사해서 다른 쪽에 붙여넣어야 하는 건 똑같다 — 그룹방을 만드는 수고만 늘고 얻는 게 없다.</p>
+<p>대신 제안한 게 <strong>로컬 CLI 오케스트레이션</strong>이었다. 각 도구의 headless(비대화형) 모드를 스크립트가 순서대로 불러서, 사람 개입 없이 기획→실행→검수가 자동으로 이어지게 만드는 것.</p>
+<hr />
+<h2>2. 모델 배치를 뒤집었다</h2>
+<p>처음 구상은 "기획=안티그래비티, 실행=클로드 코드, 검수=커서"였다. 근데 실제 로컬 설정(<code>~/.cursor/cli-config.json</code>)을 열어보니 세 도구가 이렇게 물려 있었다.</p>
+<table>
+<thead>
+<tr>
+<th>도구</th>
+<th>실제 모델</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>안티그래비티</td>
+<td>Gemini 2.5 Flash</td>
+</tr>
+<tr>
+<td>커서 CLI</td>
+<td>Composer 2.5 <strong>Fast</strong></td>
+</tr>
+<tr>
+<td>클로드 코드</td>
+<td>Sonnet 5 (fast 모드 아님)</td>
+</tr>
+</tbody>
+</table>
+<p>핵심은 이거다. <strong>Flash랑 Fast는 둘 다 "속도를 위해 깊이를 희생한 티어"다.</strong> 검수 역할은 셋 중 가장 신중해야 하는 자리인데, 원래 계획대로면 그 자리에 "빠르게 답하도록 튜닝된" 모델이 들어가는 거였다 — 역할과 모델 특성이 정반대로 맞물려 있었다.</p>
+<p>그래서 뒤집었다. 커서(Composer, 애초에 코드 편집 전용 모델)는 <strong>실행</strong>에, fast 모드가 아닌 클로드 코드는 <strong>검수</strong>에.</p>
+<hr />
+<h2>3. 안티그래비티는 없는 CLI를 찾고 있었다</h2>
+<p>역할 배치를 정하고 실제로 헤드리스 CLI를 불러보려는데, 안티그래비티 쪽이 이상했다. <code>antigravity-ide.cmd --help</code>를 찍어보니 나온 건 <code>--diff</code>, <code>--merge</code>, <code>--add</code> 같은 <strong>파일/창 관리용 옵션뿐</strong>이었다. 프롬프트 넣고 에이전트를 돌리는 기능 자체가 없었다.</p>
+<p>웹에서 찾은 "Antigravity CLI(agy)"라는 헤드리스 도구는 이 PC에 깔린 제품과는 다른 것이었던 셈. 결국 v1은 안티그래비티를 빼고, 커서의 <code>--mode plan</code>(읽기전용 기획 모드)으로 기획까지 커버하는 <strong>2-CLI 구조</strong>로 축소했다.</p>
+<hr />
+<h2>4. 검수가 진짜로 결함을 잡았다</h2>
+<p>기획→실행→검수 3단계를 다 붙이고 첫 실측을 돌렸다. 요청은 "Hello, World!"를 출력하는 스크립트. 실행 에이전트가 만든 건:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>느낌표가 없었다. 그리고 검수 에이전트(클로드 코드)가 실행 로그 텍스트만 믿지 않고 <strong>실제 파일을 열어서</strong> 이 차이를 정확히 잡아냈다.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;ok&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;issues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;출력 문자열이 &#39;Hello, World&#39;로 되어 있어 요청한 &#39;Hello, World!&#39;와 느낌표(!) 차이가 있음&quot;</span><span class="p">]}</span>
+</code></pre></div>
+
+<p>사소해 보이지만, 이게 이 파이프라인 전체 개념이 실제로 작동한다는 첫 증거였다.</p>
+<hr />
+<h2>5. 검수가 실패하면 어떻게 할까</h2>
+<p>여기서 영은이 흐름을 하나 더 제안했다. "기획-실행-검수-수정-2차검수-보고 or 완료, 이 플로 어때?"</p>
+<p>검수가 실패할 때마다 곧장 사람한테 넘기지 않고, <strong>자동으로 딱 한 번</strong> 수정 후 재검수를 거치자는 거였다. 그래도 안 되면 그때 텔레그램으로 알리고 대기. 무한 루프 걱정("토큰이 살살 녹겠네?")도 이 구조로 자연히 막혔다 — 자동 재시도 상한이 정확히 1회로 고정되니까.</p>
+<hr />
+<h2>6. 파이프라인이 자기 버그를 스스로 고쳤다</h2>
+<p>텔레그램 상시 리스너까지 붙이고 실전 테스트를 했다. "Test2.py를 86으로 출력되게 수정해줘"라고 보냈는데, 그 파일을 직전 테스트에서 내가 이미 지워버린 상태였다. 기획·실행 단계가 둘 다 <code>returncode=1</code>로 실패했다.</p>
+<p>그런데 검수가 이 상황을 정확히 짚었다.</p>
+<blockquote>
+<p>"Test2.py 파일이 수정되지 않고 아예 삭제됨(git status: D Test2.py) — 86 출력은커녕 파일 자체가 없음"<br />
+"stages/execution_output.md가 비어 있어 실행 결과나 에러 로그가 전혀 기록되지 않음"</p>
+</blockquote>
+<p>자동 수정 단계가 이 두 문제를 다 받아서, 파일을 다시 만드는 것뿐 아니라 <strong>파이프라인 자기 코드까지 고쳤다.</strong> 오케스트레이터 스크립트에 <code>format_cli_output()</code> 함수를 새로 추가해서, 앞으로는 CLI 호출이 실패해도 stderr와 returncode가 로그에 남게 만든 것. 파일 수정 요청이었는데 파이프라인 자신의 로깅 버그까지 같이 고친 셈이다.</p>
+<hr />
+<h2>7. 재부팅해도 살아있는 봇 — 그리고 세 번째로 만난 그 버그</h2>
+<p>리스너를 상시로 만들려고 Windows 작업 스케줄러에 등록했다. <code>Register-ScheduledTask</code>는 에이전트 셸에서 권한이 없어 영은이 관리자 PowerShell로 직접 실행해줬다.</p>
+<p>등록은 됐는데 실행하면 결과 코드 <code>2</code>(파일 없음)가 떴다. 등록된 액션을 열어보니:</p>
+<div class="codehilite"><pre><span></span><code>Arguments : &quot;C:\Users\Young Kim\???쒕씪?대툕\Obsidian Vault\scratch\pipeline\listener.py&quot;
+</code></pre></div>
+
+<p>"내 드라이브"가 물음표투성이로 깨져 있었다. <strong>이거 세 번째다.</strong> OpenClaw 설정할 때도, 어제 텔레그램 인프라 복구할 때도 이 한글 경로 버그를 만났다. 다행히 예전에 만들어둔 우회로가 있었다 — <code>C:\Users\Young Kim\openclaw-vault</code>, 실제 볼트를 가리키는 ASCII junction. 스케줄러 등록 경로를 여기로 바꾸니 바로 해결됐다.</p>
+<p>세 번째로 같은 버그를 밟고 나서야, 이번엔 진짜로 메모리에 박아뒀다. 다음부턴 Windows 외부 프로세스에 볼트 경로를 넘길 일이 생기면, 실패를 먼저 겪지 않고 처음부터 이 ASCII 경로를 쓴다.</p>
+<hr />
+<h2>마무리</h2>
+<p>시작은 "AI끼리 대화 가능해?"라는 가벼운 질문이었다. 끝은 텔레그램으로 아무 때나 작업을 던지면 기획→실행→검수→(필요하면)자동수정까지 알아서 돌아가고, 로그온할 때마다 자동으로 살아나는 상시 프로세스였다. 그 사이에 모델 배치를 뒤집었고, 없는 CLI를 찾아 헤맸고, AI가 자기 버그를 스스로 고치는 걸 지켜봤고, 3년 묵은(정확히는 사흘 묵은) 한글 경로 버그를 또 만났다.</p>
+<p>가장 기억에 남는 건 역시 그 느낌표 하나다. 사람이 안 봐도 될 만큼 사소한 차이를, AI가 실행 로그를 믿지 않고 직접 파일을 열어서 잡아냈다는 것 — 그게 이 파이프라인 전체가 "그냥 될 것 같다"에서 "진짜 된다"로 넘어간 순간이었다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

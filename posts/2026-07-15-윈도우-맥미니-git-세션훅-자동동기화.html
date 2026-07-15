@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다 - 영은.Dev</title>
+    <meta name="description" content="윈도우 PC와 맥미니가 같은 Obsidian Vault git 저장소를 공유하는데, 세션 시작/종료 때 pull·push를 안 챙기고 있었다는 걸 깨닫고 자동화한 과정.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/2026-07-15-윈도우-맥미니-git-세션훅-자동동기화.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다">
+    <meta property="og:description" content="윈도우 PC와 맥미니가 같은 Obsidian Vault git 저장소를 공유하는데, 세션 시작/종료 때 pull·push를 안 챙기고 있었다는 걸 깨닫고 자동화한 과정.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/2026-07-15-윈도우-맥미니-git-세션훅-자동동기화.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다">
+    <meta name="twitter:description" content="윈도우 PC와 맥미니가 같은 Obsidian Vault git 저장소를 공유하는데, 세션 시작/종료 때 pull·push를 안 챙기고 있었다는 걸 깨닫고 자동화한 과정.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다", "description": "윈도우 PC와 맥미니가 같은 Obsidian Vault git 저장소를 공유하는데, 세션 시작/종료 때 pull·push를 안 챙기고 있었다는 걸 깨닫고 자동화한 과정.", "datePublished": "2026-07-15", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/2026-07-15-윈도우-맥미니-git-세션훅-자동동기화.html", "inLanguage": "ko-KR"}</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6716530844639006" crossorigin="anonymous"></script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-15</span>
+                    <span>🏷️ Claude Code, Git, Automation, Obsidian, Troubleshooting</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다</h1>
+<p>"맥미니에서 너한테 물었을 때 답한 게 있는데, 그 세션을 여기서도 확인할 수 있어?" 라는 질문에서 시작됐다. 확인해보니 세션 자체는 기기별 로컬 저장소에 있어서 안 됐다 — 다만 볼트는 구글드라이브+깃허브로 두 기기가 공유하고 있으니, "그럼 너는 답하기 전에 깃에서 풀부터 하고 답하는 거야?"라는 다음 질문이 훨씬 중요했다. 답은 "아니오"였다.</p>
+<h2>1. 없는 걸 있는 척하고 있었다</h2>
+<p>세션 시작 훅(<code>session_start.py</code>)은 할일·일정 동기화, 최근 작업 맥락 복원, 신규 파일 스캔은 하고 있었지만 <code>git pull</code>은 아예 하지 않았다. 즉 맥미니에서 뭘 커밋·푸시해놔도, 윈도우 세션은 그 내용을 전혀 모른 채로 옛날 파일 기준으로 대답하고 있었을 수 있다는 뜻이다. 반대 방향(윈도우→맥미니)도 마찬가지였다.</p>
+<h2>2. 대칭 구조로 설계</h2>
+<p>원칙은 단순했다 — <strong>fetch로 원격 상태 먼저 확인한 다음에만 움직인다.</strong> <code>scratch/git_sync.py</code>에 두 함수를 만들었다.</p>
+<ul>
+<li><code>pull_if_behind()</code>: 세션 시작 시. 원격이 앞서 있으면, 로컬 미커밋 변경을 stash로 잠깐 치워두고 fast-forward pull한 뒤 다시 복원한다.</li>
+<li><code>push_if_needed()</code>: 세션 종료 시. 먼저 <code>pull_if_behind()</code>로 맞추고, 로컬 변경을 "vault backup: 시각"으로 커밋한 뒤 push한다.</li>
+</ul>
+<p><code>.claude/settings.json</code>에 <code>SessionEnd</code> 훅을 추가해 <code>push_if_needed()</code>를 세션 종료 시 자동 실행하도록 연결했다. 세션 시작은 이미 있던 훅에 <code>pull_if_behind()</code>만 끼워 넣었다.</p>
+<h2>3. 실전 테스트에서 바로 사고가 났다</h2>
+<p>만들자마자 실제 상태(원격 2커밋 앞섬 + 로컬 미커밋 변경 있음)로 테스트했는데, <code>git stash push -u</code>가 <strong>exit code 1</strong>을 냈다. 구글드라이브 동기화 폴더 안의 빈 디렉토리를 정리하려다 권한 오류가 난 것뿐이었는데, 코드는 이걸 "stash 실패"로 오판해서 그냥 멈춰버렸다. 그런데 실제로는 stash 자체는 이미 저장돼 있었다 — 즉 되돌리지 않은 채 방치할 뻔했다.</p>
+<p>다행히 stash 목록을 직접 열어보니 지운 줄 알았던 파일들(빠른메모 노트 2개)이 그 안에 고스란히 들어 있었다. <code>git stash apply</code>로 복원하고, 이후엔 원인을 근본적으로 고쳤다 — <code>-u</code>(untracked 포함) 플래그를 아예 빼서 애초에 그 권한 오류가 날 지점을 없애고, exit code 대신 <strong>실제 working tree 상태</strong>로 성공 여부를 재확인하도록 바꿨다.</p>
+<h2>4. 맥미니가 먼저 답을 보내왔다</h2>
+<p>이 파일들이 git으로 추적되는 덕분에, 맥미니 쪽 초록이 pull을 받자마자 경로 하드코딩을 없애 크로스플랫폼으로 고쳐서 다시 커밋해 보냈다. 굳이 맥·윈도우용을 따로 만들 필요가 없어진 셈이다.</p>
+<h2>마무리</h2>
+<p>이제 두 기기 모두 세션을 열고 닫을 때마다 "원격에 뭐가 있는지 먼저 확인 → 있으면 안전하게 반영"이 자동으로 돈다. 다만 이번에 배운 건 하나 더 있다 — <strong>subprocess exit code만 믿고 성공·실패를 판단하면 안 된다</strong>는 것. 진짜 상태(working tree가 실제로 깨끗해졌는가)를 다시 확인하는 한 줄이 없었다면, 아무 것도 모른 채 로컬 파일 두 개를 조용히 잃어버릴 뻔했다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

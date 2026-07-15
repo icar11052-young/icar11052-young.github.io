@@ -5,7 +5,14 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 12 Jul 2026 18:45:59 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 22:38:39 +0900</lastBuildDate>
+    <item>
+      <title>맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-15-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5%EB%AF%B8%EB%8B%88-git-%EC%84%B8%EC%85%98%ED%9B%85-%EC%9E%90%EB%8F%99%EB%8F%99%EA%B8%B0%ED%99%94.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-15-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5%EB%AF%B8%EB%8B%88-git-%EC%84%B8%EC%85%98%ED%9B%85-%EC%9E%90%EB%8F%99%EB%8F%99%EA%B8%B0%ED%99%94.html</guid>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 +0900</pubDate>
+      <description>윈도우 PC와 맥미니가 같은 Obsidian Vault git 저장소를 공유하는데, 세션 시작/종료 때 pull·push를 안 챙기고 있었다는 걸 깨닫고 자동화한 과정.</description>
+    </item>
     <item>
       <title>텔레그램 그룹방을 만들어달라길래, 대신 스스로 버그를 고치는 AI 파이프라인을 만들었다</title>
       <link>https://icar11052-young.github.io/posts/2026-07-09-AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%98%A4%EC%BC%80%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%9D%B4%EC%85%98-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B5%AC%EC%B6%95%EA%B8%B0.html</link>

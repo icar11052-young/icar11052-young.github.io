@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-17</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/2026-07-17-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5-%EC%97%B0%EB%91%90-%EC%BB%A4%EC%84%9C-%EC%B1%84%EB%84%90.html</loc>
+    <lastmod>2026-07-17</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/2026-07-15-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5%EB%AF%B8%EB%8B%88-git-%EC%84%B8%EC%85%98%ED%9B%85-%EC%9E%90%EB%8F%99%EB%8F%99%EA%B8%B0%ED%99%94.html</loc>

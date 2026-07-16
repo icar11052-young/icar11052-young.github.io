@@ -5,7 +5,14 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 16 Jul 2026 00:04:36 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 01:24:59 +0900</lastBuildDate>
+    <item>
+      <title>초록은 Claude, 연두는 Cursor — 윈·맥 에이전트 대화 채널을 하나 더 판 이유</title>
+      <link>https://icar11052-young.github.io/posts/2026-07-17-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5-%EC%97%B0%EB%91%90-%EC%BB%A4%EC%84%9C-%EC%B1%84%EB%84%90.html</link>
+      <guid>https://icar11052-young.github.io/posts/2026-07-17-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5-%EC%97%B0%EB%91%90-%EC%BB%A4%EC%84%9C-%EC%B1%84%EB%84%90.html</guid>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 +0900</pubDate>
+      <description>클로드 코드용 초록 채널은 그대로 두고, Cursor용 연두 채널을 LAN HTTP로 새로 만들어 윈도우·맥미니가 메아리로 대화하게 한 과정.</description>
+    </item>
     <item>
       <title>맥미니에서 물어본 걸 여기서도 보려면? — 이 질문 하나가 자동 동기화 시스템이 됐다</title>
       <link>https://icar11052-young.github.io/posts/2026-07-15-%EC%9C%88%EB%8F%84%EC%9A%B0-%EB%A7%A5%EB%AF%B8%EB%8B%88-git-%EC%84%B8%EC%85%98%ED%9B%85-%EC%9E%90%EB%8F%99%EB%8F%99%EA%B8%B0%ED%99%94.html</link>

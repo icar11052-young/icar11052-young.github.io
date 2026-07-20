@@ -127,7 +127,40 @@
   .obsidian/workspace.json
   .obsidian/workspace-mobile.json</code></li>
 </ul>
-<p>이 완전 무료 동기화 시스템 구축 덕분에, 이제 어떠한 월 비용 결제도 없이 언제 어디서나 생각과 학습 이력을 깃허브라는 든든한 클라우드 백업 공간에 복리로 축적해 나갈 수 있게 되었다. 구글 드라이브의 불안정한 동기화 오류에 지친 사용자라면 이 깃허브 가이드를 적극 활용해 보길 권장한다.</p></div>
+<p>이 완전 무료 동기화 시스템 구축 덕분에, 이제 어떠한 월 비용 결제도 없이 언제 어디서나 생각과 학습 이력을 깃허브라는 든든한 클라우드 백업 공간에 복리로 축적해 나갈 수 있게 되었다. 구글 드라이브의 불안정한 동기화 오류에 지친 사용자라면 이 깃허브 가이드를 적극 활용해 보길 권장한다.</p>
+<hr />
+<h2>🔧 자주 막히는 곳</h2>
+<table>
+<thead>
+<tr>
+<th>증상</th>
+<th>원인/해결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC에서 <code>git push</code> 시 자격 증명 팝업이 계속 뜸</td>
+<td><code>credential.helper store</code>가 제대로 안 걸린 경우 — <code>git config --global credential.helper store</code> 재실행 후 한 번 더 push해서 토큰 저장</td>
+</tr>
+<tr>
+<td>모바일에서 Push는 되는데 Pull이 실패</td>
+<td>PAT에 <code>repo</code> 권한이 빠진 경우가 많음 — 토큰 재발급 시 <code>repo</code> 체크박스 확인</td>
+</tr>
+<tr>
+<td>PC ↔ 모바일 둘 다 동시에 수정해서 충돌(conflict) 마커가 파일에 남음</td>
+<td>Obsidian Git의 <strong>Merge</strong> 전략 설정을 확인하고, 충돌 파일은 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>/<code>=======</code>/<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 구간을 수동으로 정리 후 재커밋</td>
+</tr>
+<tr>
+<td>토큰이 만료돼서 갑자기 인증 실패</td>
+<td>Classic PAT는 발급 시 만료 기간을 설정했다면 그 시점에 무효화됨 — 재발급 후 PC·모바일 양쪽 자격 증명 갱신 필요</td>
+</tr>
+<tr>
+<td><code>.obsidian/workspace</code> 무시했는데도 계속 diff가 발생</td>
+<td>이미 커밋된 뒤에 <code>.gitignore</code>에 추가한 경우 — <code>git rm --cached .obsidian/workspace.json</code> 으로 추적에서 제외해야 무시 규칙이 적용됨</td>
+</tr>
+</tbody>
+</table>
+<p><em>이 글은 GitHub Private Repository + Obsidian Git 플러그인, Windows PC + 갤럭시 안드로이드 환경을 기준으로 작성했다.</em></p></div>
         </article>
     </main>
 </body>

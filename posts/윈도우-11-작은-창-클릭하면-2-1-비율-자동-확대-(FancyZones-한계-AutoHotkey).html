@@ -159,13 +159,45 @@ UAC 없이 돌리려면 <code>install_autostart_admin.bat</code>을 <strong>한 
 </table>
 <p>내 노트북: <strong>Lenovo Legion 15AHP10</strong>, 외부 모니터 연결 시에도 동일 스크립트 사용.</p>
 <hr />
+<h2>실제 코드 — 클릭 감지와 "짝 창" 찾기</h2>
+<p>핵심은 마우스 클릭(<code>~*LButton Up</code>)을 전역으로 후킹해서, 클릭된 창이 이미 "균형 잡힌" 상태(옆 창과 너비 차이가 작업영역의 12% 이내)일 때만 리사이즈를 트리거하는 부분이다. 이미 2:1로 커져 있는 창을 또 클릭했을 때는 무시해야 하기 때문이다.</p>
+<div class="codehilite"><pre><span></span><code><span class="o">~*</span><span class="n">LButton</span> <span class="n">Up</span><span class="o">::</span> <span class="p">{</span>
+    <span class="nb">global</span> <span class="n">enabled</span>
+    <span class="n">if</span> <span class="o">!</span><span class="n">enabled</span>
+        <span class="nb">return</span>
+    <span class="nb">MouseGetPos</span><span class="p">(,</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">winUnder</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctrlUnder</span><span class="p">)</span>
+    <span class="n">clicked</span> <span class="o">:=</span> <span class="n">ResolveTopLevel</span><span class="p">(</span><span class="n">winUnder</span><span class="p">)</span>
+    <span class="nb">Sleep</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="c1">  ; 클릭 직후 hwnd가 바뀌거나 사라질 수 있어 살짝 대기</span>
+    <span class="nb">if </span><span class="n">clicked</span> <span class="o">&amp;&amp;</span> <span class="n">WinAlive</span><span class="p">(</span><span class="n">clicked</span><span class="p">)</span>
+        <span class="n">TryExpandFocused</span><span class="p">(</span><span class="n">clicked</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">TryExpandFocused</span><span class="p">(</span><span class="n">clickedRoot</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">    ; ...</span>
+    <span class="n">isBalanced</span> <span class="o">:=</span> <span class="p">(</span><span class="nf">Abs</span><span class="p">(</span><span class="n">fgRect</span><span class="o">.</span><span class="n">w</span> <span class="o">-</span> <span class="n">partnerRect</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">totalW</span> <span class="o">*</span> <span class="mf">0.12</span><span class="p">)</span>
+    <span class="n">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isBalanced</span> <span class="o">&amp;&amp;</span> <span class="n">fgRect</span><span class="o">.</span><span class="n">w</span> <span class="o">&gt;=</span> <span class="n">partnerRect</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="mf">0.92</span><span class="p">)</span>
+        <span class="nb">return</span><span class="c1">  ; 이미 큰 쪽을 클릭한 거면 무시</span>
+<span class="c1">    ; ... largeW/smallW 계산 후 ApplySplit</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>"옆 창(짝)"을 찾는 <code>FindHorizontalPartner()</code>는 단순히 "가장 가까운 창"이 아니라, <strong>같은 모니터에 있고, 세로로 45% 이상 겹치고, 가로 간격이 48px 이내이며, 두 창 너비 합이 작업영역의 82% 이상</strong>인 창만 후보로 삼는다. 그래야 화면 구석에 떠 있는 무관한 알림창 같은 걸 짝으로 오인하지 않는다.</p>
+<p>몇 가지 실제로 부딪혀서 넣은 예외 처리:</p>
+<ul>
+<li><strong>터미널 창은 기준을 다르게 잡는다.</strong> PowerShell·Windows Terminal(cmd, pwsh, ConsoleWindowClass)은 창 제목이 비어 있는 경우가 있어 별도 판별 로직(<code>IsTerminalWindow</code>)을 뒀고, 최소 높이·허용 간격 기준도 더 느슨하게(간격 48px→120px) 잡았다.</li>
+<li><strong>관리자 권한 창은 리사이즈가 씹힌다.</strong> 관리자 권한으로 뜬 PowerShell/터미널은 일반 권한 AHK 스크립트가 <code>SetWindowPos</code>를 걸어도 조용히 무시된다(UIPI 때문). 그래서 대상 창의 권한을 토큰 레벨(<code>OpenProcessToken</code> + <code>GetTokenInformation</code>)에서 직접 확인해서, 관리자 창이면 "이 스크립트도 관리자로 재시작해야 한다"는 안내를 띄우도록 처리했다. 이게 아래 표의 "PowerShell만 안 됨" 증상의 근본 원인이다.</li>
+<li><strong>창 좌표는 <code>GetWindowRect</code>가 아니라 <code>DwmGetWindowAttribute</code>로 가져온다.</strong> 윈도우 11은 창에 보이지 않는 그림자 여백이 있어서 일반 <code>WinGetPos</code>만 쓰면 창 사이에 미세한 틈이 생긴다. DWM 확장 프레임 경계를 직접 조회해야 딱 맞게 배치된다.</li>
+</ul>
+<hr />
 <h2>정리</h2>
 <ul>
 <li><strong>FancyZones</strong> = 정적 스냅. 클릭 포커싱 <strong>불가</strong>.</li>
 <li><strong>AutoHotkey</strong> = 작은 창 클릭 → <strong>2:1 / 1:2 동적 스왑</strong>.</li>
 <li>Cursor <strong>에디터 + Agents</strong> 2창 작업에 특히 편하다.</li>
+<li>실제 구현은 단순 리사이즈가 아니라 <strong>"짝 창" 판별(같은 모니터·겹침·간격 기준) + 터미널 예외 + 관리자 권한 감지 + DWM 정밀 좌표</strong> 네 가지가 맞물려야 끊김 없이 동작한다.</li>
 </ul>
-<p>스크립트 전체는 개인 Vault에 두었고, 핵심 로직은 <code>LButton Up</code> 후 포커스 창과 옆 창의 너비 비율을 비교해 <code>MoveWindow</code>로 2/3 · 1/3 배분하는 방식이다.</p></div>
+<p>스크립트 전체(<code>window_focus_swap.ahk</code>)는 개인 Vault의 <code>scratch/window-focus-swap/</code>에 있다.</p>
+<p><em>이 글은 Windows 11 + AutoHotkey v2.0 환경 기준으로 작성했다. 멀티 모니터 배율(DPI)이 다르면 좌표 계산이 약간 다르게 동작할 수 있다.</em></p></div>
         </article>
     </main>
 </body>

@@ -57,28 +57,97 @@
                 </div>
             </div>
             <div class="post-body"><h1>윈도우 11 부팅 시 넘버락(Num Lock) 자동 활성화 완벽 해결법</h1>
-<p>컴퓨터를 켜고 로그인 화면에서 숫자 PIN(비밀번호)을 치려고 할 때마다 넘버락이 꺼져 있어서 키가 입력되지 않는 불편함을 겪는 경우가 많다. 이 글에서는 레지스트리 수정과 윈도우의 '상태 기억' 동작 방식을 활용해 넘버락을 항상 켜진 상태로 고정하는 방법을 소개한다.</p>
+<p>컴퓨터를 켜고 로그인 화면에서 숫자 PIN(비밀번호)을 치려고 할 때마다 넘버락이 꺼져 있어서 키가 입력되지 않는 불편함을 겪는 경우가 많다. 검색해보면 "레지스트리 값을 2로 바꿔라"는 답이 제일 먼저 나오는데, 실제로 해보면 <strong>레지스트리만 고쳐서는 며칠 못 가 다시 꺼진 채로 돌아온다.</strong> 이 글은 그 이유까지 파고들어서, 레지스트리 수정과 윈도우의 '마지막 상태 기억' 동작 방식을 같이 잡아야 진짜로 영구 해결된다는 걸 정리한 가이드다.</p>
 <hr />
-<h2>윈도우 넘버락이 꺼지는 원인</h2>
-<p>윈도우는 로그인 화면 전의 시스템 프로필(<code>.DEFAULT</code>)과 로그인 후 사용자 프로필(<code>HKEY_CURRENT_USER</code>)의 키보드 설정을 독립적으로 관리한다. 또한, 컴퓨터를 종료할 때 <strong>마지막 넘버락의 상태(On/Off)</strong>를 기억하여 프로필에 자동으로 덮어쓴다. 따라서 넘버락이 꺼진 상태로 시스템을 종료하면 다음 부팅 때 다시 꺼진 채로 켜지게 된다.</p>
+<h2>왜 레지스트리만 고치면 다시 원상복구되는가</h2>
+<p>윈도우는 넘버락 상태를 <strong>두 곳에서 따로</strong> 관리한다.</p>
+<div class="codehilite"><pre><span></span><code>부팅 직후 로그인 화면
+  └─ HKEY_USERS\.DEFAULT\Control Panel\Keyboard   (시스템 프로필)
+
+로그인 완료 후 바탕화면
+  └─ HKEY_CURRENT_USER\Control Panel\Keyboard      (사용자 프로필)
+</code></pre></div>
+
+<p><code>InitialKeyboardIndicators</code> 값이 <code>2</code>면 "켜짐", <code>0</code>이면 "꺼짐"이다. 여기까지는 흔히 아는 내용이다.</p>
+<p><strong>진짜 원인은 따로 있다.</strong> 윈도우는 컴퓨터를 종료하는 순간 <strong>직전 넘버락 상태(On/Off)를 그대로 레지스트리에 다시 덮어쓴다.</strong> 즉 레지스트리 값을 <code>2</code>로 고쳐놔도, 넘버락이 꺼진 채로 컴퓨터를 껐다면 윈도우가 "아, 이 사람은 꺼놓고 썼구나" 하고 값을 다시 <code>0</code>으로 되돌려버린다. 레지스트리 수정 → 재부팅 몇 번 후 다시 꺼짐 → "고친 줄 알았는데 왜 또" 라는 패턴이 반복되는 게 이 때문이다.</p>
 <hr />
-<h2>해결 방법</h2>
+<h2>해결 방법 (2단계 모두 필요)</h2>
 <h3>1단계: 레지스트리 값 수정</h3>
 <ol>
-<li><code>Win + R</code>을 누르고 <code>regedit</code>을 입력한 뒤 엔터를 누른다.</li>
-<li>아래 두 경로로 각각 이동하여 <strong><code>InitialKeyboardIndicators</code></strong> 항목의 값을 수정한다.</li>
-<li><strong>로그인 화면(부팅 직후) 설정 경로</strong>:<br />
-<code>HKEY_USERS\.DEFAULT\Control Panel\Keyboard</code><br />
-     ➔ 값 데이터를 <strong><code>2</code></strong> (또는 <code>2147483650</code>)로 설정</li>
-<li><strong>사용자 계정 로그인 이후 설정 경로</strong>:<br />
-<code>HKEY_CURRENT_USER\Control Panel\Keyboard</code><br />
-     ➔ 값 데이터를 <strong><code>2</code></strong>로 설정</li>
+<li><code>Win + R</code> → <code>regedit</code> 입력 → 엔터</li>
+<li>아래 두 경로로 각각 이동해서 <strong><code>InitialKeyboardIndicators</code></strong> 값을 수정한다.</li>
 </ol>
-<h3>2단계: 윈도우에 '켜짐' 상태 기억시키기 (핵심)</h3>
-<p>레지스트리를 수정했어도 넘버락을 꺼둔 상태에서 재부팅을 하면 윈도우 종료 시 다시 <code>0</code>(꺼짐)으로 설정이 덮어씌워진다.<br />
-1. 키보드에서 <strong><code>Num Lock</code> 키를 직접 눌러 불이 들어오게(On) 만든다.</strong><br />
-2. 이 상태 그대로 <strong>컴퓨터를 다시 시작(또는 종료)</strong>한다.<br />
-3. 윈도우가 '넘버락이 켜진 상태'를 정상적으로 저장하고 종료하므로, 다음 부팅 때부터 레지스트리 <code>2</code> 값이 유지되며 항상 자동으로 켜진다.</p></div>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>대상</th>
+<th>설정할 값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HKEY_USERS\.DEFAULT\Control Panel\Keyboard</code></td>
+<td>로그인 화면(부팅 직후)</td>
+<td><code>2</code> (또는 <code>2147483650</code>)</td>
+</tr>
+<tr>
+<td><code>HKEY_CURRENT_USER\Control Panel\Keyboard</code></td>
+<td>로그인 후 바탕화면</td>
+<td><code>2</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>값이 안 보이면 <code>Keyboard</code> 키를 우클릭 → <strong>새로 만들기 → 문자열 값</strong>으로 <code>InitialKeyboardIndicators</code>를 직접 추가하면 된다.</p>
+</blockquote>
+<h3>2단계: 윈도우에 '켜짐' 상태를 직접 기억시키기 (여기가 핵심, 다들 놓치는 부분)</h3>
+<p>1단계만 하고 끝내면 앞서 설명한 이유로 며칠 안에 원상복구된다. 반드시 이어서 해야 한다.</p>
+<ol>
+<li>키보드에서 <strong><code>Num Lock</code> 키를 직접 눌러 불이 켜지게</strong> 만든다.</li>
+<li><strong>그 상태 그대로</strong> 컴퓨터를 다시 시작(또는 종료)한다. 여기서 끄기 전에 다시 누르면 안 된다.</li>
+<li>윈도우가 종료 시점의 "켜짐" 상태를 레지스트리에 저장하면서 꺼지기 때문에, 다음 부팅부터는 값이 유지되고 항상 자동으로 켜진 채 시작된다.</li>
+</ol>
+<hr />
+<h2>🔧 그래도 안 될 때 체크리스트</h2>
+<table>
+<thead>
+<tr>
+<th>증상</th>
+<th>원인/해결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>값을 <code>2</code>로 바꿔도 바로 다음 재부팅부터 꺼짐</td>
+<td>2단계(켜진 상태로 종료)를 건너뛴 경우 — 반드시 Num Lock을 켠 채로 종료</td>
+</tr>
+<tr>
+<td><code>.DEFAULT</code> 키에 <code>InitialKeyboardIndicators</code> 항목 자체가 없음</td>
+<td>값 이름을 직접 만들어야 함 (문자열 값, REG_SZ)</td>
+</tr>
+<tr>
+<td>재부팅은 되는데 완전 종료(전원 끄기) 후엔 다시 꺼짐</td>
+<td>윈도우 <strong>빠른 시작(Fast Startup)</strong>이 켜져 있으면 완전 종료 시 동작이 달라질 수 있음 — 설정 → 시스템 → 전원에서 빠른 시작 껐다가 재시도</td>
+</tr>
+<tr>
+<td>노트북인데 유독 안 됨</td>
+<td>일부 노트북 펌웨어는 BIOS/UEFI 자체에서 부팅 시 Num Lock을 강제로 끄기도 함 — BIOS 설정의 "Boot Num Lock" 항목도 같이 확인</td>
+</tr>
+<tr>
+<td>원격 데스크톱(RDP)으로 접속할 때만 꺼짐</td>
+<td>RDP는 클라이언트 쪽 Num Lock 상태를 그대로 넘겨받는 별개 이슈 — 이 글의 레지스트리 방법과는 무관</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>💡 정리</h2>
+<ul>
+<li>레지스트리 값 <code>InitialKeyboardIndicators = 2</code>는 <strong>두 경로(<code>.DEFAULT</code>, <code>HKEY_CURRENT_USER</code>) 모두</strong> 고쳐야 한다.</li>
+<li>레지스트리를 고친 뒤 <strong>Num Lock을 켠 상태로 한 번 종료/재시작</strong>해야 윈도우가 그 상태를 "기억"하고 유지한다. 이 순서를 빼먹으면 다시 꺼진다.</li>
+<li>그래도 안 되면 빠른 시작 설정, BIOS Boot Num Lock 옵션까지 확인 범위를 넓혀본다.</li>
+</ul>
+<p><em>이 글은 Windows 11 기준으로 작성했다. 빌드에 따라 레지스트리 경로나 메뉴 위치가 약간 다를 수 있다.</em></p></div>
         </article>
     </main>
 </body>

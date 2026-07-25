@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정 - 영은.Dev</title>
+    <meta name="description" content="실제 전장 설계 도면 PDF에서 벡터 데이터를 뽑아 홈페이지 히어로 애니메이션으로 만들면서 만난 두 가지 함정: fitz.Rect의 숨은 버그와, CSS transform이 SVG 속성을 통째로 지워버리는 문제.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/2026-07-26-PDF-도면을-CSS로-살아나게-만들다가-겪은-SVG-transform-함정.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정">
+    <meta property="og:description" content="실제 전장 설계 도면 PDF에서 벡터 데이터를 뽑아 홈페이지 히어로 애니메이션으로 만들면서 만난 두 가지 함정: fitz.Rect의 숨은 버그와, CSS transform이 SVG 속성을 통째로 지워버리는 문제.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/2026-07-26-PDF-도면을-CSS로-살아나게-만들다가-겪은-SVG-transform-함정.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정">
+    <meta name="twitter:description" content="실제 전장 설계 도면 PDF에서 벡터 데이터를 뽑아 홈페이지 히어로 애니메이션으로 만들면서 만난 두 가지 함정: fitz.Rect의 숨은 버그와, CSS transform이 SVG 속성을 통째로 지워버리는 문제.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정", "description": "실제 전장 설계 도면 PDF에서 벡터 데이터를 뽑아 홈페이지 히어로 애니메이션으로 만들면서 만난 두 가지 함정: fitz.Rect의 숨은 버그와, CSS transform이 SVG 속성을 통째로 지워버리는 문제.", "datePublished": "2026-07-26", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/2026-07-26-PDF-도면을-CSS로-살아나게-만들다가-겪은-SVG-transform-함정.html", "inLanguage": "ko-KR"}</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6716530844639006" crossorigin="anonymous"></script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정</h1>
+                <div class="post-meta">
+                    <span>📅 2026-07-26</span>
+                    <span>🏷️ CSS, SVG, PDF, PyMuPDF, WebAnimation</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>2026-07-26 — PDF 도면을 CSS로 살아나게 만들다가 겪은 SVG transform 함정</h1>
+<p>프리랜서 전장 설계 홈페이지의 첫 화면을, "빈 종이 위에 진짜 회로도가 선 하나씩 그려지고 심벌이 툭툭 떨어져 조립되는" 애니메이션으로 만들기로 했다. 그럴듯한 가짜 회로도가 아니라 <strong>실제로 작업했던 PDF 도면</strong>을 그대로 써야 한다는 게 조건이었다. PyMuPDF로 벡터 데이터를 뽑아 SVG로 재조립하면 되겠다 싶었는데, 그 사이에 원인을 찾는 데만 한참 걸린 버그가 두 개 있었다.</p>
+<h2>첫 번째 함정 — 멀쩡한 선이 반쯤 사라진다</h2>
+<p>PDF에서 선·도형·텍스트를 뽑아 크롭 영역 안의 것만 골라내는 코드를 짰다. 크롭 밖으로 나가는 요소는 <code>fitz.Rect.intersects()</code>로 걸러내는 흔한 방식이었다. 결과물을 원본과 겹쳐보니 굵은 접지선 하나가 통째로 빠져 있었다.</p>
+<p><img alt="원본과 렌더링 결과를 겹쳐서 빨간색으로 표시한 누락 부분" src="../scratch/blog/assets/도면-애니메이션-svg-transform/01-missing-lines-diff.png" /><br />
+<em>원본 PDF 렌더링과 내 SVG 렌더링을 픽셀 단위로 비교한 결과. 빨간 선이 "원본엔 있는데 내 결과물엔 없는" 부분이다.</em></p>
+<p>원인은 <code>intersects()</code> 자체였다. 완전히 수평이거나 수직인 선분은 폭이나 높이가 0인 사각형이 되는데, 면적이 0인 도형에 대해 이 함수가 겹침 판정을 제대로 못 했다. 개별 선 하나둘이 아니라 <strong>두께 0짜리 도형 전체가 조용히 탈락</strong>하고 있었던 것이다.</p>
+<p>해결은 라이브러리 함수를 믿지 않고 직접 짜는 것이었다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">overlaps</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">crop</span><span class="p">):</span>
+    <span class="c1"># fitz.Rect.intersects()는 두께 0인 선분(완전 수평/수직)에서 오작동한다.</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">x0</span> <span class="o">&lt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">x1</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">x1</span> <span class="o">&gt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">x0</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">y0</span> <span class="o">&lt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">y1</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">y1</span> <span class="o">&gt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">y0</span>
+</code></pre></div>
+
+<p>이 한 줄로 바꾸자 누락됐던 선들이 전부 돌아왔다.</p>
+<h2>두 번째 함정 — 회전한 글자가 전부 겹쳐 보인다</h2>
+<p>원본 도면엔 세로로 회전된 라벨이 많다("R", "S", "T" 같은 배선 색상 표기). PyMuPDF의 <code>get_text("dict")</code>가 주는 회전 각도를 읽어 SVG <code>transform="rotate(...)"</code>로 그대로 옮겨줬더니, 정적인 화면에서는 완벽하게 나왔다.</p>
+<p>문제는 여기에 "낙하 애니메이션"을 얹었을 때 터졌다. 이 텍스트들을 감싼 <code>&lt;g&gt;</code>에 CSS <code>animation</code>으로 <code>transform: translateY(...) rotateX(...)</code>를 걸었더니, 회전이 통째로 사라지고 글자들이 가로로 겹쳐서 렌더링됐다.</p>
+<p>CSS <code>transform</code> 속성(property)이 SVG의 <code>transform</code> 어트리뷰트(attribute)를 <strong>합성하지 않고 완전히 대체</strong>한다는 게 원인이었다. 애니메이션의 마지막 프레임이 <code>transform: translateY(0) rotateX(0)</code>처럼 "사실상 아무것도 안 하는" 값이어도, 그 자체가 이미 attribute를 덮어써서 원래 있던 회전은 사라진다.</p>
+<p>해결책은 역할을 분리하는 것이었다.</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>담당 요소</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>낙하 애니메이션 (CSS transform)</td>
+<td>바깥쪽 <code>&lt;g&gt;</code></td>
+<td><code>&lt;g style="animation: dropSnap ..."&gt;</code></td>
+</tr>
+<tr>
+<td>고정 회전 (SVG 속성)</td>
+<td>안쪽 <code>&lt;text&gt;</code></td>
+<td><code>&lt;text transform="rotate(-90 x y)"&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">g</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;animation-delay:1.28s;&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">text</span> <span class="na">x</span><span class="o">=</span><span class="s">&quot;104.0&quot;</span> <span class="na">y</span><span class="o">=</span><span class="s">&quot;82.9&quot;</span> <span class="na">transform</span><span class="o">=</span><span class="s">&quot;rotate(-90.0 104.0 82.9)&quot;</span><span class="p">&gt;</span>4 SQ-흑<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">g</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>바깥은 CSS로 움직이고, 안쪽은 어트리뷰트로 고정 회전만 담당하니 둘이 서로 안 건드리게 됐다.</p>
+<p><img alt="회전 텍스트가 겹치던 문제를 고친 뒤의 확대 화면" src="../scratch/blog/assets/도면-애니메이션-svg-transform/02-rotated-text-fixed.png" /><br />
+<em>각 라벨이 자기 배선 아래 정확히 세로로 정렬됐다. 고치기 전엔 4개 라벨이 한 줄에 뭉개져 있었다.</em></p>
+<h2>결과</h2>
+<p>두 버그를 잡고 나니, 실제 도면 전체(제목란만 고객 정보라 제외)가 종이 위로 떨어져 조립되는 애니메이션이 완성됐다. 선 굵기도 원본 그대로 따라가되(PDF 자체의 불규칙한 굵기는 정규화), 진짜 도면 좌표를 그대로 쓰다 보니 신뢰도가 확 올라갔다.</p>
+<p><img alt="전체 도면이 조립을 마친 최종 화면" src="../scratch/blog/assets/도면-애니메이션-svg-transform/03-full-animation-final.png" /><br />
+<em>3단계로 나눠 아래로 스크롤되며 조립되는 버전. 다음엔 이 3단계 점프를 연속적인 스크롤로 바꾸는 작업이 남아있다.</em></p>
+<h2>배운 것 / 다음에 할 일</h2>
+<p>라이브러리 함수는 "면적 0"처럼 극단적인 입력값에서 조용히 실패할 수 있다는 걸 다시 확인했다 — 의심 가면 직접 겹침 판정을 짜는 게 빠르다. 그리고 SVG에 CSS 애니메이션을 얹을 땐, <strong>움직임(CSS)과 고정 형태(속성)를 같은 요소에 두지 않는다</strong>는 원칙을 세웠다. 다음 작업은 지금 3단계로 끊어서 스크롤하는 걸 처음부터 끝까지 자연스럽게 흘러가는 연속 스크롤로 바꾸는 것 — 이건 할당량이 다 돼서 커서(Cursor)에게 인수인계했다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

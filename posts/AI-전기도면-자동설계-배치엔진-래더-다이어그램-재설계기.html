@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기 - 영은.Dev</title>
+    <meta name="description" content="넷리스트만 던지면 전기도면을 자동으로 그려주는 AI 파이프라인을 만들다가, 배치 알고리즘이 계속 지저분하게 나와서 사용자가 직접 그린 참고 도면을 보고 래더(사다리) 다이어그램 구조로 처음부터 다시 설계한 과정.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/AI-전기도면-자동설계-배치엔진-래더-다이어그램-재설계기.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기">
+    <meta property="og:description" content="넷리스트만 던지면 전기도면을 자동으로 그려주는 AI 파이프라인을 만들다가, 배치 알고리즘이 계속 지저분하게 나와서 사용자가 직접 그린 참고 도면을 보고 래더(사다리) 다이어그램 구조로 처음부터 다시 설계한 과정.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/AI-전기도면-자동설계-배치엔진-래더-다이어그램-재설계기.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기">
+    <meta name="twitter:description" content="넷리스트만 던지면 전기도면을 자동으로 그려주는 AI 파이프라인을 만들다가, 배치 알고리즘이 계속 지저분하게 나와서 사용자가 직접 그린 참고 도면을 보고 래더(사다리) 다이어그램 구조로 처음부터 다시 설계한 과정.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기", "description": "넷리스트만 던지면 전기도면을 자동으로 그려주는 AI 파이프라인을 만들다가, 배치 알고리즘이 계속 지저분하게 나와서 사용자가 직접 그린 참고 도면을 보고 래더(사다리) 다이어그램 구조로 처음부터 다시 설계한 과정.", "datePublished": "2026-09-04", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/AI-전기도면-자동설계-배치엔진-래더-다이어그램-재설계기.html", "inLanguage": "ko-KR"}</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6716530844639006" crossorigin="anonymous"></script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기</h1>
+                <div class="post-meta">
+                    <span>📅 2026-09-04</span>
+                    <span>🏷️ AI-Agent, CAD, AutoCAD, DXF, Python, ezdxf, Claude-Code</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><h1>AI한테 전기도면 자동설계를 맡겨봤다가 겪은 일 — 배치 엔진을 사다리 다이어그램으로 다시 짠 이야기</h1>
+<p>"넷리스트(JSON)만 넣으면 전기도면을 자동으로 그려주는 AI"를 만들어보려고 몇 주째 붙잡고 있다.<br />
+심볼도 진짜, 도곽도 진짜, AutoCAD로도 실제 검증까지 다 됐는데 — 정작 완성된 도면을 열어보니<br />
+"내 아들이 그려도 이것보단 잘 그리겠다"는 평가를 받았다. 이 글은 그 실패 지점을 찾아서<br />
+배치 알고리즘 자체를 갈아엎은 기록이다.</p>
+<h2>심볼은 진짜인데, 배치가 문제였다</h2>
+<p>앞선 작업에서 심볼 라이브러리는 이미 "진짜"였다. 손으로 그린 게 아니라 실제 도면(JAT<br />
+"Golden Eye Jig" 검사기 도면)에서 AutoCAD COM API로 직접 뽑아낸 블록이다. 표제란(도곽)도<br />
+사용자가 직접 WBLOCK으로 떠준 원본을 그대로 썼다.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 대화상자·타이핑 없이 블록을 그대로 복사하는 방법</span>
+<span class="n">objs</span> <span class="o">=</span> <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">(</span><span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_ARRAY</span> <span class="o">|</span> <span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_DISPATCH</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>
+<span class="n">new_block</span> <span class="o">=</span> <span class="n">dest_doc</span><span class="o">.</span><span class="n">Blocks</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span>
+    <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">(</span><span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_ARRAY</span> <span class="o">|</span> <span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_R8</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">block_name</span><span class="p">)</span>
+<span class="n">src_doc</span><span class="o">.</span><span class="n">CopyObjects</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">new_block</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>WBLOCK</code> 명령어를 스크립트로 자동화하려다 대화상자 타이밍 문제로 계속 실패했는데, <code>CopyObjects</code><br />
+COM 메서드로 바꾸니 대화상자 자체가 안 뜨고 한 번에 성공했다. 이렇게 심볼 16개를 추가로<br />
+가져왔다.</p>
+<p>그런데 가져온 심볼을 실제 도면에 꽂아보니 크기가 이상했다. 원본 도면에서 그 심볼들이 있던<br />
+좌표(원점에서 -900대 오프셋)를 그대로 갖고 있었고, 크기도 0.1~2 유닛 수준이라 나머지<br />
+심볼(수십~수백 유닛)과는 아예 스케일이 안 맞았다. 블록 정의 자체를 원점 기준으로 옮기고<br />
+기존 심볼과 같은 스케일로 재계산해서 고쳤다.</p>
+<p><img alt="JAT 심볼 스케일 버그 수정 전후" src="../scratch/blog/assets/전기도면-ai-래더-다이어그램/1-jat-symbols-scale-fix.png" /><br />
+<em><code>CopyObjects</code>로 가져온 소형 심볼(계전기·스위치·코일 등)이 원본 좌표를 그대로 갖고 있어서<br />
+크기가 안 맞던 문제를 원점 재배치 + 스케일 재계산으로 고친 결과.</em></p>
+<p>이 정도만 해도 "진짜 CAD 데이터를 정확히 다루는 파이프라인"은 완성됐다고 생각했다. 그런데<br />
+이 심볼들을 실제 EV충전기 회로 도면에 자동 배치했더니, 결과물이 엉망이었다.</p>
+<h2>"내 아들이 그려도 이것보단 낫겠다"</h2>
+<p>자동생성된 도면을 보여줬더니 돌아온 반응은 냉정했다. 선이 겹치고, 지그재그로 우회하고,<br />
+"GAP (라이브러리 없음)" 같은 디버그 텍스트가 도면에 그대로 박혀 있었다. "네가 도면 그릴<br />
+능력이 안 되는 거냐"는 직설적인 질문까지 받았다.</p>
+<p>정직하게 원인을 짚어보면 이랬다. <strong>CAD 데이터를 정확히 조작하는 것</strong>(실제 심볼, 실제 속성,<br />
+정확한 단자 연결)과 <strong>배치를 예쁘게 하는 것</strong>은 완전히 다른 문제였다. 후자는 내가 짠<br />
+배치 알고리즘이 "겹치지만 않게 대충 순서대로 놓고 직각으로 연결"하는 수준이라 못 하고<br />
+있었다.</p>
+<h2>툴을 바꾸면 해결될까? — 조사해봤더니 업계 전체가 못 푼 문제</h2>
+<p>혹시 상용 전기 CAD 툴로 갈아타면 해결될까 싶어서 AutoCAD Electrical과 EPLAN Electric P8을<br />
+조사했다.</p>
+<table>
+<thead>
+<tr>
+<th>툴</th>
+<th>비용</th>
+<th>자동배치 기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AutoCAD Electrical</td>
+<td>기존 AutoCAD 구독에 이미 포함(추가비용 없음)</td>
+<td>없음 — 반자동 넘버링 수준</td>
+</tr>
+<tr>
+<td>EPLAN Electric P8</td>
+<td>별도 라이선스(건당 수백만원대)</td>
+<td>없음 — 매크로 조립 수준</td>
+</tr>
+</tbody>
+</table>
+<p>둘 다 "넷리스트만 던지면 알아서 배치해주는" 진짜 오토라우터는 없었다. 결론: <strong>툴을 바꿔도<br />
+문제가 안 풀린다.</strong> 이건 업계에서 상용 CAD 회사들도 아직 못 푼 문제였다. 그래서 자체<br />
+배치 알고리즘을 계속 개선하는 방향으로 정했다.</p>
+<p>1차로 net끼리 배선이 겹치는 문제를 레인(lane) 기반 최소간격 배정으로 고치고, 디버그 텍스트를<br />
+실제 부품명+점선박스로 정리했다. 나아지긴 했지만 근본적인 구조 문제(부품을 그냥 좌우로<br />
+나란히 놓고 net마다 개별 배선을 계산하는 방식)는 그대로였다.</p>
+<h2>진짜 정답은 사용자가 직접 그려서 보여줬다</h2>
+<p>여기서 방향이 바뀌었다. 사용자가 우리가 만든 도곽·심볼 라이브러리를 그대로 갖고 AutoCAD에서<br />
+같은 회로를 <strong>직접 손으로</strong> 그려서 저장해서 보여준 것이다.</p>
+<p><img alt="사용자가 직접 그린 참고 도면" src="../scratch/blog/assets/전기도면-ai-래더-다이어그램/2-user-hand-drawn-reference.png" /><br />
+<em>PE/L1/N1을 도곽 전체 높이를 관통하는 곧은 버스 3줄로 긋고, 각 소자는 그 버스에 옆으로 짧게<br />
+걸쳐서 연결하는 구조 — 전형적인 래더(사다리) 다이어그램 스타일.</em></p>
+<p>내가 자동으로 만든 것보다 압도적으로 깔끔했다. 핵심 차이는 명확했다:<br />
+- <strong>N/PE 같은 공통 배선은 곧은 세로선(버스)으로 먼저 긋는다.</strong> 부품마다 개별 net을 계산하지<br />
+  않는다.<br />
+- <strong>나머지는 위에서 아래로, 신호가 흐르는 순서 그대로 배치한다.</strong> 좌우로 늘어놓지 않는다.</p>
+<p>이건 그냥 "감각"이 아니라 <strong>명시적으로 코드화할 수 있는 규칙</strong>이었다.</p>
+<h2>배치 엔진을 그래프 문제로 다시 정의하기</h2>
+<p>넷리스트의 net을 두 종류로 나누기로 했다.</p>
+<ul>
+<li><strong>rail(버스)</strong>: N, PE처럼 도곽 전체 높이를 관통하는 직선. <code>netlist.json</code>에<br />
+<code>"rail": true</code> 필드를 새로 넣어서 명시적으로 표시한다.</li>
+<li><strong>그 외</strong>: 2단자 부품(차단기·접점·코일 등)이 net과 net을 잇는 "다리(bridge)"라고 보고,<br />
+  전원에 연결된 net을 뿌리 삼아 그래프를 BFS로 타고 내려가며 위→아래 순서로 배치한다.</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 2단자 부품 = net과 net을 잇는 다리</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+    <span class="n">non_rail_terms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">t</span><span class="p">,</span> <span class="n">net_of</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;terminals&#39;</span><span class="p">]</span>
+                       <span class="k">if</span> <span class="n">net_of</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rail_ids</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_rail_terms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">bridge_edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">non_rail_terms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">non_rail_terms</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># 전원에 연결된 net을 뿌리 삼아 BFS: 분기는 옆 레인, 깊이는 아래로</span>
+<span class="n">depth</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># ... 분기(여러 다리가 갈라짐)는 새 레인, 합류(OR 로직처럼 여러 경로가</span>
+<span class="c1">#     같은 net으로 모이는 경우)는 나중에 도달한 쪽을 합류 연결선으로 처리</span>
+</code></pre></div>
+
+<p>분기(예: 주접점/바이패스스위치/리밋스위치가 하나의 지점에서 세 갈래로 갈라짐)는 옆 레인으로<br />
+새로 배정하고, 합류(바이패스 스위치와 리밋스위치+타이머가 둘 다 "코일 입력"이라는 같은 net으로<br />
+모이는 OR 로직)는 먼저 도달한 경로를 기준 위치로 삼고 나머지는 별도 연결선으로 그린다.</p>
+<p>한 가지 더 까다로웠던 부분은 심볼 방향이었다. 실제 도면에서 뽑아온 접점 심볼들은 원래<br />
+좌우로 단자가 난 "가로형"인데, 위→아래 흐름에 꽂으려면 세로로 서야 한다. 단자 좌표를<br />
+90도 회전 변환해서 정확히 이어붙이는 코드를 추가했다.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">place_vertical</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_bottom</span><span class="p">,</span> <span class="n">y_top</span><span class="p">):</span>
+    <span class="n">pins</span> <span class="o">=</span> <span class="n">block_pins</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">rot</span> <span class="o">=</span> <span class="n">needs_rotation</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>  <span class="c1"># 가로형 핀 쌍이면 90도 회전 필요</span>
+    <span class="n">p_b</span><span class="p">,</span> <span class="n">p_t</span> <span class="o">=</span> <span class="n">pins</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">rot</span><span class="p">:</span>
+        <span class="n">ob</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">p_b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p_b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 회전 후 좌표 변환</span>
+        <span class="n">ot</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">p_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p_t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ob</span><span class="p">,</span> <span class="n">ot</span> <span class="o">=</span> <span class="n">p_b</span><span class="p">,</span> <span class="n">p_t</span>
+    <span class="n">ix</span><span class="p">,</span> <span class="n">iy</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">ob</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_bottom</span> <span class="o">-</span> <span class="n">ob</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="n">iy</span><span class="p">,</span> <span class="mi">90</span> <span class="k">if</span> <span class="n">rot</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">ix</span> <span class="o">+</span> <span class="n">ot</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">iy</span> <span class="o">+</span> <span class="n">ot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+
+<h2>결과</h2>
+<p><img alt="재설계 후 배선 결과 (확대)" src="../scratch/blog/assets/전기도면-ai-래더-다이어그램/3-v4-ladder-chain-zoom.png" /><br />
+<em>분전반 → 차단기 → 분기(주접점/바이패스/리밋스위치) → 합류(타이머) → 코일까지, 신호가<br />
+흐르는 순서 그대로 위에서 아래로 배치된다.</em></p>
+<p><img alt="최종 결과 — 실제 AutoCAD 화면" src="../scratch/blog/assets/전기도면-ai-래더-다이어그램/4-v4-full-autocad-result.png" /><br />
+<em>PE/N 버스가 도곽 전체를 관통하는 직선으로, 나머지 회로는 흐름을 따라 배치된 최종 결과.<br />
+matplotlib 렌더와 실제 AutoCAD COM 화면 캡처로 이중 검증했다.</em></p>
+<h2>배운 것</h2>
+<p>AI 에이전트가 "정확한 데이터"를 다루는 것과 "보기 좋게 배치"하는 것은 전혀 다른 난이도의<br />
+문제다. 전자는 코드로 검증 가능하지만, 후자는 그 도메인의 관례(전기도면이라면 래더 다이어그램)를<br />
+사람에게 직접 배우지 않으면 절대 저절로 나오지 않는다. 상용 툴 조사에 시간을 썼지만, 결과적으로<br />
+가장 결정적인 힌트는 리서치가 아니라 <strong>사용자가 직접 그려서 보여준 예시 하나</strong>였다.</p>
+<p>"이 배치가 왜 좋은지"를 말로 설명받기보다, 실물 예시를 그래프 구조로 역설계하는 게 훨씬<br />
+정확하고 빨랐다. 다음엔 TB1(단자대) 실물 심볼을 제대로 연결하고, 더 복잡한(분기가 많고<br />
+깊은) 회로에서도 이 알고리즘이 안 깨지는지 검증할 차례다.</p>
+<p>관련 글: <a href="프로젝트/진행중/전기도면-설계-AI/전기도면-설계-AI.html">전기도면-설계-AI 프로젝트 진행 로그</a></p></div>
+        </article>
+    </main>
+</body>
+</html>

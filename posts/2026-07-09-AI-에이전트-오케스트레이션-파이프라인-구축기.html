@@ -98,12 +98,12 @@
 <hr />
 <h2>4. 검수가 진짜로 결함을 잡았다</h2>
 <p>기획→실행→검수 3단계를 다 붙이고 첫 실측을 돌렸다. 요청은 "Hello, World!"를 출력하는 스크립트. 실행 에이전트가 만든 건:</p>
-<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World&quot;</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">print(&quot;Hello, World&quot;)
+</code></pre>
 
 <p>느낌표가 없었다. 그리고 검수 에이전트(클로드 코드)가 실행 로그 텍스트만 믿지 않고 <strong>실제 파일을 열어서</strong> 이 차이를 정확히 잡아냈다.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;ok&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;issues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;출력 문자열이 &#39;Hello, World&#39;로 되어 있어 요청한 &#39;Hello, World!&#39;와 느낌표(!) 차이가 있음&quot;</span><span class="p">]}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-json">{&quot;ok&quot;: false, &quot;issues&quot;: [&quot;출력 문자열이 'Hello, World'로 되어 있어 요청한 'Hello, World!'와 느낌표(!) 차이가 있음&quot;]}
+</code></pre>
 
 <p>사소해 보이지만, 이게 이 파이프라인 전체 개념이 실제로 작동한다는 첫 증거였다.</p>
 <hr />
@@ -123,8 +123,8 @@
 <h2>7. 재부팅해도 살아있는 봇 — 그리고 세 번째로 만난 그 버그</h2>
 <p>리스너를 상시로 만들려고 Windows 작업 스케줄러에 등록했다. <code>Register-ScheduledTask</code>는 에이전트 셸에서 권한이 없어 영은이 관리자 PowerShell로 직접 실행해줬다.</p>
 <p>등록은 됐는데 실행하면 결과 코드 <code>2</code>(파일 없음)가 떴다. 등록된 액션을 열어보니:</p>
-<div class="codehilite"><pre><span></span><code>Arguments : &quot;C:\Users\Young Kim\???쒕씪?대툕\Obsidian Vault\scratch\pipeline\listener.py&quot;
-</code></pre></div>
+<pre class="codehilite"><code>Arguments : &quot;C:\Users\Young Kim\???쒕씪?대툕\Obsidian Vault\scratch\pipeline\listener.py&quot;
+</code></pre>
 
 <p>"내 드라이브"가 물음표투성이로 깨져 있었다. <strong>이거 세 번째다.</strong> OpenClaw 설정할 때도, 어제 텔레그램 인프라 복구할 때도 이 한글 경로 버그를 만났다. 다행히 예전에 만들어둔 우회로가 있었다 — <code>C:\Users\Young Kim\openclaw-vault</code>, 실제 볼트를 가리키는 ASCII junction. 스케줄러 등록 경로를 여기로 바꾸니 바로 해결됐다.</p>
 <p>세 번째로 같은 버그를 밟고 나서야, 이번엔 진짜로 메모리에 박아뒀다. 다음부턴 Windows 외부 프로세스에 볼트 경로를 넘길 일이 생기면, 실패를 먼저 겪지 않고 처음부터 이 ASCII 경로를 쓴다.</p>

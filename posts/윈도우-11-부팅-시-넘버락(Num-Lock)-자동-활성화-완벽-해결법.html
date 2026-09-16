@@ -61,12 +61,12 @@
 <hr />
 <h2>왜 레지스트리만 고치면 다시 원상복구되는가</h2>
 <p>윈도우는 넘버락 상태를 <strong>두 곳에서 따로</strong> 관리한다.</p>
-<div class="codehilite"><pre><span></span><code>부팅 직후 로그인 화면
+<pre class="codehilite"><code>부팅 직후 로그인 화면
   └─ HKEY_USERS\.DEFAULT\Control Panel\Keyboard   (시스템 프로필)
 
 로그인 완료 후 바탕화면
   └─ HKEY_CURRENT_USER\Control Panel\Keyboard      (사용자 프로필)
-</code></pre></div>
+</code></pre>
 
 <p><code>InitialKeyboardIndicators</code> 값이 <code>2</code>면 "켜짐", <code>0</code>이면 "꺼짐"이다. 여기까지는 흔히 아는 내용이다.</p>
 <p><strong>진짜 원인은 따로 있다.</strong> 윈도우는 컴퓨터를 종료하는 순간 <strong>직전 넘버락 상태(On/Off)를 그대로 레지스트리에 다시 덮어쓴다.</strong> 즉 레지스트리 값을 <code>2</code>로 고쳐놔도, 넘버락이 꺼진 채로 컴퓨터를 껐다면 윈도우가 "아, 이 사람은 꺼놓고 썼구나" 하고 값을 다시 <code>0</code>으로 되돌려버린다. 레지스트리 수정 → 재부팅 몇 번 후 다시 꺼짐 → "고친 줄 알았는데 왜 또" 라는 패턴이 반복되는 게 이 때문이다.</p>

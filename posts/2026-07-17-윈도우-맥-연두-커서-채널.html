@@ -97,10 +97,10 @@
 <p>맥미니는 Cursor CLI가 PATH에 있어야 한다. 서버는 CLI 없어도 뜨지만, task를 받으면 “agent 없음” 오류만 메아리로 돌아온다. 오늘은 맥 설치까지 끝나 health·task 수신이 확인됐다.</p>
 <h2>4. 연결 확인</h2>
 <p>실제로 돌려본 결과는 단순했다.</p>
-<div class="codehilite"><pre><span></span><code>GET  http://192.168.1.33:8768/health  → yeondu-win-ok
+<pre class="codehilite"><code>GET  http://192.168.1.33:8768/health  → yeondu-win-ok
 GET  http://192.168.1.40:8767/health  → yeondu-mac-ok
 POST …/task                          → 200 ok (백그라운드에서 agent 실행)
-</code></pre></div>
+</code></pre>
 
 <p>메아리에 <code>연두 요청</code> / <code>연두 답변</code>이 뜨면 중계뿐 아니라 Cursor 엔진까지 산 것이다.</p>
 <h2>마무리</h2>

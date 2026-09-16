@@ -64,10 +64,10 @@
 <em>원본 PDF 렌더링과 내 SVG 렌더링을 픽셀 단위로 비교한 결과. 빨간 선이 "원본엔 있는데 내 결과물엔 없는" 부분이다.</em></p>
 <p>원인은 <code>intersects()</code> 자체였다. 완전히 수평이거나 수직인 선분은 폭이나 높이가 0인 사각형이 되는데, 면적이 0인 도형에 대해 이 함수가 겹침 판정을 제대로 못 했다. 개별 선 하나둘이 아니라 <strong>두께 0짜리 도형 전체가 조용히 탈락</strong>하고 있었던 것이다.</p>
 <p>해결은 라이브러리 함수를 믿지 않고 직접 짜는 것이었다.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">overlaps</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">crop</span><span class="p">):</span>
-    <span class="c1"># fitz.Rect.intersects()는 두께 0인 선분(완전 수평/수직)에서 오작동한다.</span>
-    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">x0</span> <span class="o">&lt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">x1</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">x1</span> <span class="o">&gt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">x0</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">y0</span> <span class="o">&lt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">y1</span> <span class="ow">and</span> <span class="n">r</span><span class="o">.</span><span class="n">y1</span> <span class="o">&gt;=</span> <span class="n">crop</span><span class="o">.</span><span class="n">y0</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">def overlaps(r, crop):
+    # fitz.Rect.intersects()는 두께 0인 선분(완전 수평/수직)에서 오작동한다.
+    return r.x0 &lt;= crop.x1 and r.x1 &gt;= crop.x0 and r.y0 &lt;= crop.y1 and r.y1 &gt;= crop.y0
+</code></pre>
 
 <p>이 한 줄로 바꾸자 누락됐던 선들이 전부 돌아왔다.</p>
 <h2>두 번째 함정 — 회전한 글자가 전부 겹쳐 보인다</h2>
@@ -96,10 +96,10 @@
 </tr>
 </tbody>
 </table>
-<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">g</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;animation-delay:1.28s;&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">text</span> <span class="na">x</span><span class="o">=</span><span class="s">&quot;104.0&quot;</span> <span class="na">y</span><span class="o">=</span><span class="s">&quot;82.9&quot;</span> <span class="na">transform</span><span class="o">=</span><span class="s">&quot;rotate(-90.0 104.0 82.9)&quot;</span><span class="p">&gt;</span>4 SQ-흑<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">g</span><span class="p">&gt;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-html">&lt;g style=&quot;animation-delay:1.28s;&quot;&gt;
+  &lt;text x=&quot;104.0&quot; y=&quot;82.9&quot; transform=&quot;rotate(-90.0 104.0 82.9)&quot;&gt;4 SQ-흑&lt;/text&gt;
+&lt;/g&gt;
+</code></pre>
 
 <p>바깥은 CSS로 움직이고, 안쪽은 어트리뷰트로 고정 회전만 담당하니 둘이 서로 안 건드리게 됐다.</p>
 <p><img alt="회전 텍스트가 겹치던 문제를 고친 뒤의 확대 화면" src="../scratch/blog/assets/도면-애니메이션-svg-transform/02-rotated-text-fixed.png" /><br />

@@ -161,25 +161,25 @@ UAC 없이 돌리려면 <code>install_autostart_admin.bat</code>을 <strong>한 
 <hr />
 <h2>실제 코드 — 클릭 감지와 "짝 창" 찾기</h2>
 <p>핵심은 마우스 클릭(<code>~*LButton Up</code>)을 전역으로 후킹해서, 클릭된 창이 이미 "균형 잡힌" 상태(옆 창과 너비 차이가 작업영역의 12% 이내)일 때만 리사이즈를 트리거하는 부분이다. 이미 2:1로 커져 있는 창을 또 클릭했을 때는 무시해야 하기 때문이다.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">~*</span><span class="n">LButton</span> <span class="n">Up</span><span class="o">::</span> <span class="p">{</span>
-    <span class="nb">global</span> <span class="n">enabled</span>
-    <span class="n">if</span> <span class="o">!</span><span class="n">enabled</span>
-        <span class="nb">return</span>
-    <span class="nb">MouseGetPos</span><span class="p">(,</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">winUnder</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctrlUnder</span><span class="p">)</span>
-    <span class="n">clicked</span> <span class="o">:=</span> <span class="n">ResolveTopLevel</span><span class="p">(</span><span class="n">winUnder</span><span class="p">)</span>
-    <span class="nb">Sleep</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="c1">  ; 클릭 직후 hwnd가 바뀌거나 사라질 수 있어 살짝 대기</span>
-    <span class="nb">if </span><span class="n">clicked</span> <span class="o">&amp;&amp;</span> <span class="n">WinAlive</span><span class="p">(</span><span class="n">clicked</span><span class="p">)</span>
-        <span class="n">TryExpandFocused</span><span class="p">(</span><span class="n">clicked</span><span class="p">)</span>
-<span class="p">}</span>
+<pre class="codehilite"><code class="language-ahk">~*LButton Up:: {
+    global enabled
+    if !enabled
+        return
+    MouseGetPos(, , &amp;winUnder, &amp;ctrlUnder)
+    clicked := ResolveTopLevel(winUnder)
+    Sleep(80)  ; 클릭 직후 hwnd가 바뀌거나 사라질 수 있어 살짝 대기
+    if clicked &amp;&amp; WinAlive(clicked)
+        TryExpandFocused(clicked)
+}
 
-<span class="n">TryExpandFocused</span><span class="p">(</span><span class="n">clickedRoot</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">    ; ...</span>
-    <span class="n">isBalanced</span> <span class="o">:=</span> <span class="p">(</span><span class="nf">Abs</span><span class="p">(</span><span class="n">fgRect</span><span class="o">.</span><span class="n">w</span> <span class="o">-</span> <span class="n">partnerRect</span><span class="o">.</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">totalW</span> <span class="o">*</span> <span class="mf">0.12</span><span class="p">)</span>
-    <span class="n">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isBalanced</span> <span class="o">&amp;&amp;</span> <span class="n">fgRect</span><span class="o">.</span><span class="n">w</span> <span class="o">&gt;=</span> <span class="n">partnerRect</span><span class="o">.</span><span class="n">w</span> <span class="o">*</span> <span class="mf">0.92</span><span class="p">)</span>
-        <span class="nb">return</span><span class="c1">  ; 이미 큰 쪽을 클릭한 거면 무시</span>
-<span class="c1">    ; ... largeW/smallW 계산 후 ApplySplit</span>
-<span class="p">}</span>
-</code></pre></div>
+TryExpandFocused(clickedRoot := 0) {
+    ; ...
+    isBalanced := (Abs(fgRect.w - partnerRect.w) &lt; totalW * 0.12)
+    if (!isBalanced &amp;&amp; fgRect.w &gt;= partnerRect.w * 0.92)
+        return  ; 이미 큰 쪽을 클릭한 거면 무시
+    ; ... largeW/smallW 계산 후 ApplySplit
+}
+</code></pre>
 
 <p>"옆 창(짝)"을 찾는 <code>FindHorizontalPartner()</code>는 단순히 "가장 가까운 창"이 아니라, <strong>같은 모니터에 있고, 세로로 45% 이상 겹치고, 가로 간격이 48px 이내이며, 두 창 너비 합이 작업영역의 82% 이상</strong>인 창만 후보로 삼는다. 그래야 화면 구석에 떠 있는 무관한 알림창 같은 걸 짝으로 오인하지 않는다.</p>
 <p>몇 가지 실제로 부딪혀서 넣은 예외 처리:</p>

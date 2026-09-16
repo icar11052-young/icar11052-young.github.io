@@ -146,16 +146,16 @@
 <hr />
 <h2>Cursor에서 쓰는 법</h2>
 <p>Vault에 스킬을 넣어 두었다.</p>
-<div class="codehilite"><pre><span></span><code><span class="na">.cursor</span><span class="err">/</span><span class="no">skills</span><span class="err">/</span><span class="no">blog-pipeline</span><span class="err">/</span>
-<span class="w">  </span><span class="nf">SKILL.md</span>
-<span class="w">  </span><span class="nf">agents</span><span class="err">/</span><span class="mi">01</span><span class="p">-</span><span class="no">researcher.md</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="mi">06</span><span class="p">-</span><span class="no">publisher.md</span>
-<span class="nf">scratch</span><span class="err">/</span><span class="no">blog-pipeline</span><span class="err">/</span><span class="p">{</span><span class="no">slug</span><span class="p">}</span><span class="err">/</span><span class="w">   </span><span class="err">←</span><span class="w"> </span><span class="err">중간</span><span class="w"> </span><span class="err">산출물</span>
-</code></pre></div>
+<pre class="codehilite"><code>.cursor/skills/blog-pipeline/
+  SKILL.md
+  agents/01-researcher.md … 06-publisher.md
+scratch/blog-pipeline/{slug}/   ← 중간 산출물
+</code></pre>
 
 <p><strong>호출 예:</strong></p>
-<div class="codehilite"><pre><span></span><code>/blog-pipeline topic=&quot;NotebookLM 유튜브 표 추출&quot; target=tech
+<pre class="codehilite"><code>/blog-pipeline topic=&quot;NotebookLM 유튜브 표 추출&quot; target=tech
 /blog-pipeline topic=&quot;금요미식회 103회&quot; target=food publish=false
-</code></pre></div>
+</code></pre>
 
 <p><code>publish=false</code>(기본)면 <code>블로그/</code>에만 저장하고, 승인 후 <code>publish.py</code>를 돌린다.</p>
 <hr />

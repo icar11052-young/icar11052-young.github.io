@@ -63,18 +63,18 @@
 <p>그래서 <strong>PC만 켜져 있으면</strong> 주기적으로 검색하고, <strong>새 공고가 잡히면 Gmail로 메일</strong> 오게 만들었다.</p>
 <hr />
 <h2>구조 한눈에</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">[매주 월요일 09:00]</span>
-<span class="w">    </span><span class="na">Windows 작업 스케줄러</span>
-<span class="w">         </span><span class="na">↓</span>
-<span class="na">heatpump_subsidy_watch.py</span>
-<span class="w">         </span><span class="na">↓</span>
-<span class="w">  </span><span class="na">네이버 검색 + 정책 페이지 스캔</span>
-<span class="w">  </span><span class="na">(히트펌프 · 공기열 · 난방전기화 + 경산/경북/전국)</span>
-<span class="w">         </span><span class="na">↓</span>
-<span class="w">  </span><span class="na">state.json에 없는 새 항목?</span>
-<span class="w">         </span><span class="na">↓ YES</span>
-<span class="w">  </span><span class="na">Gmail SMTP → icar11052@gmail.com</span>
-</code></pre></div>
+<pre class="codehilite"><code>[매주 월요일 09:00]
+    Windows 작업 스케줄러
+         ↓
+heatpump_subsidy_watch.py
+         ↓
+  네이버 검색 + 정책 페이지 스캔
+  (히트펌프 · 공기열 · 난방전기화 + 경산/경북/전국)
+         ↓
+  state.json에 없는 새 항목?
+         ↓ YES
+  Gmail SMTP → icar11052@gmail.com
+</code></pre>
 
 <p>Cursor·OpenClaw·텔레그램 봇 <strong>필요 없음.</strong> Obsidian Vault 안 <code>scratch/watchers/</code>에 스크립트만 두면 된다.</p>
 <hr />
@@ -109,15 +109,15 @@
 <hr />
 <h2>Gmail SMTP 설정 (한 번만)</h2>
 <p>Google 계정 <strong>앱 비밀번호</strong>를 만들고, 볼트 루트 <code>.env</code>에 넣는다 (git 제외).</p>
-<div class="codehilite"><pre><span></span><code><span class="n">SMTP_USER</span><span class="o">=</span><span class="n">본인</span><span class="nv">@gmail</span><span class="p">.</span><span class="n">com</span>
-<span class="n">SMTP_APP_PASSWORD</span><span class="o">=</span><span class="n">xxxx</span><span class="w"> </span><span class="n">xxxx</span><span class="w"> </span><span class="n">xxxx</span><span class="w"> </span><span class="n">xxxx</span>
-<span class="n">HEATPUMP_WATCH_EMAIL_TO</span><span class="o">=</span><span class="n">받을주소</span><span class="nv">@gmail</span><span class="p">.</span><span class="n">com</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-env">SMTP_USER=본인@gmail.com
+SMTP_APP_PASSWORD=xxxx xxxx xxxx xxxx
+HEATPUMP_WATCH_EMAIL_TO=받을주소@gmail.com
+</code></pre>
 
 <p>앱 이름 칸은 Google이 구분용으로 묻는 <strong>메모</strong>다. <code>경산 히트펌프 감시</code> 같이 아무거나 넣으면 된다.</p>
 <p>테스트:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">python</span> <span class="n">scratch</span><span class="p">/</span><span class="n">watchers</span><span class="p">/</span><span class="n">heatpump_subsidy_watch</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-test-email</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-powershell">python scratch/watchers/heatpump_subsidy_watch.py --test-email
+</code></pre>
 
 <hr />
 <h2>왜 OAuth가 아니라 SMTP?</h2>

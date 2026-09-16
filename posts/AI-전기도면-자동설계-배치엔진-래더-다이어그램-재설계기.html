@@ -65,12 +65,12 @@
 <p>앞선 작업에서 심볼 라이브러리는 이미 "진짜"였다. 손으로 그린 게 아니라 실제 도면(JAT<br />
 "Golden Eye Jig" 검사기 도면)에서 AutoCAD COM API로 직접 뽑아낸 블록이다. 표제란(도곽)도<br />
 사용자가 직접 WBLOCK으로 떠준 원본을 그대로 썼다.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 대화상자·타이핑 없이 블록을 그대로 복사하는 방법</span>
-<span class="n">objs</span> <span class="o">=</span> <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">(</span><span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_ARRAY</span> <span class="o">|</span> <span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_DISPATCH</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>
-<span class="n">new_block</span> <span class="o">=</span> <span class="n">dest_doc</span><span class="o">.</span><span class="n">Blocks</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span>
-    <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">(</span><span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_ARRAY</span> <span class="o">|</span> <span class="n">pythoncom</span><span class="o">.</span><span class="n">VT_R8</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">block_name</span><span class="p">)</span>
-<span class="n">src_doc</span><span class="o">.</span><span class="n">CopyObjects</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span> <span class="n">new_block</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python"># 대화상자·타이핑 없이 블록을 그대로 복사하는 방법
+objs = win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_DISPATCH, entities)
+new_block = dest_doc.Blocks.Add(
+    win32com.client.VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8, [0, 0, 0]), block_name)
+src_doc.CopyObjects(objs, new_block)
+</code></pre>
 
 <p><code>WBLOCK</code> 명령어를 스크립트로 자동화하려다 대화상자 타이밍 문제로 계속 실패했는데, <code>CopyObjects</code><br />
 COM 메서드로 바꾸니 대화상자 자체가 안 뜨고 한 번에 성공했다. 이렇게 심볼 16개를 추가로<br />
@@ -141,18 +141,18 @@ COM 메서드로 바꾸니 대화상자 자체가 안 뜨고 한 번에 성공�
 <li><strong>그 외</strong>: 2단자 부품(차단기·접점·코일 등)이 net과 net을 잇는 "다리(bridge)"라고 보고,<br />
   전원에 연결된 net을 뿌리 삼아 그래프를 BFS로 타고 내려가며 위→아래 순서로 배치한다.</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 2단자 부품 = net과 net을 잇는 다리</span>
-<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
-    <span class="n">non_rail_terms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">t</span><span class="p">,</span> <span class="n">net_of</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;terminals&#39;</span><span class="p">]</span>
-                       <span class="k">if</span> <span class="n">net_of</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rail_ids</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">non_rail_terms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">bridge_edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">non_rail_terms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">non_rail_terms</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<pre class="codehilite"><code class="language-python"># 2단자 부품 = net과 net을 잇는 다리
+for c in components:
+    non_rail_terms = [(t, net_of(c, t)) for t in c['terminals']
+                       if net_of(c, t) not in rail_ids]
+    if len(non_rail_terms) == 2:
+        bridge_edges.append((c, non_rail_terms[0], non_rail_terms[1]))
 
-<span class="c1"># 전원에 연결된 net을 뿌리 삼아 BFS: 분기는 옆 레인, 깊이는 아래로</span>
-<span class="n">depth</span><span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># ... 분기(여러 다리가 갈라짐)는 새 레인, 합류(OR 로직처럼 여러 경로가</span>
-<span class="c1">#     같은 net으로 모이는 경우)는 나중에 도달한 쪽을 합류 연결선으로 처리</span>
-</code></pre></div>
+# 전원에 연결된 net을 뿌리 삼아 BFS: 분기는 옆 레인, 깊이는 아래로
+depth[root] = 0
+# ... 분기(여러 다리가 갈라짐)는 새 레인, 합류(OR 로직처럼 여러 경로가
+#     같은 net으로 모이는 경우)는 나중에 도달한 쪽을 합류 연결선으로 처리
+</code></pre>
 
 <p>분기(예: 주접점/바이패스스위치/리밋스위치가 하나의 지점에서 세 갈래로 갈라짐)는 옆 레인으로<br />
 새로 배정하고, 합류(바이패스 스위치와 리밋스위치+타이머가 둘 다 "코일 입력"이라는 같은 net으로<br />
@@ -160,18 +160,18 @@ COM 메서드로 바꾸니 대화상자 자체가 안 뜨고 한 번에 성공�
 <p>한 가지 더 까다로웠던 부분은 심볼 방향이었다. 실제 도면에서 뽑아온 접점 심볼들은 원래<br />
 좌우로 단자가 난 "가로형"인데, 위→아래 흐름에 꽂으려면 세로로 서야 한다. 단자 좌표를<br />
 90도 회전 변환해서 정확히 이어붙이는 코드를 추가했다.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">place_vertical</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_bottom</span><span class="p">,</span> <span class="n">y_top</span><span class="p">):</span>
-    <span class="n">pins</span> <span class="o">=</span> <span class="n">block_pins</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">rot</span> <span class="o">=</span> <span class="n">needs_rotation</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>  <span class="c1"># 가로형 핀 쌍이면 90도 회전 필요</span>
-    <span class="n">p_b</span><span class="p">,</span> <span class="n">p_t</span> <span class="o">=</span> <span class="n">pins</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">rot</span><span class="p">:</span>
-        <span class="n">ob</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">p_b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p_b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 회전 후 좌표 변환</span>
-        <span class="n">ot</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">p_t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p_t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">ob</span><span class="p">,</span> <span class="n">ot</span> <span class="o">=</span> <span class="n">p_b</span><span class="p">,</span> <span class="n">p_t</span>
-    <span class="n">ix</span><span class="p">,</span> <span class="n">iy</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">ob</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_bottom</span> <span class="o">-</span> <span class="n">ob</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="n">iy</span><span class="p">,</span> <span class="mi">90</span> <span class="k">if</span> <span class="n">rot</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">ix</span> <span class="o">+</span> <span class="n">ot</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">iy</span> <span class="o">+</span> <span class="n">ot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">def place_vertical(c, x, y_bottom, y_top):
+    pins = block_pins(c)
+    rot = needs_rotation(pins)  # 가로형 핀 쌍이면 90도 회전 필요
+    p_b, p_t = pins[0], pins[1]
+    if rot:
+        ob = (-p_b[1], p_b[0])  # 회전 후 좌표 변환
+        ot = (-p_t[1], p_t[0])
+    else:
+        ob, ot = p_b, p_t
+    ix, iy = x - ob[0], y_bottom - ob[1]
+    return (ix, iy, 90 if rot else 0), (ix + ot[0], iy + ot[1])
+</code></pre>
 
 <h2>결과</h2>
 <p><img alt="재설계 후 배선 결과 (확대)" src="../assets/전기도면-ai-래더-다이어그램/3-v4-ladder-chain-zoom.png" /><br />

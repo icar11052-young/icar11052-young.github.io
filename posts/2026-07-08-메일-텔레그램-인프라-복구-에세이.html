@@ -73,12 +73,12 @@
 <p><strong>1단계.</strong> 스케줄 작업(<code>Register-ScheduledTask</code>)을 에이전트 셸에서 등록하려니 <code>Access is denied</code>. 에이전트가 완전한 대화형 사용자 토큰이 없어서 생기는 흔한 제약이라 영은에게 직접 실행을 부탁했다.</p>
 <p><strong>2단계.</strong> 영은이 <strong>관리자 PowerShell</strong>로 열어서 실행했는데도 또 막혔다 — 이번엔 다른 에러, <code>UnauthorizedAccess</code>. 관리자인데 왜? 알고 보니 완전히 다른 문제였다. <strong>PowerShell 실행 정책(Execution Policy)</strong>이 서명 안 된 스크립트 자체를 막고 있었다. <code>powershell -ExecutionPolicy Bypass -File ...</code>로 우회하니 등록은 성공.</p>
 <p><strong>3단계.</strong> 등록된 작업을 수동으로 한 번 실행(<code>Start-ScheduledTask</code>)했는데, 프로세스가 안 떴다. 스크립트를 직접 foreground로 돌려보니 진짜 에러가 드러났다.</p>
-<div class="codehilite"><pre><span></span><code>Get-Content : An object at the specified path C:\Users\Young Kim\???쒕씪?대툕\Obsidian Vault\.env does not exist
-</code></pre></div>
+<pre class="codehilite"><code>Get-Content : An object at the specified path C:\Users\Young Kim\???쒕씪?대툕\Obsidian Vault\.env does not exist
+</code></pre>
 
 <p>"내 드라이브"가 물음표투성이로 깨져 있었다. <code>.ps1</code> 파일을 <strong>BOM 없는 UTF-8</strong>로 저장해뒀는데, Windows PowerShell 5.1은 BOM이 없으면 시스템 로케일(한국어 환경이면 CP949)로 스크립트를 읽는다. 한글 경로가 통째로 깨지면서 존재하는 파일을 "없다"고 판단한 것.</p>
-<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$p</span> <span class="n">-Raw</span> <span class="n">-Encoding</span> <span class="n">UTF8</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="n">-Path</span> <span class="nv">$p</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-powershell">(Get-Content -Path $p -Raw -Encoding UTF8) | Set-Content -Path $p -Encoding UTF8
+</code></pre>
 
 <p>Windows PowerShell 5.1의 <code>-Encoding UTF8</code>은 (PowerShell 7과 달리) <strong>BOM을 붙여서</strong> 쓴다. 이걸로 재저장하니 한글 경로가 정상적으로 읽혔다.</p>
 <hr />

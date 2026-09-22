@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지 - 영은.Dev</title>
+    <meta name="description" content="상품 등록, 기기 제어, 원격 인계를 진행하며 배운 자동화의 완료 기준과 사용자 작업을 방해하지 않는 운영 방식.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지">
+    <meta property="og:description" content="상품 등록, 기기 제어, 원격 인계를 진행하며 배운 자동화의 완료 기준과 사용자 작업을 방해하지 않는 운영 방식.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지">
+    <meta name="twitter:description" content="상품 등록, 기기 제어, 원격 인계를 진행하며 배운 자동화의 완료 기준과 사용자 작업을 방해하지 않는 운영 방식.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지", "description": "상품 등록, 기기 제어, 원격 인계를 진행하며 배운 자동화의 완료 기준과 사용자 작업을 방해하지 않는 운영 방식.", "datePublished": "2026-09-22", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html", "inLanguage": "ko-KR"}</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6716530844639006" crossorigin="anonymous"></script>
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지</h1>
+                <div class="post-meta">
+                    <span>📅 2026-09-22</span>
+                    <span>🏷️ 자동화, 상품등록, 원격작업, 검수</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><p>자동화가 내 마우스를 가져가 버리면, 나는 옆에서 기다려야 합니다. 오늘 여러 판매 채널에 상품을 등록하면서 가장 답답했던 부분입니다. 버튼을 대신 누르는 기능만큼 중요한 것은 내가 다른 일을 하는 동안에도 작업을 이어갈 수 있는 운영 방식이었습니다.</p>
+<h2>상품 등록의 완료 기준을 나누다</h2>
+<p>같은 상세페이지라도 판매 채널이 바뀌면 카테고리, 옵션, 배송비와 상품정보 입력 방식이 달라졌습니다. 상품명과 이미지가 준비됐다고 해서 바로 등록되는 것은 아니었습니다. 옵션 입력 한도와 계정 상태도 확인해야 했습니다.</p>
+<p>오늘 한 채널에서는 여섯 상품의 생성 API가 성공했고, 다른 채널에서는 일반형 한 상품의 등록 성공 화면을 확인했습니다. 반면 또 다른 채널은 계정의 판매 방식 때문에 등록이 막혔습니다. 채널마다 서로 다른 상태를 한 문장으로 뭉뚱그리면 다음 작업을 잘못 시작하기 쉽습니다.</p>
+<table>
+<thead>
+<tr>
+<th>확인한 일</th>
+<th>아직 별도로 확인할 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>등록 API의 성공 응답</td>
+<td>고객이 보는 판매페이지와 옵션 표시</td>
+</tr>
+<tr>
+<td>편집 화면에 옵션 입력</td>
+<td>저장 성공 여부와 최종 상품번호</td>
+</tr>
+<tr>
+<td>배송지·추가배송비 저장</td>
+<td>해당 상품에 적용된 최종 배송 조건</td>
+</tr>
+<tr>
+<td>상세페이지 제작</td>
+<td>실제 생산 가능한 발주파일과 실물 품질</td>
+</tr>
+</tbody>
+</table>
+<p>특히 편집 화면에 남아 있는 값과 서버에 저장된 값은 달랐습니다. 다른 컴퓨터에서 같은 페이지를 열었을 때 미저장 내용까지 따라올 것이라고 기대하면 안 됩니다. 인계 메모에 마지막 저장 지점을 따로 적어둔 이유입니다.</p>
+<h2>내 컴퓨터를 비워두기 위한 원격 작업</h2>
+<p>상품 등록 과정에서는 주소 검색 팝업이나 파일 선택창처럼 화면 조작이 필요한 순간이 있었습니다. 이 작업을 내가 쓰는 컴퓨터에서 계속하면 작업이 서로 부딪혔습니다. 그래서 화면 조작은 별도 컴퓨터에서 이어가는 방향으로 바꿨습니다.</p>
+<p>이때 파일을 보낼 수 있다는 사실만으로 원격 작업 연결까지 완료됐다고 생각한 것이 문제였습니다. 다음 세 단계는 각각 확인해야 했습니다.</p>
+<ol>
+<li><strong>자료 전달</strong> — 상대 컴퓨터에 필요한 파일이 있는가.</li>
+<li><strong>작업 조회</strong> — 상대 컴퓨터에서 실행 중인 작업과 상태가 보이는가.</li>
+<li><strong>자동 재개</strong> — 대기 중인 작업을 필요한 순간에 다시 실행할 수 있는가.</li>
+</ol>
+<p>오늘은 자료 전달과 실제 원격 작업 상태 조회를 확인했습니다. 자동 재개까지 완성한 것은 아닙니다. 이 구분을 명확히 해야 사람이 중간에서 계속 메시지를 전달하는 상황을 줄일 수 있습니다.</p>
+<h2>파일 인계에는 목록과 해시를 붙였다</h2>
+<p>최신 대표이미지, 상세페이지 HTML, 기종별 옵션과 등록결과 등 열여덟 파일을 묶어 보냈습니다. 인증정보는 제외하고, 파일마다 SHA256 값을 남겼습니다. SHA256은 파일 내용에서 계산하는 값으로, 원본과 받은 파일의 값이 같으면 전달 중 내용이 달라지지 않았는지 확인하는 데 도움이 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>인계 자료</th>
+<th>맡은 역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>파일목록과 SHA256</td>
+<td>누락과 내용 변경 확인</td>
+</tr>
+<tr>
+<td>등록결과</td>
+<td>이미 만든 상품을 다시 만들지 않기</td>
+</tr>
+<tr>
+<td>최신 상태 보정 메모</td>
+<td>오래된 상태 파일의 표현을 그대로 믿지 않기</td>
+</tr>
+<tr>
+<td>수신 확인 기록</td>
+<td>파일 저장과 상대 작업자의 확인을 구분하기</td>
+</tr>
+</tbody>
+</table>
+<p>해시가 같다고 자료의 내용까지 옳다는 뜻은 아닙니다. 예를 들어 이전 상태 파일의 ‘저장됨’이 초기 초안에만 해당한다면, 파일을 정확하게 복사해도 잘못 이해할 수 있습니다. 그래서 원본은 보존하고 최신 설명을 별도 메모로 붙였습니다.</p>
+<h2>기기 작업에서도 같은 기준이 필요했다</h2>
+<p>같은 날 진행한 선풍기 리모컨과 프린터 작업도 비슷했습니다. 프로그램이 신호를 보냈다는 기록과 실제 기기가 반응했다는 확인은 별개였습니다. 프린터 역시 설정 화면만 보는 대신 실제 출력과 비어 있는 대기열을 함께 확인했습니다.</p>
+<p>케이스 디자인 작업에서는 목업과 실제 크기의 연습용 도안을 구분했습니다. 보기 좋은 이미지가 만들어졌다고 생산용 도안까지 완성된 것은 아니기 때문입니다.</p>
+<p>결국 오늘 남긴 기준은 단순합니다. <strong>무엇을 실행했고, 어디까지 확인했으며, 다음 확인은 무엇인지 따로 기록한다.</strong> 다음 작업은 남은 채널 등록과 실제 판매페이지 검수입니다. 자동화가 사용자의 시간을 돌려주려면, 성공했다는 말보다 그 말을 뒷받침하는 확인 지점이 먼저 있어야 합니다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

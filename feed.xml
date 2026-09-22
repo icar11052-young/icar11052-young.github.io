@@ -5,20 +5,20 @@
     <link>https://icar11052-young.github.io/</link>
     <description>AI 기술 동향, 옵시디언 자동화, 로봇 공학 및 개인 지식 구축 과정을 컴파운딩하여 기록하는 기술 블로그입니다.</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 17 Sep 2026 02:55:15 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 21:52:41 +0900</lastBuildDate>
+    <item>
+      <title>자동화의 완료를 확인하는 법 — 상품 등록부터 원격 작업까지</title>
+      <link>https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html</link>
+      <guid>https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0900</pubDate>
+      <description>상품 등록, 기기 제어, 원격 인계를 진행하며 배운 자동화의 완료 기준과 사용자 작업을 방해하지 않는 운영 방식.</description>
+    </item>
     <item>
       <title>제작파일 자동화는 규칙 분류부터 시작한다</title>
       <link>https://icar11052-young.github.io/posts/print-file-rules-before-automation-20260917.html</link>
       <guid>https://icar11052-young.github.io/posts/print-file-rules-before-automation-20260917.html</guid>
       <pubDate>Thu, 17 Sep 2026 00:00:00 +0900</pubDate>
       <description>공급사 제작자료를 읽으며 파일 형식, 적용 제품, 버전과 발주 검수의 중요성을 확인한 기록.</description>
-    </item>
-    <item>
-      <title>맥미니 연결보다 사용 경로를 먼저 정리한 날</title>
-      <link>https://icar11052-young.github.io/posts/mac-connection-and-memory-20260915.html</link>
-      <guid>https://icar11052-young.github.io/posts/mac-connection-and-memory-20260915.html</guid>
-      <pubDate>Tue, 15 Sep 2026 00:00:00 +0900</pubDate>
-      <description>외장하드 공유와 AI 기억 설정을 점검하며 기존 접속 방식, 실제 검증, 기록의 역할을 구분한 경험.</description>
     </item>
     <item>
       <title>맥미니 연결보다 사용 경로를 먼저 정리한 날</title>

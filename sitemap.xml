@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/proof-versus-completion-20261023.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/automation-completion-and-remote-work-20260922.html</loc>
@@ -76,22 +81,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/2026-07-05-OneNote-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%95-%EC%8A%B9%EA%B2%A9-%EC%B6%94%EC%96%B5-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
-    <lastmod>2026-07-05</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://icar11052-young.github.io/posts/2026-07-05-%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B3%BC%ED%8A%B8-%ED%8F%B4%EB%8D%94-%ED%8A%B8%EB%A6%AC-%EC%A0%95%EB%A6%AC-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
     <lastmod>2026-07-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/2026-07-04-OneNote-267%ED%8E%98%EC%9D%B4%EC%A7%80-Obsidian-%EC%9D%B4%EA%B4%80-%EB%B0%A4%EC%83%98-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://icar11052-young.github.io/posts/2026-07-05-OneNote-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%95-%EC%8A%B9%EA%B2%A9-%EC%B6%94%EC%96%B5-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
+    <lastmod>2026-07-05</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/Claude-Code-6%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%28%EC%97%89%ED%81%B4%EC%9E%A1%EC%8A%A4-%EC%A0%95%EB%A6%AC%29.html</loc>
+    <loc>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</loc>
     <lastmod>2026-07-04</lastmod>
     <priority>0.8</priority>
   </url>
@@ -101,8 +101,18 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%B9%A0%EB%A5%B8%EB%A9%94%EB%AA%A8%EB%A5%BC-%EC%9C%88%EB%8F%84%EC%9A%B0-%EC%8A%A4%ED%8B%B0%EC%BB%A4%EB%A9%94%EB%AA%A8%EC%B2%98%EB%9F%BC-%28AutoHotkey-v2%29.html</loc>
+    <loc>https://icar11052-young.github.io/posts/Claude-Code-6%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%28%EC%97%89%ED%81%B4%EC%9E%A1%EC%8A%A4-%EC%A0%95%EB%A6%AC%29.html</loc>
     <lastmod>2026-07-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/2026-07-04-OneNote-267%ED%8E%98%EC%9D%B4%EC%A7%80-Obsidian-%EC%9D%B4%EA%B4%80-%EB%B0%A4%EC%83%98-%EC%97%90%EC%84%B8%EC%9D%B4.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%9E%91%EC%9D%80-%EC%B0%BD-%ED%81%B4%EB%A6%AD%ED%95%98%EB%A9%B4-2-1-%EB%B9%84%EC%9C%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EB%8C%80-%28FancyZones-%ED%95%9C%EA%B3%84-AutoHotkey%29.html</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -116,18 +126,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%9E%91%EC%9D%80-%EC%B0%BD-%ED%81%B4%EB%A6%AD%ED%95%98%EB%A9%B4-2-1-%EB%B9%84%EC%9C%A8-%EC%9E%90%EB%8F%99-%ED%99%95%EB%8C%80-%28FancyZones-%ED%95%9C%EA%B3%84-AutoHotkey%29.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://icar11052-young.github.io/posts/Cursor%EC%97%90%EC%84%9C-%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%9B%A8%EC%9D%BC-%EA%B8%B0%EB%B3%B8-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0.html</loc>
     <lastmod>2026-07-02</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://icar11052-young.github.io/posts/AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%8C%80%ED%99%94%EB%A1%9D-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%88%84%EC%A0%81-%EC%8B%9C%EB%8F%84%EC%99%80-%EB%A1%A4%EB%B0%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B3%B4%EC%95%88-%EA%B2%BD%EA%B3%84-%EC%86%8D-UX-%EC%84%A4%EA%B3%84.html</loc>
-    <lastmod>2026-06-30</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -141,12 +141,17 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%AA%A8%EB%B0%94%EC%9D%BC-PC-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%AC%B4%EB%A3%8C-%EC%9E%90%EB%8F%99-%EB%8F%99%EA%B8%B0%ED%99%94.html</loc>
-    <lastmod>2026-06-29</lastmod>
+    <loc>https://icar11052-young.github.io/posts/AI-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EB%8C%80%ED%99%94%EB%A1%9D-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%88%84%EC%A0%81-%EC%8B%9C%EB%8F%84%EC%99%80-%EB%A1%A4%EB%B0%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B3%B4%EC%95%88-%EA%B2%BD%EA%B3%84-%EC%86%8D-UX-%EC%84%A4%EA%B3%84.html</loc>
+    <lastmod>2026-06-30</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/%ED%8B%B0%EC%8A%A4%ED%86%A0%EB%A6%AC-API-%EC%A2%85%EB%A3%8C-%EB%8C%80%EC%9D%91-%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EA%B9%83%ED%97%88%EB%B8%8C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9E%90%EB%8F%99%ED%99%94-%EA%B5%AC%EC%B6%95%EA%B8%B0.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/%EC%98%B5%EC%8B%9C%EB%94%94%EC%96%B8-%EB%AA%A8%EB%B0%94%EC%9D%BC-PC-%EA%B9%83%ED%97%88%EB%B8%8C-%EB%AC%B4%EB%A3%8C-%EC%9E%90%EB%8F%99-%EB%8F%99%EA%B8%B0%ED%99%94.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.8</priority>
   </url>

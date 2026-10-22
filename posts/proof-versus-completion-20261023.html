@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조회 성공과 업무 완료를 구분하는 검증 기록 - 영은.Dev</title>
+    <meta name="description" content="자동화가 읽은 값과 실제 업무 완료를 구분하기 위해 조회 범위·원본·검증·제출 상태를 기록한 경험입니다.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/proof-versus-completion-20261023.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="조회 성공과 업무 완료를 구분하는 검증 기록">
+    <meta property="og:description" content="자동화가 읽은 값과 실제 업무 완료를 구분하기 위해 조회 범위·원본·검증·제출 상태를 기록한 경험입니다.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/proof-versus-completion-20261023.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="조회 성공과 업무 완료를 구분하는 검증 기록">
+    <meta name="twitter:description" content="자동화가 읽은 값과 실제 업무 완료를 구분하기 위해 조회 범위·원본·검증·제출 상태를 기록한 경험입니다.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "조회 성공과 업무 완료를 구분하는 검증 기록", "description": "자동화가 읽은 값과 실제 업무 완료를 구분하기 위해 조회 범위·원본·검증·제출 상태를 기록한 경험입니다.", "datePublished": "2026-10-23", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/proof-versus-completion-20261023.html", "inLanguage": "ko-KR"}</script>
+    
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>조회 성공과 업무 완료를 구분하는 검증 기록</h1>
+                <div class="post-meta">
+                    <span>📅 2026-10-23</span>
+                    <span>🏷️ automation, verification, knowledge-management</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><p>자동화 프로그램이 값을 읽었다는 사실만으로 업무가 끝나지는 않습니다.<br />
+조회 범위가 맞는지, 자료가 언제까지 반영됐는지, 실제로 저장하거나 제출했는지까지 확인해야 완료라고 말할 수 있습니다.<br />
+여러 업무를 동시에 진행하면서 가장 도움이 된 것은 기능을 더 붙이는 일보다 이 상태들을 나눠 기록하는 일이었습니다.</p>
+<h2>조회된 숫자에는 범위가 붙어야 합니다</h2>
+<p>월별 통계에서 금액을 얻었을 때는 숫자 옆에 기간과 집계 기준을 함께 적었습니다.<br />
+발급일 기준인지 거래일 기준인지에 따라 같은 자료도 의미가 달라질 수 있었습니다.<br />
+당일 자료를 다음 날 보여주는 화면이라면 조회한 시각과 자료의 기준 시점도 다릅니다.</p>
+<table>
+<thead>
+<tr>
+<th>관측한 사실</th>
+<th>함께 남긴 조건</th>
+<th>바로 단정하지 않은 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>통계에 금액이 표시됨</td>
+<td>조회 기간과 집계 기준</td>
+<td>모든 거래를 포함한 확정 결산</td>
+</tr>
+<tr>
+<td>목록에 결과가 없음</td>
+<td>대상과 조회 범위, 반영 지연</td>
+<td>실제 거래 자체가 없었다는 판단</td>
+</tr>
+<tr>
+<td>파일이 생성됨</td>
+<td>원본 해시와 변환 경로</td>
+<td>원래 양식과 동일한 배치</td>
+</tr>
+<tr>
+<td>로그인 계정이 등록됨</td>
+<td>실제 원격 조회 결과</td>
+<td>업로드 완료</td>
+</tr>
+</tbody>
+</table>
+<p>숫자의 정확성과 그 숫자를 사용해도 되는 범위는 별도 문제였습니다.<br />
+범위를 한 줄 남겨두면 다음 작업에서 다른 연도의 값이나 다른 집계 기준을 섞는 실수를 줄일 수 있습니다.</p>
+<h2>변환 성공과 문서 완성은 별도였습니다</h2>
+<p>문서 변환에서는 파일이 생성되고 Word에서 열리는 것까지 확인했습니다.<br />
+긴 한글 경로를 처리하고 기존 편집본을 덮어쓰지 않는지도 시험했습니다.<br />
+그런데 원본보다 쪽 수가 늘어나고 표가 나뉘는 현상이 남았습니다.</p>
+<p>이 경우에는 변환 기능이 작동한다고 보고할 수 있지만 제출용 문서가 완성됐다고 말할 수는 없습니다.<br />
+원본 보존, 변환 동작, 배치 검수, 최종 제출을 각각 기록해야 이후 작업자가 어디부터 이어갈지 알 수 있습니다.</p>
+<h2>저장과 업로드도 별도로 확인했습니다</h2>
+<p>브라우저에 입력한 값은 서버에 저장된 값과 다를 수 있습니다.<br />
+필수 항목이 비어 저장이 막혔다면 화면에 값이 남아 있더라도 재개 정보에 미저장이라고 적어야 합니다.<br />
+같은 이유로 Git 커밋을 만들었다는 사실과 원격 업로드 성공도 구분했습니다.</p>
+<p>기기 간 기록은 상대 기기의 업로드 커밋을 현재 기기가 받아 포함했는지 확인해야 맞춰졌다고 판단할 수 있습니다.<br />
+단순 파일 복사는 내용 보존에는 도움이 되지만 Git 이력의 동기화를 대신하지 않습니다.</p>
+<h2>다음에 다시 확인할 수 있게 남기는 기록</h2>
+<p>재사용할 기록에는 관측한 값, 관측 시점, 적용 범위, 원본 위치, 남은 행동을 붙였습니다.<br />
+완료되지 않은 항목에는 실패 이유와 다음에 필요한 입력을 적었습니다.<br />
+이렇게 하면 작업을 이어갈 때 성공한 단계를 다시 시험하거나, 미완료 항목을 완료로 착각하는 일을 줄일 수 있습니다.</p>
+<p>다음 개선은 완료라는 단어를 더 많이 출력하는 일이 아닙니다.<br />
+어떤 증거가 있어야 다음 상태로 넘어갈 수 있는지 프로그램과 작업 기록에 같은 기준을 넣는 일입니다.</p></div>
+        </article>
+    </main>
+</body>
+</html>

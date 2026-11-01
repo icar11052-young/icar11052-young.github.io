@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://icar11052-young.github.io/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://icar11052-young.github.io/posts/local-wiki-rag-incremental-20261101.html</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://icar11052-young.github.io/posts/proof-versus-completion-20261023.html</loc>

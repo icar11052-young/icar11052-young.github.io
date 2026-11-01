@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기존 위키에 로컬 RAG 검색을 붙인 기록 - 영은.Dev</title>
+    <meta name="description" content="기존 Markdown 위키를 유지하면서 로컬 키워드·의미 검색을 결합하고 변경분만 관리한 구현 기록입니다.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://icar11052-young.github.io/posts/local-wiki-rag-incremental-20261101.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="기존 위키에 로컬 RAG 검색을 붙인 기록">
+    <meta property="og:description" content="기존 Markdown 위키를 유지하면서 로컬 키워드·의미 검색을 결합하고 변경분만 관리한 구현 기록입니다.">
+    <meta property="og:url" content="https://icar11052-young.github.io/posts/local-wiki-rag-incremental-20261101.html">
+    <meta property="og:site_name" content="영은.Dev">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="기존 위키에 로컬 RAG 검색을 붙인 기록">
+    <meta name="twitter:description" content="기존 Markdown 위키를 유지하면서 로컬 키워드·의미 검색을 결합하고 변경분만 관리한 구현 기록입니다.">
+    <meta name="twitter:image" content="https://icar11052-young.github.io/og-default.png">
+    <meta name="google-site-verification" content="TcLxUZzdhJ9m87uSKi0XiMwk-7yq9cZwiPk_0GrHTH0">
+    <meta name="naver-site-verification" content="9d046d7d920016e7ff48d456abf408b360cdfcb1">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="영은.Dev RSS" href="../feed.xml">
+    <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "기존 위키에 로컬 RAG 검색을 붙인 기록", "description": "기존 Markdown 위키를 유지하면서 로컬 키워드·의미 검색을 결합하고 변경분만 관리한 구현 기록입니다.", "datePublished": "2026-11-01", "author": {"@type": "Person", "name": "영은"}, "publisher": {"@type": "Organization", "name": "영은.Dev"}, "mainEntityOfPage": "https://icar11052-young.github.io/posts/local-wiki-rag-incremental-20261101.html", "inLanguage": "ko-KR"}</script>
+    
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+    </script>
+</head>
+<body>
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    <header>
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">⚡ 영은.Dev</a>
+            <div class="nav-links">
+                <a href="../index.html">홈</a>
+                <a href="https://github.com/icar11052-young" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </header>
+    <main class="container" style="padding-top: 40px;">
+        <a href="../index.html" class="back-link">← 목록으로 돌아가기</a>
+        <article>
+            <div class="post-header">
+                <h1>기존 위키에 로컬 RAG 검색을 붙인 기록</h1>
+                <div class="post-meta">
+                    <span>📅 2026-11-01</span>
+                    <span>🏷️ rag, local-ai, wiki, search</span>
+                    
+                </div>
+            </div>
+            <div class="post-body"><p>위키에 기록이 늘어날수록 저장 여부만큼 중요한 문제가 생깁니다.<br />
+전에 정리한 내용을 다른 표현으로 물었을 때도 필요한 근거를 찾을 수 있어야 합니다.<br />
+기존 위키를 다른 서비스로 옮기는 대신, 원문은 유지하고 로컬 검색을 덧붙였습니다.</p>
+<h2>정리와 검색의 역할을 나눴습니다</h2>
+<p>위키는 사실과 결정, 이유, 정정 이력을 관리합니다.<br />
+검색은 그 기록에서 질문에 맞는 부분을 찾아오는 역할입니다.<br />
+검색이 좋아져도 오래된 결정을 최신 사실로 읽으면 답변은 잘못될 수 있습니다.<br />
+그래서 결과에는 원문 경로와 줄 번호를 함께 반환하고, 답변 전에 최신 정정을 다시 확인하도록 했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>맡은 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLite FTS5</td>
+<td>이름·식별자·정확한 단어를 찾는 키워드 검색</td>
+</tr>
+<tr>
+<td>로컬 EmbeddingGemma</td>
+<td>표현이 다른 질문의 관련 내용 탐색</td>
+</tr>
+<tr>
+<td>RRF 결합</td>
+<td>두 검색의 순위를 함께 사용</td>
+</tr>
+<tr>
+<td>파일 해시</td>
+<td>바뀐 문서만 갱신하고 오래된 색인 식별</td>
+</tr>
+</tbody>
+</table>
+<p>문서 임베딩은 같은 컴퓨터의 Ollama 서비스에서 생성합니다.<br />
+공식 모델 파일은 다운로드하지만 위키 본문을 외부 임베딩 API로 보내지는 않습니다.<br />
+<a href="https://ollama.com/library/embeddinggemma">모델 설명</a>과 <a href="https://docs.ollama.com/api/embed">임베딩 API</a>를 기준으로 구현했습니다.</p>
+<h2>전체를 반복 처리하지 않도록 했습니다</h2>
+<p>파일마다 해시를 기록하고 바뀐 파일만 다시 나눠 색인합니다.<br />
+삭제된 문서는 색인에서도 제거합니다.<br />
+목차와 누적 로그는 비슷한 문장이 반복돼 순위를 왜곡할 수 있어 본문 검색에서 제외했습니다.<br />
+검색 데이터베이스와 원시 세션 점검 후보는 비공개 로컬 경로에 두고 Git 백업 대상과 분리했습니다.</p>
+<p>세션 정리도 같은 원칙을 적용했습니다.<br />
+검토한 파일 경계까지만 처리하고, 이후 추가된 대화는 다음 점검 대상으로 남깁니다.<br />
+파일이 다시 작성됐을 때는 경계 해시를 대조해 처음부터 검토하도록 했습니다.<br />
+기록을 읽었다는 사실과 위키 반영이 끝났다는 상태는 구분했습니다.</p>
+<h2>작게 시험하고 한계도 남겼습니다</h2>
+<p>변경·삭제된 문서 처리와 오래된 색인 경고, 한국어 검색, 세션 증분 경계 등에 대한 검사 8개를 통과했습니다.<br />
+실제 질문을 바꿔 만든 예시 6개에서도 상위 결과에 관련 문서가 포함됐습니다.<br />
+다만 이 예시에서는 키워드 검색도 관련 문서를 찾았습니다.<br />
+따라서 의미검색이 더 정확하다고 입증한 결과로 표현하지 않았습니다.</p>
+<p>검색시간 역시 모델이 이미 메모리에 있는 조건과 첫 실행을 구분해야 합니다.<br />
+색인을 갱신하는 시간은 조회 시간에 별도로 더해질 수 있습니다.<br />
+관련 문서를 찾는 데 성공한 것과 그 안에서 최신 결론을 정확하게 선택하는 것은 다른 문제입니다.</p>
+<p>로컬 검색을 붙인 뒤에도 기준은 원문과 정정 이력입니다.<br />
+검색은 기억을 대신하는 저장소가 아니라, 이미 정리한 기억을 꺼내 쓰는 통로로 두는 편이 관리하기 쉬웠습니다.</p></div>
+        </article>
+    </main>
+</body>
+</html>
